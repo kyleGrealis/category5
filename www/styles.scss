@@ -1,7 +1,8 @@
 $um-orange: #f47321;
 $um-green: #005030;
+$shadow: #777777;
 $um-color-fade: linear-gradient(to right, $um-orange, white, $um-green);
-$my-shadow: 10px 10px 8px #888888;
+$my-shadow: 10px 10px 8px $shadow;
 $bg-gray: #d3d3d3;
 
 .modal {
@@ -23,7 +24,7 @@ $bg-gray: #d3d3d3;
 
 .modal-body {
   background-color: white;
-  border-radius: 0px 0px 0.5rem 0.5rem;
+  border-radius: 0.5px;
 }
 
 .modal-title {
@@ -32,34 +33,63 @@ $bg-gray: #d3d3d3;
   margin: auto;
 }
 
-.my-title {
+
+h1.bslib-page-title {
+  text-align: center;
   font-size: 40px;
   font-weight: bold;
+  font-color: black;
+  border-bottom: 0.25rem;
+  border-bottom-color: $shadow;
   background-image: $um-color-fade;
   box-shadow: $my-shadow;
 }
 
-.card {
+.sidebar {
   box-shadow: $my-shadow;
 }
 
-.card-header {
-  background-color: $bg-gray;
+
+/* plot card header font */
+h3 {
+  font-size: 1.75rem;
+  font-weight: bold;
 }
+
+/* plot card shadow box */
+.g-col-md-6 {
+  box-shadow: $my-shadow;
+  border-radius: 0.5rem;
+}
+
+
+
+
 
 .left-box {
   background-image: linear-gradient(to bottom right, #f47321, white);
+  height: 200px;
+  box-shadow: $my-shadow;
+  border-radius: 0.5rem;
+}
+
+.center-box {
+  height: 200px;
+  box-shadow: $my-shadow;
+  border-radius: 0.5rem;
 }
 
 .right-box {
   background-image: linear-gradient(to bottom right, white, $um-green);
+  height: 200px;
   box-shadow: $my-shadow;
+  border-radius: 0.5rem;
 }
 
 /* The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-box {
-  border: 1px solid #f1f1f1;
-  max-height: 200px;
+  border-radius: 0.5rem;
+  height: 200px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -68,7 +98,7 @@ $bg-gray: #d3d3d3;
   position: relative;
   width: 100%;
   height: 100%;
-  text-align: center;
+  text-align: left;
   transition: transform 0.8s;
   transform-style: preserve-3d;
 }
@@ -85,6 +115,7 @@ $bg-gray: #d3d3d3;
   height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
+  border-radius: 0.5rem;
 }
 
 /* Style the front side */
