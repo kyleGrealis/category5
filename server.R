@@ -1,6 +1,16 @@
 server <- function(input, output, session) {
   
-  output$backsideTest <- renderText('THIS IS A TEST OF THE FLIP!')
+  output$backsideLeft <- renderText({
+    "Effect size is based on Cohen's d."
+  })
+  
+  output$backsideCenter <- renderText({
+    "...information coming soon!"
+  })
+  
+  output$backsideRight <- renderText({
+    "...information coming soon!"
+  })
   
   observeEvent(input$toggle, {
     updateFlipBox("myflipbox")
@@ -80,7 +90,7 @@ server <- function(input, output, session) {
       head(1)
   })
   
-  output$other <- renderText({
+  output$sampleResult <- renderText({
     if (studySampleNeeded() <= input$sample) {
       "SUFFICIENT"
     } else {

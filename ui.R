@@ -8,7 +8,7 @@ ui <- page_sidebar(
   
   # welcome popup modal
   modalDialog(
-    h5("This statistical power calculator and plotting tool is 
+    h5("This statistical power calculator and plotting tool is
        100% interactive!"),
     br(),
     h5("Hover over the plots to see more information about power,
@@ -21,10 +21,7 @@ ui <- page_sidebar(
   ),
   
   # application title
-  title = div(
-    "CAT 5: A Hurricane's Power Calculator & Plotting Tool",
-    class = 'my-title'
-  ),
+  title = "CAT 5: A Hurricane's Power Calculator & Plotting Tool",
   
   # sidebar / input controls
   sidebar = sidebar(
@@ -58,18 +55,16 @@ ui <- page_sidebar(
     
     # left plot
     card(
-      card_header(h3('Selected sample size')),
+      card_header(h3('Selected sample size'), style = "background-color: #d3d3d3;"),
       card_footer('Displaying your desired sample size and ± 20 participants per group.'),
-      echarts4rOutput('power'),
-      min_height = 200, max_height = 600,
+      echarts4rOutput('power')
     ),
     
     # right plot
     card(
-      card_header(h3('Selected effect size')),
+      card_header(h3('Selected effect size'), style = "background-color: #d3d3d3"),
       card_footer('The effect size line displays the necessary sample size and power.'),
-      echarts4rOutput('power2'),
-      min_height = 200, max_height = 600
+      echarts4rOutput('power2')
     ),
     style='max-height: 39rem;'
     
@@ -79,7 +74,7 @@ ui <- page_sidebar(
   p('To achieve at least 80% power, your study will need:'),
   
   # lower display section with flip cards
-  layout_columns(
+  layout_columns( 
     
     # left box
     div( # flip-box
@@ -89,6 +84,7 @@ ui <- page_sidebar(
             title = 'Overall measurable effect size',
             value = textOutput('effectSize'),
             showcase = bsicons::bs_icon("thermometer-low"),
+            theme = 'white',
             class = 'left-box'
           ),
           class = 'flip-box-front'
@@ -96,9 +92,10 @@ ui <- page_sidebar(
         # back side of left card
         div(
           value_box(
-            title = 'backside test',
-            value = textOutput('backsideTest'),
+            title = 'About effect size:',
+            value = textOutput('backsideLeft'),
             showcase = bsicons::bs_icon("thermometer-low"),
+            theme = 'white',
             class = 'left-box'
           ),
           class = 'flip-box-back'
@@ -109,19 +106,61 @@ ui <- page_sidebar(
     ),
     
     # center box
-    value_box(
-      title = 'Minimal sample size per group',
-      value = textOutput('minSampleSize'),
-      showcase = bsicons::bs_icon("speedometer2"),
-      theme = 'white'
+    div( # flip-box
+      div( # flip-box-inner
+        div( # flip-box-front
+          value_box(
+            title = 'Minimal sample size per group',
+            value = textOutput('minSampleSize'),
+            showcase = bsicons::bs_icon("people-fill"),
+            theme = 'white',
+            class = 'center-box'
+          ),
+          class = 'flip-box-front'
+        ),
+        # back side of left card
+        div(
+          value_box(
+            title = 'Sample Size info...',
+            value = textOutput('backsideCenter'),
+            showcase = bsicons::bs_icon("people-fill"),
+            theme = 'white',
+            class = 'center-box'
+          ),
+          class = 'flip-box-back'
+        ),
+        class = 'flip-box-inner'
+      ),
+      class = 'flip-box'
     ),
     
     # right box
-    value_box(
-      title = 'Your proposed study power will be:',
-      value = textOutput('other'),
-      showcase = bsicons::bs_icon("thermometer-high"),
-      class = 'right-box'
+    div( # flip-box
+      div( # flip-box-inner
+        div( # flip-box-front
+          value_box(
+            title = 'Your proposed study power will be:',
+            value = textOutput('sampleResult'),
+            showcase = bsicons::bs_icon("bullseye"),
+            theme = 'black',
+            class = 'right-box'
+          ),
+          class = 'flip-box-front'
+        ),
+        # back side of left card
+        div(
+          value_box(
+            title = 'Power is calculated by:',
+            value = textOutput('backsideRight'),
+            showcase = bsicons::bs_icon("bullseye"),
+            theme = 'black',
+            class = 'right-box'
+          ),
+          class = 'flip-box-back'
+        ),
+        class = 'flip-box-inner'
+      ),
+      class = 'flip-box'
     ),
     style = 'max-height: 200px;'
   ), # layout_columns
