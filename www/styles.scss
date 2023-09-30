@@ -1,17 +1,50 @@
 $um-orange: #f47321;
 $um-green: #005030;
-$my-shadow: 10px 10px 8px .888888;
+$um-color-fade: linear-gradient(to right, $um-orange, white, $um-green);
+$my-shadow: 10px 10px 8px #888888;
+$bg-gray: #d3d3d3;
 
+.modal {
+  backdrop-filter: blur(5px);
+  margin: auto;
+}
+.modal-content {
+  margin-top: 30%;
+  border-width: 0.15em;
+  border-color: black;
+}
 
-.my-title{
-  font-size:40px;
-  text-align:center;
-  background-image:linear-gradient(to right, $um-orange, white, $um-green);
+.modal-header {
+  background-color: $bg-gray;
+  text-align: center;
+  border-bottom-width: 0.1rem;
+  border-bottom-color: black;
+}
+
+.modal-body {
+  background-color: white;
+  border-radius: 0px 0px 0.5rem 0.5rem;
+}
+
+.modal-title {
+  text-align: center;
+  font-weight: bold;
+  margin: auto;
+}
+
+.my-title {
+  font-size: 40px;
+  font-weight: bold;
+  background-image: $um-color-fade;
   box-shadow: $my-shadow;
 }
 
 .card {
   box-shadow: $my-shadow;
+}
+
+.card-header {
+  background-color: $bg-gray;
 }
 
 .left-box {
@@ -20,6 +53,7 @@ $my-shadow: 10px 10px 8px .888888;
 
 .right-box {
   background-image: linear-gradient(to bottom right, white, $um-green);
+  box-shadow: $my-shadow;
 }
 
 /* The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
@@ -50,7 +84,7 @@ $my-shadow: 10px 10px 8px .888888;
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* Style the front side */

@@ -2,15 +2,11 @@ server <- function(input, output, session) {
   
   output$backsideTest <- renderText('THIS IS A TEST OF THE FLIP!')
   
-  output$active_side <- renderUI({
-    side <- if (input$myflipbox) "front" else "back"
-    dashboardBadge(side, color = "blue")
-  })
-  
   observeEvent(input$toggle, {
     updateFlipBox("myflipbox")
   })
   
+  # left plot
   output$power <- renderEcharts4r({
     pwrTable |>
       filter(
@@ -31,6 +27,8 @@ server <- function(input, output, session) {
       e_x_axis(effectSize) |> 
       e_axis_labels(x = "Effect \nSize", "Power")
   })
+  
+  # right plot
   output$power2 <- renderEcharts4r({
     pwrTable |>
       filter(
@@ -49,24 +47,27 @@ server <- function(input, output, session) {
       e_axis_labels(x = "Power", y = "Sample Size")
   })
   
+  # front, left value_box
   output$effectSize <- renderText({input$effect})
   
   comparisonTable <- reactive({
     pwrTable |> 
       filter(
-        power >= 0.8,                    # for minimal accetable power
+        power >= 0.8,                    # for minimal acceptable power
         alpha == input$alpha,            # user input
         effectSize >= input$effect,      # user input      
       ) |> 
       arrange(power, effectSize)
   })
   
+  # front, middle value_box
   output$minSampleSize <- renderText({
     comparisonTable() |> 
       pull(sampleSize) |> 
       head(1)
   })
   
+  # front, right value_box
   studySampleNeeded <- reactive({
     pwrTable |> 
       filter(
