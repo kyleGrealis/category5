@@ -7,18 +7,21 @@ ui <- page_sidebar(
   ),
   
   # welcome popup modal
-  modalDialog(
-    h5("This statistical power calculator and plotting tool is
-       100% interactive!"),
-    br(),
-    h5("Hover over the plots to see more information about power,
-       effect size, and sample size."),
-    br(),
-    h5("Hold your pointer on the lower boxes to flip for more information."),
-    title = "CAT 5: A Hurricane's Power Calculator & Plotting Tool",
-    size = "l",
-    easyClose = FALSE,
-  ),
+  # modalDialog(
+  #   h5("This statistical power calculator and plotting tool is
+  #      100% interactive!"),
+  #   br(),
+  #   h5("Hover over the plots to see more information about power,
+  #      effect size, and sample size."),
+  #   br(),
+  #   h5("Hold your pointer on the lower boxes to flip for more information."),
+  #   title = "CAT 5: A Hurricane's Power Calculator & Plotting Tool",
+  #   size = "l",
+  #   easyClose = FALSE,
+  # ),
+  
+  
+  
   
   # application title
   title = "CAT 5: A Hurricane's Power Calculator & Plotting Tool",
@@ -55,14 +58,24 @@ ui <- page_sidebar(
     
     # left plot
     card(
-      card_header(h3('Selected sample size'), style = "background-color: #d3d3d3;"),
+      card_header(
+        h3(
+          'Selected sample size'
+        ),
+        style = "background-color: #d3d3d3;",
+      ),
       card_footer('Displaying your desired sample size and ± 20 participants per group.'),
       echarts4rOutput('power')
     ),
     
     # right plot
     card(
-      card_header(h3('Selected effect size'), style = "background-color: #d3d3d3"),
+      card_header(
+        h3(
+          'Selected effect size'
+        ),
+        style = "background-color: #d3d3d3"
+      ),
       card_footer('The effect size line displays the necessary sample size and power.'),
       echarts4rOutput('power2')
     ),
@@ -105,7 +118,8 @@ ui <- page_sidebar(
       class = 'flip-box'
     ),
     
-    # center box
+
+        # center box
     div( # flip-box
       div( # flip-box-inner
         div( # flip-box-front
@@ -113,7 +127,7 @@ ui <- page_sidebar(
             title = 'Minimal sample size per group',
             value = textOutput('minSampleSize'),
             showcase = bsicons::bs_icon("people-fill"),
-            theme = 'black',
+            theme = 'white',
             class = 'center-box'
           ),
           class = 'flip-box-front'
@@ -124,7 +138,7 @@ ui <- page_sidebar(
             title = 'Sample Size info...',
             value = textOutput('backsideCenter'),
             showcase = bsicons::bs_icon("people-fill"),
-            theme = 'black',
+            theme = 'white',
             class = 'center-box'
           ),
           class = 'flip-box-back'

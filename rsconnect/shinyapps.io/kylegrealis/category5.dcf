@@ -1,0 +1,12 @@
+name: category5
+title: category5
+username: kylegrealis
+account: kylegrealis
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10044315
+bundleId: 7747977
+url: https://kylegrealis.shinyapps.io/category5/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

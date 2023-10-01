@@ -34,13 +34,14 @@ $bg-gray: #d3d3d3;
 }
 
 
+/* page/app title */
 h1.bslib-page-title {
   text-align: center;
   font-size: 40px;
   font-weight: bold;
   color: black;
-  border-bottom: 0.25rem;
-  border-bottom-color: $shadow;
+  border-width: 0.1rem;
+  border-color: black;
   background-image: $um-color-fade;
   box-shadow: $my-shadow;
 }
@@ -50,8 +51,9 @@ h1.bslib-page-title {
 }
 
 
+
 /* plot card header font */
-h3 {
+.card-header {
   font-size: 1.75rem;
   font-weight: bold;
 }
