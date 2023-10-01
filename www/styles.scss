@@ -127,13 +127,11 @@ h1.bslib-page-title {
 
 /* Style the front side */
 .flip-box-front {
-  background-image: linear-gradient(to bottom right, $um-orange, white);
   color: black;
 }
 
 /* Style the back side */
 .flip-box-back {
-  background-image: linear-gradient(to bottom right, $um-orange, white);
   color: black;
   transform: rotateY(180deg);
 } 
