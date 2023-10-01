@@ -58,26 +58,16 @@ ui <- page_sidebar(
     
     # left plot
     card(
-      card_header(
-        h3(
-          'Selected sample size'
-        ),
-        style = "background-color: #d3d3d3;",
-      ),
+      card_header(h3('Selected sample size'), class = 'my-card-header'),
       card_footer('Displaying your desired sample size and ± 20 participants per group.'),
-      echarts4rOutput('power')
+      echarts4rOutput('power'),
     ),
     
     # right plot
     card(
-      card_header(
-        h3(
-          'Selected effect size'
-        ),
-        style = "background-color: #d3d3d3"
-      ),
+      card_header(h3('Selected effect size'), class = 'my-card-header'),
       card_footer('The effect size line displays the necessary sample size and power.'),
-      echarts4rOutput('power2')
+      echarts4rOutput('power2'),
     ),
     style='max-height: 39rem;'
     

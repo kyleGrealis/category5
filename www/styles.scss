@@ -52,11 +52,6 @@ h1.bslib-page-title {
 
 
 
-/* plot card header font */
-.card-header {
-  font-size: 1.75rem;
-  font-weight: bold;
-}
 
 /* plot card shadow box */
 .g-col-md-6 {
@@ -64,7 +59,16 @@ h1.bslib-page-title {
   border-radius: 0.5rem;
 }
 
+/* plot card header font */
+.card-header h3 {
+  font-weight: bold;
+}
 
+.my-card-header {
+  background-color: #d3d3d3 !important;
+  border-bottom-width: thick !important;
+  border-bottom-color: black !important;
+}
 
 
 
