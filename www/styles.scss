@@ -38,7 +38,7 @@ h1.bslib-page-title {
   text-align: center;
   font-size: 40px;
   font-weight: bold;
-  font-color: black;
+  color: black;
   border-bottom: 0.25rem;
   border-bottom-color: $shadow;
   background-image: $um-color-fade;
@@ -68,20 +68,21 @@ h3 {
 
 .left-box {
   background-image: linear-gradient(to bottom right, #f47321, white);
-  height: 200px;
+  height: 150px;
   box-shadow: $my-shadow;
   border-radius: 0.5rem;
 }
 
 .center-box {
-  height: 200px;
+  background-image: linear-gradient(white);
+  height: 150px;
   box-shadow: $my-shadow;
   border-radius: 0.5rem;
 }
 
 .right-box {
   background-image: linear-gradient(to bottom right, white, $um-green);
-  height: 200px;
+  height: 150px;
   box-shadow: $my-shadow;
   border-radius: 0.5rem;
 }
@@ -89,7 +90,7 @@ h3 {
 /* The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-box {
   border-radius: 0.5rem;
-  height: 200px;
+  height: 150px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 

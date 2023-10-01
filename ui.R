@@ -113,7 +113,7 @@ ui <- page_sidebar(
             title = 'Minimal sample size per group',
             value = textOutput('minSampleSize'),
             showcase = bsicons::bs_icon("people-fill"),
-            theme = 'white',
+            theme = 'black',
             class = 'center-box'
           ),
           class = 'flip-box-front'
@@ -124,7 +124,7 @@ ui <- page_sidebar(
             title = 'Sample Size info...',
             value = textOutput('backsideCenter'),
             showcase = bsicons::bs_icon("people-fill"),
-            theme = 'white',
+            theme = 'black',
             class = 'center-box'
           ),
           class = 'flip-box-back'
