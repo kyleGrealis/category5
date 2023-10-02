@@ -5,6 +5,10 @@ $um-color-fade: linear-gradient(to right, $um-orange, white, $um-green);
 $my-shadow: 10px 10px 8px $shadow;
 $bg-gray: #d3d3d3;
 
+body, .modal-content, .my-header {
+  font-family: Trebuchet MS;
+}
+
 .modal {
   backdrop-filter: blur(5px);
   margin: auto;

@@ -4,7 +4,8 @@ ui <- page_sidebar(
   tags$head(
     tags$style(sass(sass_file("www/styles.scss")))
   ),
-
+  
+  
   # welcome popup modal
   modalDialog(
     h5("This statistical power calculator and plotting tool is
@@ -18,7 +19,8 @@ ui <- page_sidebar(
     size = "l",
     easyClose = FALSE,
   ),
-
+  
+  
 
   # application title
   title = "CAT 5: A Hurricane's Power Calculator & Plotting Tool",
