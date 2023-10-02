@@ -23,19 +23,33 @@ server <- function(input, output, session) {
         sampleSize %in% c(input$sample - 20, input$sample, input$sample + 20),
         alpha == input$alpha
       ) |>
+      mutate(effectSize = round(effectSize, 2)) |> 
       group_by(sampleSize, alpha) |>
       e_charts(effectSize) |>
       e_line(power) |>
-      e_tooltip(trigger = "axis") |>
+      e_tooltip(
+        trigger = "item",
+        formatter = htmlwidgets::JS(
+          "
+          function(params){
+            return(
+              'Power: ' + params.value[1] +
+              '<br />Effect size: ' + params.value[0]
+            )
+          }
+          "
+        )
+      ) |> 
       e_grid(right = '15%') |>
       e_legend(
-        orient = 'vertical', right = '5', top = '45%',
-        label = "Sample size"
+        # orient = 'vertical', right = '5', top = '45%',
+        dataName = list("Sample size")
       ) |>
       e_datazoom(type = 'inside') |>
       e_y_axis(power) |>
       e_x_axis(effectSize) |> 
-      e_axis_labels(x = "Effect \nSize", "Power")
+      e_axis_labels(x = "Effect \nSize", "Power") |> 
+      e_toolbox_feature(feature = c("saveAsImage", "dataView"))
   })
   
   # right plot
@@ -48,13 +62,26 @@ server <- function(input, output, session) {
       group_by(effectSize, alpha) |>
       e_charts(power) |>
       e_line(sampleSize) |>
-      e_tooltip(trigger = "axis") |>
+      e_tooltip(
+        trigger = "item",
+        formatter = htmlwidgets::JS(
+          "
+          function(params){
+            return(
+              'Sample size: ' + params.value[1] +
+              '<br />Power: ' + params.value[0]
+            )
+          }
+          "
+        )
+      ) |>
       e_grid(right = '15%') |>
       e_legend(show = FALSE) |>
       e_datazoom(type = 'inside') |>
       e_y_axis(sampleSize) |>
       e_x_axis(power) |> 
-      e_axis_labels(x = "Power", y = "Sample Size")
+      e_axis_labels(x = "Power", y = "Sample Size") |> 
+      e_toolbox_feature(feature = c("saveAsImage", "dataView"))
   })
   
   # front, left value_box
