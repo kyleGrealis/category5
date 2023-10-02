@@ -21,7 +21,7 @@ ui <- page_sidebar(
   ),
   
   
-
+  
   # application title
   title = "CAT 5: A Hurricane's Power Calculator & Plotting Tool",
 
