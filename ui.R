@@ -7,18 +7,18 @@ ui <- page_sidebar(
   
   
   # welcome popup modal
-  modalDialog(
-    h5("This statistical power calculator and plotting tool is
-       100% interactive!"),
-    br(),
-    h5("Hover over the plots to see more information about power,
-       effect size, and sample size."),
-    br(),
-    h5("Hold your pointer on the lower boxes to flip for more information."),
-    title = "CAT 5: A Hurricane's Power Calculator & Plotting Tool",
-    size = "l",
-    easyClose = FALSE,
-  ),
+  # modalDialog(
+  #   h5("This statistical power calculator and plotting tool is
+  #      100% interactive!"),
+  #   br(),
+  #   h5("Hover over the plots to see more information about power,
+  #      effect size, and sample size."),
+  #   br(),
+  #   h5("Hold your pointer on the lower boxes to flip for more information."),
+  #   title = "CAT 5: A Hurricane's Power Calculator & Plotting Tool",
+  #   size = "l",
+  #   easyClose = FALSE,
+  # ),
   
   
   

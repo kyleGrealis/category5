@@ -1,0 +1,12 @@
+name: cat5-power
+title: cat5-power
+username: kylegrealis
+account: kylegrealis
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10029900
+bundleId: 7754658
+url: https://kylegrealis.shinyapps.io/cat5-power/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
