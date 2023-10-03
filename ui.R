@@ -71,7 +71,6 @@ ui <- page_sidebar(
       card_header(h3("Selected sample size"), class = "my-card-header"),
       card_footer("Displaying your desired sample size and ± 20 participants per group."),
       echarts4rOutput("power"),
-      style = "box-shadow: 10px 10px 8px #777777"
     ),
 
     # right plot
@@ -79,14 +78,11 @@ ui <- page_sidebar(
       card_header(h3("Selected effect size"), class = "my-card-header"),
       card_footer("The effect size line displays the necessary sample size and power."),
       echarts4rOutput("power2"),
-      style = "box-shadow: 10px 10px 8px #777777"
     ),
-    style = "max-height: 39rem;"
   ), # layout_columns
 
   # simple dialogue between plots and flip cards
-  div(p("To achieve at least 80% power, your study will need:"))
-,
+  # p("To achieve at least 80% power, your study will need:"),
 
 
 
@@ -194,6 +190,11 @@ ui <- page_sidebar(
       ),
       class = "flip-box"
     ),
+    # class = 'my-layout-columns'
+    style = "padding: 5% 0.5% 6% 0% !important;"
+    
+    
+    
     
   ), # layout_columns
 

@@ -2,7 +2,7 @@ $um-orange: #f47321;
 $um-green: #005030;
 $shadow: #777777;
 $um-color-fade: linear-gradient(to right, $um-orange, white, $um-green);
-$my-shadow: 10px 10px 8px $shadow;
+$my-shadow: 6px 6px 6px $shadow;
 $bg-gray: #d3d3d3;
 
 
@@ -65,13 +65,6 @@ h1.bslib-page-title {
 
 
 
-
-/* plot card shadow box */
-.g-col-md-6 .bslib-mb-spacing .html-fill-item .html-fill-container {
-  box-shadow: $my-shadow;
-  border-radius: 0.5rem;
-}
-
 /* plot card header font */
 .card-header h3 {
   font-weight: bold;
@@ -85,22 +78,23 @@ h1.bslib-page-title {
 
 
 
+.bslib-grid .grid .bslib-mb-spacing .html-fill-item .my-layout-columns {
+  padding: 5% 0.5% 6% 0% !important;
+}
+
 .left-box {
-  background-image: linear-gradient(to bottom right, #f47321, white);
-  height: 150px;
-  box-shadow: $my-shadow;
-  border-radius: 0.5rem;
+  background-image: linear-gradient(to bottom right, $um-orange, white);
 }
 
 .center-box {
   background-image: linear-gradient(white);
-  height: 150px;
-  box-shadow: $my-shadow;
-  border-radius: 0.5rem;
 }
 
 .right-box {
   background-image: linear-gradient(to bottom right, white, $um-green);
+}
+
+.left-box, .center-box, .right-box {
   height: 150px;
   box-shadow: $my-shadow;
   border-radius: 0.5rem;
