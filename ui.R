@@ -84,7 +84,7 @@ ui <- page_sidebar(
           value_box(
             title = "Overall measurable effect size",
             value = textOutput("effectSize"),
-            showcase = bsicons::bs_icon("thermometer-low"),
+            showcase = bsicons::bs_icon("graph-up-arrow"),
             theme = "white",
             class = "left-box"
           ),
@@ -93,9 +93,19 @@ ui <- page_sidebar(
         # back side of left card
         div(
           value_box(
-            title = "About effect size:",
-            value = textOutput("backsideLeft"),
-            showcase = bsicons::bs_icon("thermometer-low"),
+            title = "These results are based on the `pwr` package by Clay Ford.
+            For more information, refer to this vignette:",
+            value = 
+              # span(
+              # textOutput("backsideLeft"),
+              a(
+                "Getting started with the pwr package",
+                href = "http://cran.nexr.com/web/packages/pwr/vignettes/pwr-vignette.html",
+                target = "_blank",
+                style = "color:black; font-size: 1.1rem;"
+              ),
+            # ),
+            showcase = bsicons::bs_icon("graph-up-arrow"),
             theme = "white",
             class = "left-box"
           ),

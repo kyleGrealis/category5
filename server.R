@@ -1,92 +1,36 @@
 server <- function(input, output, session) {
   
-  output$backsideLeft <- renderText({
-    "Effect size is based on Cohen's d."
-  })
-  
-  output$backsideCenter <- renderText({
-    "...information coming soon!"
-  })
-  
-  output$backsideRight <- renderText({
-    "...information coming soon!"
-  })
-  
-  observeEvent(input$toggle, {
-    updateFlipBox("myflipbox")
-  })
-  
+
+# plots -------------------------------------------------------------------
   # left plot
   output$power <- renderEcharts4r({
-    pwrTable |>
-      filter(
-        sampleSize %in% c(input$sample - 20, input$sample, input$sample + 20),
-        alpha == input$alpha
-      ) |>
-      mutate(effectSize = round(effectSize, 2)) |> 
-      group_by(sampleSize, alpha) |>
-      e_charts(effectSize) |>
-      e_line(power) |>
-      e_tooltip(
-        trigger = "item",
-        formatter = htmlwidgets::JS(
-          "
-          function(params){
-            return(
-              'Power: ' + params.value[1] +
-              '<br />Effect size: ' + params.value[0]
-            )
-          }
-          "
-        )
-      ) |> 
-      e_grid(right = '15%') |>
-      e_legend(
-        # orient = 'vertical', right = '5', top = '45%',
-        dataName = list("Sample size")
-      ) |>
-      e_datazoom(type = 'inside') |>
-      e_y_axis(power) |>
-      e_x_axis(effectSize) |> 
-      e_axis_labels(x = "Effect \nSize", "Power") |> 
-      e_toolbox_feature(feature = c("saveAsImage", "dataView"))
+    # validate selected sample size
+    if (input$sample < 2 | input$sample > 700 ) {
+      validate("Please select a per-group sample size between 2 and 700.")
+    }
+    
+    # from global.R
+    left_plot(input$sample, input$alpha)
   })
   
   # right plot
   output$power2 <- renderEcharts4r({
-    pwrTable |>
-      filter(
-        near(effectSize, input$effect),
-        alpha == input$alpha
-      ) |>
-      group_by(effectSize, alpha) |>
-      e_charts(power) |>
-      e_line(sampleSize) |>
-      e_tooltip(
-        trigger = "item",
-        formatter = htmlwidgets::JS(
-          "
-          function(params){
-            return(
-              'Sample size: ' + params.value[1] +
-              '<br />Power: ' + params.value[0]
-            )
-          }
-          "
-        )
-      ) |>
-      e_grid(right = '15%') |>
-      e_legend(show = FALSE) |>
-      e_datazoom(type = 'inside') |>
-      e_y_axis(sampleSize) |>
-      e_x_axis(power) |> 
-      e_axis_labels(x = "Power", y = "Sample Size") |> 
-      e_toolbox_feature(feature = c("saveAsImage", "dataView"))
+    # from global.R
+    right_plot(input$effect, input$alpha)
   })
+  
   
   # front, left value_box
   output$effectSize <- renderText({input$effect})
   
+
+# flip boxes --------------------------------------------------------------
+  # this section is for comparing the selected sample size against the
+  # required sample size to achieve >= 80% holding the other variables
+  # (alpha, effect size) at a constant. then, a minimal sample size is 
+  # calculated and displayed in the middle output box, front side. lastly,
+  # the minimal calculated sample size is compared to the user-selected
+  # sample size to finally render "sufficient" or "too low"
   comparisonTable <- reactive({
     pwrTable |> 
       filter(
@@ -123,6 +67,23 @@ server <- function(input, output, session) {
     } else {
       "TOO LOW!"
     }
+  })
+  
+  # backside of boxes
+  output$backsideLeft <- renderText({
+    "See this `pwr` package vignette by Clay Ford:"
+  })
+  
+  output$backsideCenter <- renderText({
+    "...information coming soon!"
+  })
+  
+  output$backsideRight <- renderText({
+    "...information coming soon!"
+  })
+  
+  observeEvent(input$toggle, {
+    updateFlipBox("myflipbox")
   })
   
 }
