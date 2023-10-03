@@ -5,7 +5,9 @@ ui <- page_sidebar(
     tags$style(sass(sass_file("www/styles.scss")))
   ),
   
-  
+
+# welcome modal -----------------------------------------------------------
+
   # welcome popup modal
   modalDialog(
     h5("This statistical power calculator and plotting tool is
@@ -21,9 +23,15 @@ ui <- page_sidebar(
   ),
   
   
-  
+
+# title -------------------------------------------------------------------
+
   # application title
   title = "CAT 5: A Hurricane's Power Calculator & Plotting Tool",
+
+
+
+# sidebar -----------------------------------------------------------------
 
   # sidebar / input controls
   sidebar = sidebar(
@@ -49,6 +57,11 @@ ui <- page_sidebar(
     )
   ), # sidebar
 
+
+
+
+# plots -------------------------------------------------------------------
+
   # main section
   layout_columns(
     col_widths = c(6, 6),
@@ -72,7 +85,14 @@ ui <- page_sidebar(
   ), # layout_columns
 
   # simple dialogue between plots and flip cards
-  p("To achieve at least 80% power, your study will need:"),
+  div(p("To achieve at least 80% power, your study will need:"))
+,
+
+
+
+
+
+# flip cards --------------------------------------------------------------
 
   # lower display section with flip cards
   layout_columns(
@@ -174,7 +194,7 @@ ui <- page_sidebar(
       ),
       class = "flip-box"
     ),
-    style = "max-height: 200px;"
+    
   ), # layout_columns
 
   # footer
