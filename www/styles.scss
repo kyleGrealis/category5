@@ -59,8 +59,11 @@ h1.bslib-page-title {
   box-shadow: $my-shadow;
 }
 
-.sidebar {
-  box-shadow: $my-shadow;
+
+/* render a slight black border on the sidebar and add a shadow */
+.main {
+  border-left: 2px solid black;
+  box-shadow: 6px 6px 6px #777777 inset;
 }
 
 
@@ -78,9 +81,18 @@ h1.bslib-page-title {
 
 
 
-.bslib-grid .grid .bslib-mb-spacing .html-fill-item .my-layout-columns {
+.bslib-grid .grid .bslib-mb-spacing .html-fill-item {
   padding: 5% 0.5% 6% 0% !important;
 }
+
+
+
+
+
+
+
+
+
 
 .left-box {
   background-image: linear-gradient(to bottom right, $um-orange, white);
@@ -100,10 +112,12 @@ h1.bslib-page-title {
   border-radius: 0.5rem;
 }
 
-/* The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+/* https://www.w3schools.com/howto/howto_css_flip_card.asp
+The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-box {
   border-radius: 0.5rem;
   height: 150px;
+  border: 1px solid #f1f1f1;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 

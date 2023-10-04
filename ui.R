@@ -22,6 +22,7 @@ ui <- page_sidebar(
     easyClose = FALSE,
   ),
   
+
   
 
 # title -------------------------------------------------------------------
@@ -190,7 +191,6 @@ ui <- page_sidebar(
       ),
       class = "flip-box"
     ),
-    # class = 'my-layout-columns'
     style = "padding: 5% 0.5% 6% 0% !important;"
     
     
