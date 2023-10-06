@@ -74,7 +74,8 @@ h1.bslib-page-title {
 
 /* signature div inside sidebar */
 .sidebar-signature {
-  padding-top: 100%;
+  position: absolute;
+  bottom: 0px
 }
 
 
