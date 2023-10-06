@@ -13,11 +13,20 @@ server <- function(input, output, session) {
     left_plot(input$sample, input$alpha)
   })
   
+  output$leftCardHeader <- renderText({
+    glue::glue("Selected sample size: {input$sample} per group")
+  })
+  
   # right plot
   output$power2 <- renderEcharts4r({
     # from global.R
     right_plot(input$effect, input$alpha)
   })
+  
+  output$rightCardHeader <- renderText({
+    glue::glue("Selected effect size: {input$effect}")
+  })
+  
   
   
   # front, left value_box
@@ -70,11 +79,7 @@ server <- function(input, output, session) {
   })
   
   # backside of boxes
-  output$backsideLeft <- renderText({
-    "See this `pwr` package vignette by Clay Ford:"
-  })
-  
-  output$backsideCenter <- renderText({
+  output$sampleCardBack <- renderText({
     "...information coming soon!"
   })
   

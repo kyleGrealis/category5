@@ -62,38 +62,42 @@ h1.bslib-page-title {
 
 /* render a slight black border on the sidebar and add a shadow */
 .main {
-  border-left: 2px solid black;
-  box-shadow: 6px 6px 6px #777777 inset;
+  border-left: 1.5px solid black;
+  box-shadow: $my-shadow inset;
+}
+
+/* styling for hyperlinks */
+.my-links {
+  font-size: 16px !important;
+  color: black;
+}
+
+/* signature div inside sidebar */
+.sidebar-signature {
+  padding-top: 100%;
 }
 
 
-
-/* plot card header font */
-.card-header h3 {
-  font-weight: bold;
+/* plot card styling */
+.bslib-page-sidebar > .bslib-sidebar-layout:first-of-type > .main .bslib-card .card-header {
+  font-size: 1.3rem;
+  background-color: #d3d3d3;
 }
 
-.my-card-header {
-  background-color: #d3d3d3 !important;
-  border-bottom-width: thick !important;
-  border-bottom-color: black !important;
+@media (min-width: 768px) {
+  .grid .g-col-md-6 {
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px #777;
+    border-radius: 0.5rem;
+  }
+}
+
+.bslib-card .card-footer {
+  border-top: 1px solid black !important;
 }
 
 
-
-.bslib-grid .grid .bslib-mb-spacing .html-fill-item {
-  padding: 5% 0.5% 6% 0% !important;
-}
-
-
-
-
-
-
-
-
-
-
+/* data card styling */
 .left-box {
   background-image: linear-gradient(to bottom right, $um-orange, white);
 }
@@ -108,16 +112,13 @@ h1.bslib-page-title {
 
 .left-box, .center-box, .right-box {
   height: 150px;
-  box-shadow: $my-shadow;
-  border-radius: 0.5rem;
+  margin-bottom: 0px !important;
 }
 
 /* https://www.w3schools.com/howto/howto_css_flip_card.asp
 The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-box {
-  border-radius: 0.5rem;
   height: 150px;
-  border: 1px solid #f1f1f1;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -126,8 +127,7 @@ The flip box container - set the width and height to whatever you want. We have 
   position: relative;
   width: 100%;
   height: 100%;
-  text-align: left;
-  transition: transform 0.8s;
+  transition: transform 0.75s;
   transform-style: preserve-3d;
 }
 
@@ -140,24 +140,35 @@ The flip box container - set the width and height to whatever you want. We have 
 .flip-box-front, .flip-box-back {
   position: absolute;
   width: 100%;
-  height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
+  border: 1px solid black;
   border-radius: 0.5rem;
+  color: black;
 }
 
 /* Style the front side */
 .flip-box-front {
-  color: black;
 }
 
 /* Style the back side */
 .flip-box-back {
-  color: black;
   transform: rotateY(180deg);
 }
 
-/* card backside font size */
-#backsideLeft, #backsideCenter, #backsideRight {
-  font-size: 1.1rem !important;
+#sampleCardBack {
+  font-size: 16px;
+}
+
+
+/* style for the bottom right (green) card */
+div.g-col-sm-1:nth-child(3) {
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  height: 150px;
+}
+
+#sampleResult {
+  font-size: 18px;
+  font-weight: bold;
 }

@@ -62,16 +62,14 @@ left_plot <- function(chosenSample, chosenAlpha) {
     ) |> 
     e_grid(right = '15%') |>
     e_legend(
-      # orient = 'vertical', 
       left = '5', 
-      # top = '45%',
       title = list("Sample size")
     ) |>
     e_datazoom(type = 'inside') |>
     e_y_axis(power) |>
     e_x_axis(effectSize) |> 
     e_axis_labels(x = "Effect \nSize", y = "Power") |> 
-    e_toolbox_feature(feature = c("saveAsImage", "dataView"))
+    e_toolbox_feature(feature = c("saveAsImage"))
 }
 
 # plotting the selected effect size as a line on Power vs sample size plot
@@ -103,5 +101,5 @@ right_plot <- function(chosenEffect, chosenAlpha) {
     e_y_axis(sampleSize) |>
     e_x_axis(power) |> 
     e_axis_labels(x = "Power", y = "Sample \nSize") |> 
-    e_toolbox_feature(feature = c("saveAsImage", "dataView"))
+    e_toolbox_feature(feature = c("saveAsImage"))
 }
