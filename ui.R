@@ -13,22 +13,22 @@ ui <- page_sidebar(
     h5("This statistical power calculator and plotting tool is
        100% interactive!"),
     br(),
-    h5("Hover over the plots to see more information about power,
-       effect size, and sample size."),
+    h5("Dynamically change the plots and view the impact on study power when 
+       changing significance, effect size, and sample size. Click download 
+       icon inside the plot output to save the image."),
     br(),
-    h5("Hold your pointer on the lower boxes to flip for more information."),
+    h5("Hover your pointer to flip the lower info cards for package links
+       and study design resources."),
     title = "CAT 5: A Hurricane's Power Calculator & Plotting Tool",
     size = "l",
     easyClose = FALSE,
   ),
-  
   
 
 # title -------------------------------------------------------------------
 
   # application title
   title = "CAT 5: A Hurricane's Power Calculator & Plotting Tool",
-
 
 
 # sidebar -----------------------------------------------------------------
@@ -54,10 +54,23 @@ ui <- page_sidebar(
     numericInput(
       "sample", "Choose the sample size per group",
       min = 20, max = 300, step = 5, value = 100
+    ),
+    
+    # footer-- link to GitHub page
+    div(
+      p(
+        em("Written & developed by: "),
+        a(
+          "Kyle Grealis",
+          href = "https://github.com/kyleGrealis/category5",
+          target = "_blank",
+          class = "my-links"
+        ),
+      ),
+      span("The Azimuth Project 2023", style = "font-size: 10px"),
+      class = "sidebar-signature"
     )
   ), # sidebar
-
-
 
 
 # plots -------------------------------------------------------------------
@@ -68,24 +81,21 @@ ui <- page_sidebar(
 
     # left plot
     card(
-      card_header(h3("Selected sample size"), class = "my-card-header"),
+      card_header(textOutput("leftCardHeader")),
       card_footer("Displaying your desired sample size and ± 20 participants per group."),
       echarts4rOutput("power"),
     ),
 
     # right plot
     card(
-      card_header(h3("Selected effect size"), class = "my-card-header"),
+      card_header(textOutput("rightCardHeader")),
       card_footer("The effect size line displays the necessary sample size and power."),
       echarts4rOutput("power2"),
     ),
   ), # layout_columns
 
   # simple dialogue between plots and flip cards
-  # p("To achieve at least 80% power, your study will need:"),
-
-
-
+  p("To achieve at least 80% power, your study will need:"),
 
 
 # flip cards --------------------------------------------------------------
@@ -109,18 +119,15 @@ ui <- page_sidebar(
         # back side of left card
         div(
           value_box(
-            title = "These results are based on the `pwr` package by Clay Ford.
-            For more information, refer to this vignette:",
+            title = "Results are based on the `pwr` package by Clay Ford.
+            Refer to this vignette:",
             value = 
-              # span(
-              # textOutput("backsideLeft"),
               a(
                 "Getting started with the pwr package",
                 href = "http://cran.nexr.com/web/packages/pwr/vignettes/pwr-vignette.html",
                 target = "_blank",
-                style = "color:black; font-size: 1.1rem;"
+                class = "my-links"
               ),
-            # ),
             showcase = bsicons::bs_icon("graph-up-arrow"),
             theme = "white",
             class = "left-box"
@@ -131,7 +138,6 @@ ui <- page_sidebar(
       ),
       class = "flip-box"
     ),
-
 
     # center box
     div( # flip-box
@@ -146,11 +152,11 @@ ui <- page_sidebar(
           ),
           class = "flip-box-front"
         ),
-        # back side of left card
+        # back side of center card
         div(
           value_box(
-            title = "Sample Size info...",
-            value = textOutput("backsideCenter"),
+            title = "Study design links:",
+            value = textOutput("sampleCardBack"),
             showcase = bsicons::bs_icon("people-fill"),
             theme = "white",
             class = "center-box"
@@ -163,52 +169,13 @@ ui <- page_sidebar(
     ),
 
     # right box
-    div( # flip-box
-      div( # flip-box-inner
-        div( # flip-box-front
-          value_box(
-            title = "Your proposed study power will be:",
-            value = textOutput("sampleResult"),
-            showcase = bsicons::bs_icon("bullseye"),
-            theme = "black",
-            class = "right-box"
-          ),
-          class = "flip-box-front"
-        ),
-        # back side of left card
-        div(
-          value_box(
-            title = "Power is calculated by:",
-            value = textOutput("backsideRight"),
-            showcase = bsicons::bs_icon("bullseye"),
-            theme = "black",
-            class = "right-box"
-          ),
-          class = "flip-box-back"
-        ),
-        class = "flip-box-inner"
-      ),
-      class = "flip-box"
-    ),
-    # class = 'my-layout-columns'
-    style = "padding: 5% 0.5% 6% 0% !important;"
-    
-    
-    
-    
-  ), # layout_columns
-
-  # footer
-  span(
-    p(
-      em("Written & developed by: "),
-      a(
-        "Kyle Grealis",
-        href = "https://github.com/kyleGrealis/",
-        target = "_blank",
-        style = "color:black;"
-      ),
-      style = "text-align:right;"
+    value_box(
+      title = "Your proposed study power will be:",
+      value = textOutput("sampleResult"),
+      showcase = bsicons::bs_icon("bullseye"),
+      theme = "black",
+      class = "right-box"
     )
-  )
+  ) # layout_columns
+
 ) # ui
