@@ -60,12 +60,12 @@ ui <- page_sidebar(
     div(
       p(
         em("Written & developed by: "),
-        a(
+        div(a(
           "Kyle Grealis",
           href = "https://github.com/kyleGrealis/category5",
           target = "_blank",
           class = "my-links"
-        ),
+        )),
       ),
       span("The Azimuth Project 2023", style = "font-size: 10px"),
       class = "sidebar-signature"

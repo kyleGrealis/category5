@@ -98,17 +98,32 @@ h1.bslib-page-title {
 }
 
 
+/* bootstrap.min.css | http://127.0.0.1:6835/bootstrap-5.2.2/bootstrap.min.css */
+
+.bg-primary {
+  /* color: #fff; */
+}
+
+.bg-primary {
+  /* --bs-bg-opacity: 1; */
+}
+
+
+
 /* data card styling */
 .left-box {
-  background-image: linear-gradient(to bottom right, $um-orange, white);
+  background-image: linear-gradient(to bottom right, $um-orange, white) !important;
+  color: black !important;
 }
 
 .center-box {
-  background-image: linear-gradient(white);
+  background-color: white !important;
+  color: black!important;
 }
 
 .right-box {
-  background-image: linear-gradient(to bottom right, white, $um-green);
+  background-image: linear-gradient(to bottom right, white, $um-green) !important;
+  color: black !important;
 }
 
 .left-box, .center-box, .right-box {
