@@ -95,17 +95,18 @@ h1.bslib-page-title {
 
 .bslib-card .card-footer {
   border-top: 1px solid black !important;
+  background-color: white !important;
 }
 
 
 /* bootstrap.min.css | http://127.0.0.1:6835/bootstrap-5.2.2/bootstrap.min.css */
 
 .bg-primary {
-  /* color: #fff; */
+  color: #fff;
 }
 
 .bg-primary {
-  /* --bs-bg-opacity: 1; */
+  --bs-bg-opacity: 1;
 }
 
 
@@ -161,6 +162,7 @@ The flip box container - set the width and height to whatever you want. We have 
   border: 1px solid black;
   border-radius: 0.5rem;
   color: black;
+  box-shadow: 5px 5px 5px #777;
 }
 
 /* Style the front side */
@@ -170,6 +172,7 @@ The flip box container - set the width and height to whatever you want. We have 
 /* Style the back side */
 .flip-box-back {
   transform: rotateY(180deg);
+  box-shadow: 5px 5px 5px #777;
 }
 
 #sampleCardBack {
@@ -182,6 +185,7 @@ div.g-col-sm-1:nth-child(3) {
   border: 1px solid black;
   border-radius: 0.5rem;
   height: 150px;
+  box-shadow: 5px 5px 5px #777;
 }
 
 #sampleResult {
