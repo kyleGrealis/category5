@@ -5,3 +5,5 @@
 *.Rproj
 rsconnect*
 rsconnect/*
+rs*
+
