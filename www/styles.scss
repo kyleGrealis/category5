@@ -42,6 +42,10 @@ body, .modal-content, .my-header {
       border-radius: 0.5px;
     }
     
+    /* modal button border */
+    .btn {
+      border: 0.5px solid black !important;
+    }
   }
   
 }
@@ -53,8 +57,7 @@ h1.bslib-page-title {
   font-size: 40px;
   font-weight: bold;
   color: black;
-  border-width: 0.1rem;
-  border-color: black;
+  border: 0.1rem solid black !important;
   background-image: $um-color-fade;
   box-shadow: $my-shadow;
 }
