@@ -3,7 +3,4 @@
 .RData
 .Ruserdata
 *.Rproj
-rsconnect*
-rsconnect/*
-rs*
-*/cat5-power.dcf
+rsconnect/shinapps.io/kylegrealis/*
