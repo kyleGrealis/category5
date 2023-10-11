@@ -1,2 +1,4 @@
 # category5
-This is UMiami-themed statistical power calculator and plotting app
+A University of Miami color-themed statistical power calculator and plotting app
+
+...more details comings soon!
