@@ -7,7 +7,7 @@ $bg-gray: #d3d3d3;
 
 
 /* change entire app font */
-body, .modal-content, .my-header {
+* {
   font-family: Trebuchet MS;
 }
 
@@ -16,9 +16,7 @@ body, .modal-content, .my-header {
   margin: 0px !important;
 }
 
-
-
-/* welcome modal popup */
+/* ---------------- welcome modal -------------------------------------------*/
 .modal {
   backdrop-filter: blur(5px);
   margin: auto;
@@ -55,10 +53,76 @@ body, .modal-content, .my-header {
   }
   
 }
+/*------------------ end of modal --------------------------------------------*/
 
 
-/* page title */
+
+
+
+
+
+/*---- this section controls the hover drop down for test selection ----------*/
+
+/* background property when statistic test is selected */
+.nav-underline .nav-link.active,
+.nav-underline :where(ul.nav.navbar-nav > li)>a.active,
+.nav-underline .nav-tabs>li>a.active,
+.nav-underline .nav-pills>li>a.active {
+  font-weight: bold
+}
+
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-menu a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-item.active,
+.dropdown-menu>li>a.active,
+.dropdown-item:active,
+.dropdown-menu>li>a:active {
+  background-color: #f1f1f1;
+  text-decoration: underline;
+  color: black;
+  font-weight: bold;
+}
+
+/* Change color of dropdown links on hover 
+*/
+.dropdown-menu a:hover {
+  background-color: #aaa;
+  border-bottom: 0.3px solid gray;
+  font-style: italic;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-menu {display: block;}
+
+/*---------------- end of the hover drop down -------------------------------*/
+
+
+/* page title 
 h1.bslib-page-title {
+.navbar .navbar-default .navbar-static-top {
   text-align: center;
   font-size: 40px;
   font-weight: bold;
@@ -67,7 +131,18 @@ h1.bslib-page-title {
   background-image: $um-color-fade;
   box-shadow: $my-shadow;
 }
+*/
 
+
+
+
+
+
+
+.bslib-sidebar-layout {
+  border-top-width: 0px;
+  border-top-style: solid;
+}
 
 /* render a slight black border on the sidebar and add a shadow */
 .main {
@@ -82,9 +157,21 @@ h1.bslib-page-title {
 }
 
 /* signature div inside sidebar */
-.sidebar-signature {
-  position: absolute;
-  bottom: 0px
+/*.sidebar-signature {*/
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: gray;
+  color: black;
+}
+
+.footer.project {
+  font-size: 10px;
+  position: fixed;
+  right: 0;
+  background: gray;
 }
 
 
@@ -99,6 +186,7 @@ h1.bslib-page-title {
     border: 1px solid black;
     box-shadow: 5px 5px 5px #777;
     border-radius: 0.5rem;
+    min-height: "400px";
   }
 }
 
@@ -201,3 +289,10 @@ div.g-col-sm-1:nth-child(3) {
   font-size: 18px;
   font-weight: bold;
 }
+
+
+
+
+
+
+
