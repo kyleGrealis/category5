@@ -2,7 +2,6 @@ box::use(
   shiny[div, span, em, a, icon]
 )
 
-#' @export
 my_footer <- div(
   class = "footer",
   span(
@@ -20,4 +19,3 @@ my_footer <- div(
     "The Azimuth Project ©2023",
   )
 )
-

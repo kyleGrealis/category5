@@ -4,7 +4,7 @@ box::use(
         card_footer],
   echarts4r[echarts4rOutput, renderEcharts4r],
   glue[glue],
-  shiny[moduleServer, NS, reactive, withMathJax, validate,
+  shiny[moduleServer, NS, reactive, withMathJax, validate, div,
         selectInput, numericInput, textOutput, renderText],
   shiny.blueprint[Callout]
 )
@@ -14,6 +14,8 @@ box::use(
   app/logic/plots,
   app/logic/t_test_logic
 )
+
+display_card <- function(...) card(full_screen = TRUE, ...)
 
 #' @export
 ui <- function(id) {
@@ -40,11 +42,11 @@ ui <- function(id) {
       t_test_logic$callout,
       layout_column_wrap(
         width = 1/2,
-        card(
+        display_card(
           card_header(textOutput(ns("leftCardHeader"))),
           echarts4rOutput(ns("power"))
         ),
-        card(
+        display_card(
           card_header(textOutput(ns("rightCardHeader"))),
           echarts4rOutput(ns("effect"))
         ),

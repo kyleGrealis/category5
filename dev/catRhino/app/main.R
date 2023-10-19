@@ -6,7 +6,7 @@ box::use(
 
 box::use(
   app/view/t_test,
-  app/view/text
+  app/logic/text
 )
 
 #' @export

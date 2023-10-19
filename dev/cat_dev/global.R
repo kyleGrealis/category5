@@ -1,162 +1,162 @@
-library(bslib)
-library(shinydashboardPlus)
-library(shiny)
-library(dplyr)
-library(tidyr)
-library(pwr)
-library(echarts4r)
-library(sass)
-library(fresh)
-
-
-pwrTable <- expand.grid(
-    alpha = c(0.01, 0.025, 0.05),
-    effectSize = seq(0.0, 1.0, by = 0.05),
-    sampleSize = seq(2, 700, by = 1)
-  ) |> 
-  mutate(
-    power = pwr::pwr.t.test(
-      n = sampleSize,
-      d = effectSize,
-      sig.level = alpha,
-      power = NULL
-    )$power,
-    power = round(power, 2),
-  ) |>
-  filter(between(power, 0.4, 0.99)) |>
-  na.omit()
+# library(bslib)
+# library(shinydashboardPlus)
+# library(shiny)
+# library(dplyr)
+# library(tidyr)
+# library(pwr)
+# library(echarts4r)
+# library(sass)
+# library(fresh)
+# 
+# 
+# pwrTable <- expand.grid(
+#     alpha = c(0.01, 0.025, 0.05),
+#     effectSize = seq(0.0, 1.0, by = 0.05),
+#     sampleSize = seq(2, 700, by = 1)
+#   ) |> 
+#   mutate(
+#     power = pwr::pwr.t.test(
+#       n = sampleSize,
+#       d = effectSize,
+#       sig.level = alpha,
+#       power = NULL
+#     )$power,
+#     power = round(power, 2),
+#   ) |>
+#   filter(between(power, 0.4, 0.99)) |>
+#   na.omit()
 
 
 # for rendering output plots
 # Power vs effect size plot
-left_plot <- function(chosenSample, chosenAlpha) {
-  pwrTable |>
-    filter(
-      sampleSize %in% c(chosenSample - 20, chosenSample, chosenSample + 20),
-      alpha == chosenAlpha
-    ) |>
-    mutate(effectSize = round(effectSize, 2)) |> 
-    group_by(sampleSize, alpha) |>
-    e_charts(effectSize) |>
-    e_line(power) |>
-    e_tooltip(
-      trigger = "item",
-      formatter = htmlwidgets::JS(
-        "
-          function(params){
-            return(
-              'Power: ' + params.value[1] +
-              '<br />Effect size: ' + params.value[0]
-            )
-          }
-          "
-      )
-    ) |> 
-    e_grid(right = '15%') |>
-    e_color(c("#f47321", "#777777", "#005030")) |> 
-    e_legend(
-      left = '5', 
-      title = list("Sample size")
-    ) |>
-    e_datazoom(type = 'inside') |>
-    e_y_axis(power) |>
-    e_x_axis(effectSize) |> 
-    e_axis_labels(x = "Effect \nSize", y = "Power") |> 
-    e_toolbox_feature(feature = c("saveAsImage"))
-}
+# left_plot <- function(chosenSample, chosenAlpha) {
+#   pwrTable |>
+#     filter(
+#       sampleSize %in% c(chosenSample - 20, chosenSample, chosenSample + 20),
+#       alpha == chosenAlpha
+#     ) |>
+#     mutate(effectSize = round(effectSize, 2)) |> 
+#     group_by(sampleSize, alpha) |>
+#     e_charts(effectSize) |>
+#     e_line(power) |>
+#     e_tooltip(
+#       trigger = "item",
+#       formatter = htmlwidgets::JS(
+#         "
+#           function(params){
+#             return(
+#               'Power: ' + params.value[1] +
+#               '<br />Effect size: ' + params.value[0]
+#             )
+#           }
+#           "
+#       )
+#     ) |> 
+#     e_grid(right = '15%') |>
+#     e_color(c("#f47321", "#777777", "#005030")) |> 
+#     e_legend(
+#       left = '5', 
+#       title = list("Sample size")
+#     ) |>
+#     e_datazoom(type = 'inside') |>
+#     e_y_axis(power) |>
+#     e_x_axis(effectSize) |> 
+#     e_axis_labels(x = "Effect \nSize", y = "Power") |> 
+#     e_toolbox_feature(feature = c("saveAsImage"))
+# }
 
 # plotting the selected effect size as a line on Power vs sample size plot
-right_plot <- function(chosenEffect, chosenAlpha) {
-  pwrTable |>
-    filter(
-      near(effectSize, chosenEffect),
-      alpha == chosenAlpha
-    ) |>
-    group_by(effectSize, alpha) |>
-    e_charts(power) |>
-    e_line(sampleSize) |>
-    e_color("#777777") |> 
-    e_tooltip(
-      trigger = "item",
-      formatter = htmlwidgets::JS(
-        "
-          function(params){
-            return(
-              'Sample size: ' + params.value[1] +
-              '<br />Power: ' + params.value[0]
-            )
-          }
-          "
-      )
-    ) |>
-    e_grid(right = '15%') |>
-    e_legend(show = FALSE) |>
-    e_datazoom(type = 'inside') |>
-    e_y_axis(sampleSize) |>
-    e_x_axis(power) |> 
-    e_axis_labels(x = "Power", y = "Sample \nSize") |> 
-    e_toolbox_feature(feature = c("saveAsImage"))
-}
+# right_plot <- function(chosenEffect, chosenAlpha) {
+#   pwrTable |>
+#     filter(
+#       near(effectSize, chosenEffect),
+#       alpha == chosenAlpha
+#     ) |>
+#     group_by(effectSize, alpha) |>
+#     e_charts(power) |>
+#     e_line(sampleSize) |>
+#     e_color("#777777") |> 
+#     e_tooltip(
+#       trigger = "item",
+#       formatter = htmlwidgets::JS(
+#         "
+#           function(params){
+#             return(
+#               'Sample size: ' + params.value[1] +
+#               '<br />Power: ' + params.value[0]
+#             )
+#           }
+#           "
+#       )
+#     ) |>
+#     e_grid(right = '15%') |>
+#     e_legend(show = FALSE) |>
+#     e_datazoom(type = 'inside') |>
+#     e_y_axis(sampleSize) |>
+#     e_x_axis(power) |> 
+#     e_axis_labels(x = "Power", y = "Sample \nSize") |> 
+#     e_toolbox_feature(feature = c("saveAsImage"))
+# }
 
-input_alpha <- selectInput(
-  "alpha", "Choose your significance level",
-  choices = c(0.01, 0.025, 0.05),
-  selected = 0.05
-)
+# input_alpha <- selectInput(
+#   "alpha", "Choose your significance level",
+#   choices = c(0.01, 0.025, 0.05),
+#   selected = 0.05
+# )
+# 
+# input_effect <- numericInput(
+#   "effect", "Choose the desired effect size",
+#   min = 0.1, max = 1.0, step = 0.05, value = 0.5
+# )
+# 
+# input_sampleSize <- numericInput(
+#   "sample", "Choose the sample size per group",
+#   min = 20, max = 300, step = 5, value = 100
+# )
 
-input_effect <- numericInput(
-  "effect", "Choose the desired effect size",
-  min = 0.1, max = 1.0, step = 0.05, value = 0.5
-)
-
-input_sampleSize <- numericInput(
-  "sample", "Choose the sample size per group",
-  min = 20, max = 300, step = 5, value = 100
-)
-
-extra_sidebar_buttons <- list(
-  shiny.blueprint::ButtonGroup(
-    class = "sidebar-buttons",
-    minimal = TRUE,
-    shiny.blueprint::Button(
-      onClick = shiny.blueprint::triggerEvent("reset"),
-      icon = "refresh",
-      "Reset"
-    ),
-    shiny.blueprint::Divider(),
-    shiny.blueprint::Button(
-      onClick = shiny.blueprint::triggerEvent("help_me"),
-      icon = "lightbulb",
-      "Help!"
-    )
-  )
-)
-
-
+# extra_sidebar_buttons <- list(
+#   shiny.blueprint::ButtonGroup(
+#     class = "sidebar-buttons",
+#     minimal = TRUE,
+#     shiny.blueprint::Button(
+#       onClick = shiny.blueprint::triggerEvent("reset"),
+#       icon = "refresh",
+#       "Reset"
+#     ),
+#     shiny.blueprint::Divider(),
+#     shiny.blueprint::Button(
+#       onClick = shiny.blueprint::triggerEvent("help_me"),
+#       icon = "lightbulb",
+#       "Help!"
+#     )
+#   )
+# )
 
 
-my_sidebar <- sidebar(
-  title = "Plotting controls",
-  input_alpha,
-  input_effect,
-  input_sampleSize,
-  extra_sidebar_buttons
-)
 
 
+# my_sidebar <- sidebar(
+#   title = "Plotting controls",
+#   input_alpha,
+#   input_effect,
+#   input_sampleSize,
+#   extra_sidebar_buttons
+# )
 
 
 
 
 
-plotting_cards <- function(headerTextOutput, footerTextOutput, displayedPlot) {
-  card(
-    full_screen = TRUE,
-    card_header(textOutput(headerTextOutput)),
-    card_footer(footerTextOutput),
-    echarts4rOutput(displayedPlot)
-  )
-}
+
+
+# plotting_cards <- function(headerTextOutput, footerTextOutput, displayedPlot) {
+#   card(
+#     full_screen = TRUE,
+#     card_header(textOutput(headerTextOutput)),
+#     card_footer(footerTextOutput),
+#     echarts4rOutput(displayedPlot)
+#   )
+# }
 
 
 
@@ -164,15 +164,15 @@ plotting_cards <- function(headerTextOutput, footerTextOutput, displayedPlot) {
 
 display_here <- list(
   
-  shiny.blueprint::Callout(
-    title = "This is where the callout will live.",
-    "Inside this callout block, I am planning to provide an example of ",
-    "the selected statistical test. For example, describe what a test of ",
-    "means is with a quick use case."
-  ),
+  # shiny.blueprint::Callout(
+  #   title = "This is where the callout will live.",
+  #   "Inside this callout block, I am planning to provide an example of ",
+  #   "the selected statistical test. For example, describe what a test of ",
+  #   "means is with a quick use case."
+  # ),
   
-  layout_column_wrap(
-    width = 1/2,
+  # layout_column_wrap(
+  #   width = 1/2,
     
     # left plot
     # card(
@@ -183,11 +183,11 @@ display_here <- list(
     #   ),
     #   echarts4rOutput("power"),
     # ),
-    plotting_cards(
-      "leftCardHeader", 
-      "Displaying your desired sample size and ± 20 participants per group.",
-      "power"
-    ),
+    # plotting_cards(
+    #   "leftCardHeader", 
+    #   "Displaying your desired sample size and ± 20 participants per group.",
+    #   "power"
+    # ),
     
     # right plot
     # card(
@@ -198,16 +198,16 @@ display_here <- list(
     #   ),
     #   echarts4rOutput("power2"),
     # ),
-    plotting_cards(
-      "rightCardHeader",
-      "The effect size line displays the necessary sample size and power.",
-      "power2"
-    )
-  ), # layout_columns
+    # plotting_cards(
+    #   "rightCardHeader",
+    #   "The effect size line displays the necessary sample size and power.",
+    #   "power2"
+    # )
+  # ), # layout_columns
   
   
   # simple dialogue between plots and flip cards
-  p("To achieve at least 80% power, your study will need:"),
+  # p("To achieve at least 80% power, your study will need:"),
   
   
   # flip cards --------------------------------------------------------------
