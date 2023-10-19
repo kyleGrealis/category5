@@ -16,8 +16,8 @@ box::use(
 
 # plotting power by effect size filtered by sample size +/- 20
 #' @export
-left_plot <- function(inputSample, inputAlpha) {
-  pwrTable |>
+left_plot <- function(data, inputSample, inputAlpha) {
+  data |>
     filter(
       sampleSize %in% c(inputSample - 20, inputSample, inputSample + 20),
       alpha == inputAlpha
@@ -46,8 +46,8 @@ left_plot <- function(inputSample, inputAlpha) {
 
 # plotting the selected effect size as a line on Power vs sample size plot
 #' @export
-right_plot <- function(chosenEffect, chosenAlpha) {
-  pwrTable |>
+right_plot <- function(data, chosenEffect, chosenAlpha) {
+  data |>
     filter(
       near(effectSize, chosenEffect),
       alpha == chosenAlpha
