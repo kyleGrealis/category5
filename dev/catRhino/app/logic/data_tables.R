@@ -6,7 +6,7 @@ box::use(
 
 grid <- expand.grid(
   alpha = c(0.01, 0.025, 0.05),
-  effectSize = seq(0.0, 2, by = 0.01),
+  effectSize = seq(0.0, 2, by = 0.05),
   sampleSize = seq(4, 700 , by = 1)
 )
 
@@ -38,7 +38,7 @@ pwrTable <- grid |>
 anovaTable <- expand.grid(
   groups = seq(2, 6, by = 1),
   alpha = c(0.01, 0.025, 0.05),
-  effectSize = seq(0.0, 2, by = 0.01),
+  effectSize = seq(0.0, 2, by = 0.05),
   sampleObs = seq(4, 700 , by = 1)
 ) |> mutate(
   power = pwr.anova.test(

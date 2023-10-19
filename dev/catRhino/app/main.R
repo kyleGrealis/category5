@@ -1,7 +1,7 @@
 box::use(
   bslib[page_navbar, navset_underline, nav_spacer, nav_menu, nav_panel,
         layout_sidebar],
-  shiny[moduleServer, NS, withMathJax],
+  shiny[div, moduleServer, NS, withMathJax],
 )
 
 box::use(
@@ -37,7 +37,7 @@ ui <- function(id) {
       nav_panel(withMathJax("$$X^2$$"), "chi square results here"),
       nav_panel("GLM", "General linear model results here")
     ),
-    text$my_footer
+    div(class = "footer", text$footer)
   ) # page_navbar
 }
 

@@ -76,69 +76,22 @@ ui <- function(id) {
       # TEST: adding the flip boxes (will look like shit until CSS)
       layout_columns(
 
-                # left box
-        div( # flip-box
-          div( # flip-box-inner
-            div( # flip-box-front
-              value_box(
-                title = "Overall measurable effect size:",
-                value = textOutput(ns("effectSize")),
-                showcase = bsicons::bs_icon("graph-up-arrow"),
-                theme = "white",
-                class = "left-box"
-              ),
-              class = "flip-box-front"
-            ),
-            # back side of left card
-            div(
-              value_box(
-                title = "Results are based on the `pwr` package by Clay Ford.
-              Refer to this vignette:",
-              value =
-                a(
-                  "Getting started with the pwr package",
-                  href = "http://cran.nexr.com/web/packages/pwr/vignettes/pwr-vignette.html",
-                  target = "_blank",
-                  class = "my-links"
-                ),
-              showcase = bsicons::bs_icon("graph-up-arrow"),
-              theme = "white",
-              class = "left-box"
-              ),
-              class = "flip-box-back"
-            ),
-            class = "flip-box-inner"
-          ),
-          class = "flip-box"
+        # left box
+        value_box(
+          title = "Overall measurable effect size:",
+          value = textOutput(ns("effectSize")),
+          showcase = bsicons::bs_icon("graph-up-arrow"),
+          theme = "white",
+          class = "left-box"
         ),
 
         # center box
-        div( # flip-box
-          div( # flip-box-inner
-            div( # flip-box-front
-              value_box(
-                title = "Minimal sample size per group:",
-                value = textOutput(ns("minSampleSize")),
-                showcase = bsicons::bs_icon("people-fill"),
-                theme = "white",
-                class = "center-box"
-              ),
-              class = "flip-box-front"
-            ),
-            # back side of center card
-            div(
-              value_box(
-                title = "Study design links:",
-                value = textOutput(ns("sampleCardBack")),
-                showcase = bsicons::bs_icon("people-fill"),
-                theme = "white",
-                class = "center-box"
-              ),
-              class = "flip-box-back"
-            ),
-            class = "flip-box-inner"
-          ),
-          class = "flip-box"
+        value_box(
+          title = "Minimal sample size per group:",
+          value = textOutput(ns("minSampleSize")),
+          showcase = bsicons::bs_icon("people-fill"),
+          theme = "white",
+          class = "center-box"
         ),
 
         # right box
@@ -240,9 +193,9 @@ server <- function(id) {
       } else if (is.na(input$effect) | input$effect < 0.1 | input$effect > 3 ) {
         validate("Invalid entry!")
       } else if (studySampleNeeded() <= input$sample) {
-        "SUFFICIENT"
+        "GOOD"
       } else {
-        "TOO LOW!"
+        "LOW!!"
       }
     })
 

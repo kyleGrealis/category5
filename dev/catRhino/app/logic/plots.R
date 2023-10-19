@@ -1,6 +1,6 @@
 
 box::use(
-  bslib[card, card_header, card_footer],
+  bslib[card, card_header, card_body],
   dplyr[filter, group_by, mutate, near],
   echarts4r[e_charts, e_line, e_tooltip, e_grid, e_color, e_legend,
             e_datazoom, e_x_axis, e_y_axis, e_axis_labels,
@@ -9,7 +9,6 @@ box::use(
 )
 
 box::use(
-  app/logic/data_tables[pwrTable],
   app/logic/chart_utils[left_label_formatter, right_label_formatter]
 )
 
@@ -107,6 +106,7 @@ plotting_cards <- function(headerTextOutput, displayedPlot) {
     class = "plotting_cards",
     full_screen = TRUE,
     card_header(headerTextOutput),
-    displayedPlot
+    card_body(displayedPlot, max_height = "350px"),
+    # style = "max-width: 350px;"
   )
 }

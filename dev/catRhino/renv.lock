@@ -1077,6 +1077,21 @@
       ],
       "Hash": "c3ef4152f87e8598ab28e825b92bd7cf"
     },
+    "shiny.fluent": {
+      "Package": "shiny.fluent",
+      "Version": "0.3.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "htmltools",
+        "jsonlite",
+        "rlang",
+        "shiny",
+        "shiny.react"
+      ],
+      "Hash": "588f81f264112d7c85f9b9e3c92ffc8d"
+    },
     "shiny.react": {
       "Package": "shiny.react",
       "Version": "0.3.0",
