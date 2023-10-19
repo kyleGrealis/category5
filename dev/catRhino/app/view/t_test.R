@@ -5,14 +5,12 @@ box::use(
 
         layout_columns, value_box],
   bsicons[bs_icon],
-  dplyr[arrange, between, filter, mutate, pull],
+  dplyr[arrange, filter, pull],
   echarts4r[echarts4rOutput, renderEcharts4r],
   glue[glue],
-  pwr[pwr.t.test],
   shiny[moduleServer, NS, reactive, withMathJax, validate, div, a,
         selectInput, numericInput, textOutput, renderText],
   shiny.blueprint[Callout],
-  stats[na.omit],
   utils[head]
 )
 
@@ -85,7 +83,7 @@ ui <- function(id) {
           div( # flip-box-inner
             div( # flip-box-front
               value_box(
-                title = "Overall measurable effect size",
+                title = "Overall measurable effect size:",
                 value = textOutput(ns("effectSize")),
                 showcase = bsicons::bs_icon("graph-up-arrow"),
                 theme = "white",
@@ -96,7 +94,6 @@ ui <- function(id) {
             # back side of left card
             div(
               value_box(
-                fill = FALSE,
                 title = "Results are based on the `pwr` package by Clay Ford.
               Refer to this vignette:",
               value =
@@ -122,7 +119,7 @@ ui <- function(id) {
           div( # flip-box-inner
             div( # flip-box-front
               value_box(
-                title = "Minimal sample size per group",
+                title = "Minimal sample size per group:",
                 value = textOutput(ns("minSampleSize")),
                 showcase = bsicons::bs_icon("people-fill"),
                 theme = "white",
@@ -151,7 +148,7 @@ ui <- function(id) {
           title = "Your proposed study power will be:",
           value = textOutput(ns("sampleResult")),
           showcase = bsicons::bs_icon("bullseye"),
-          theme = "black",
+          theme = "white",
           class = "right-box"
         )
       ) # layout_columns
@@ -163,30 +160,13 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
 
-    dataTable <- reactive({
-      pwrTable |>
-        mutate(
-          power = pwr.t.test(
-            n = sampleSize,
-            d = effectSize,
-            sig.level = alpha,
-            alternative = input$alternative,
-            type = input$testType,
-            power = NULL
-          )$power,
-          power = round(power, 2)
-        ) |>
-        filter(between(power, 0.6, 0.99)) |>
-        na.omit()
-    })
-
     # left plot
     output$power <- renderEcharts4r({
       # validate selected sample size
       if (is.na(input$sample) | input$sample < 4 | input$sample > 700 ) {
         validate("Please select a per-group sample size between 4 and 700.")
       }
-      plots$left_plot(dataTable(), input$sample, input$alpha)
+      plots$left_plot(pwrTable, input$sample, input$alpha)
     })
 
     output$leftCardHeader <- renderText({
@@ -201,7 +181,7 @@ server <- function(id) {
       if (is.na(input$effect) | input$effect < 0.1 | input$effect > 3 ) {
         validate("Invalid entry!")
       }
-      plots$right_plot(dataTable(), input$effect, input$alpha)
+      plots$right_plot(pwrTable, input$effect, input$alpha)
     })
 
     output$rightCardHeader <- renderText({
@@ -219,7 +199,7 @@ server <- function(id) {
     # the minimal calculated sample size is compared to the user-selected
     # sample size to finally render "sufficient" or "too low"
     comparisonTable <- reactive({
-      dataTable() |>
+      pwrTable |>
         filter(
           power >= 0.8,                    # for minimal acceptable power
           alpha == input$alpha,            # user input
@@ -240,7 +220,7 @@ server <- function(id) {
 
     # front, right value_box
     studySampleNeeded <- reactive({
-      dataTable() |>
+      pwrTable |>
         filter(
           power >= 0.8,
           alpha == input$alpha,
