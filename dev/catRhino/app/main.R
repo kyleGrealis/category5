@@ -6,6 +6,7 @@ box::use(
 
 box::use(
   app/view/t_test,
+  app/view/uneq_t_test,
   app/logic/text
 )
 
@@ -21,14 +22,20 @@ ui <- function(id) {
         title = "t-test",
         align = "right",
         t_test$ui(ns("t_test")),
-        nav_panel(
-          "Unequal sample sizes",
-          layout_sidebar(
-            sidebar = "uneq-ttest",
-            "Unequal sample sizes t-test here soon"
-          )
-        )
-      )
+        uneq_t_test$ui(ns("uneq_t_test"))
+      ),
+      # anova$ui(ns("anova")),
+      nav_menu(
+        title = "Proportions",
+        align = "right",
+        nav_panel("One sample", "this one will work"),
+        nav_panel("Two sample", "this one will NEED work"),
+        nav_panel("Unequal n samples", "this one will NEED work also")
+      ),
+      nav_panel("ANOVA", "ANOVA results here"),
+      nav_panel("Correlation", "Correlation results here"),
+      nav_panel(withMathJax("$$X^2$$"), "chi square results here"),
+      nav_panel("GLM", "General linear model results here")
     ),
     text$my_footer
   ) # page_navbar
@@ -38,5 +45,7 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     t_test$server("t_test")
+    uneq_t_test$server("uneq_t_test")
+    # anova$server("anova")
   })
 }

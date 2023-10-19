@@ -1,11 +1,14 @@
 box::use(
   bslib[page_navbar, navset_underline, nav_spacer, nav_menu, nav_panel,
         layout_sidebar, sidebar, layout_column_wrap, card, card_header,
-        card_footer, layout_columns, value_box],
+        card_footer,
+
+        layout_columns, value_box],
   bsicons[bs_icon],
   dplyr[arrange, filter, pull],
   echarts4r[echarts4rOutput, renderEcharts4r],
   glue[glue],
+  pwr,
   shiny[moduleServer, NS, reactive, withMathJax, validate, div, a,
         selectInput, numericInput, textOutput, renderText],
   shiny.blueprint[Callout],
@@ -25,7 +28,7 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   nav_panel(
-    "Means",
+    "Unequal sample sizes",
     layout_sidebar(
       sidebar = sidebar(
         selectInput(
@@ -34,25 +37,22 @@ ui <- function(id) {
           selected = 0.05
         ),
         numericInput(
-          ns("effect"), "Desired effect size",
-          min = 0.1, max = 3.0, step = 0.1, value = 0.5
+          "effectSize_d", "Desired effect size",
+          min = 0.1, max = 3, step = 0.1, value = 0.5
         ),
         numericInput(
-          ns("sample"), "Sample size per group",
-          min = 20, max = 700, step = 5, value = 100
+          "sampleN1_t2n", "Sample size in group 1",
+          min = 20, max = 700, step = 5, value = 50
+        ),
+        numericInput(
+          "sampleN2_t2n", "Sample size in group 2",
+          min = 20, max = 700, step = 5, value = 75
         ),
         selectInput(
-          ns("testType"), "t-test type",
-          choices = c(
-            "Two sample" = "two.sample",
-            "One sample" = "one.sample",
-            "Paired" = "paired"
-          )
-        ),
-        selectInput(
-          ns("alternative"), "Alternative hypothesis type",
+          "alternative_t2n", "Alternative hypothesis type",
           choices = c(
             "Two-sided" = "two.sided",
+            "Less than the null" = "less",
             "Greater than the null" = "greater"
           ),
           selected = "two.sided"
@@ -158,13 +158,28 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
 
+    # uneq_tTable <- reactive({
+    #   grid |>
+    #     mutate(
+    #       power = pwr$pwr.t2n.test(
+    #         n1 = sampleSize1,
+    #         n2 = sampleSize2,
+    #         d = effectSize,
+    #         sig.level = alpha,
+    #         alternative = input$alternative_t2n,
+    #         power = NULL
+    #       )$power,
+    #       power = round(power, 2)
+    #     )
+    # })
+
     # left plot
     output$power <- renderEcharts4r({
       # validate selected sample size
       if (is.na(input$sample) | input$sample < 4 | input$sample > 700 ) {
         validate("Please select a per-group sample size between 4 and 700.")
       }
-      plots$ttest_left(pwrTable, input$sample, input$alpha)
+      plots$left_plot(pwrTable, input$sample, input$alpha)
     })
 
     output$leftCardHeader <- renderText({

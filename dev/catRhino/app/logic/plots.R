@@ -16,11 +16,40 @@ box::use(
 
 # plotting power by effect size filtered by sample size +/- 20
 #' @export
-left_plot <- function(data, inputSample, inputAlpha) {
+ttest_left <- function(data, inputSample, inputAlpha) {
   data |>
     filter(
       sampleSize %in% c(inputSample - 20, inputSample, inputSample + 20),
       alpha == inputAlpha
+    ) |>
+    mutate(effectSize = round(effectSize, 2)) |>
+    group_by(sampleSize, alpha) |>
+    e_charts(effectSize) |>
+    e_line(power) |>
+    e_tooltip(
+      trigger = "item",
+      formatter = left_label_formatter
+    ) |>
+    e_grid(right = '15%') |>
+    e_color(c("#f47321", "#777777", "#005030")) |>
+    e_legend(
+      left = '5',
+      title = list("Sample size")
+    ) |>
+    e_datazoom(type = 'inside') |>
+    e_y_axis(power) |>
+    e_x_axis(effectSize) |>
+    e_axis_labels(x = "Effect \nSize", y = "Power") |>
+    e_toolbox_feature(feature = c("saveAsImage"))
+}
+
+#' @export
+anova_left <- function(data, inputSample, inputAlpha, inputGroups) {
+  data |>
+    filter(
+      sampleSize %in% c(inputSample - 20, inputSample, inputSample + 20),
+      alpha == inputAlpha,
+      groups == inputGroups
     ) |>
     mutate(effectSize = round(effectSize, 2)) |>
     group_by(sampleSize, alpha) |>

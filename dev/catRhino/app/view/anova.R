@@ -14,7 +14,7 @@ box::use(
 
 box::use(
   app/logic/callout,
-  app/logic/data_tables[pwrTable],
+  app/logic/data_tables[anovaTable],
   app/logic/plots,
   app/logic/sidebar_buttons[extra_buttons],
   app/logic/text[app_note]
@@ -25,7 +25,7 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   nav_panel(
-    "Means",
+    "ANOVA",
     layout_sidebar(
       sidebar = sidebar(
         selectInput(
@@ -35,31 +35,19 @@ ui <- function(id) {
         ),
         numericInput(
           ns("effect"), "Desired effect size",
-          min = 0.1, max = 3.0, step = 0.1, value = 0.5
+          min = 0.1, max = 2, step = 0.1, value = 0.5
         ),
         numericInput(
-          ns("sample"), "Sample size per group",
+          ns("sample"), "Number of tests",
           min = 20, max = 700, step = 5, value = 100
         ),
-        selectInput(
-          ns("testType"), "t-test type",
-          choices = c(
-            "Two sample" = "two.sample",
-            "One sample" = "one.sample",
-            "Paired" = "paired"
-          )
-        ),
-        selectInput(
-          ns("alternative"), "Alternative hypothesis type",
-          choices = c(
-            "Two-sided" = "two.sided",
-            "Greater than the null" = "greater"
-          ),
-          selected = "two.sided"
+        numericInput(
+          ns("groups"), "Number of groups (classes)",
+          min = 2, max = 6, step = 1, value = 2
         ),
         extra_buttons
       ),
-      callout$ttest,
+      callout$anova,
       layout_column_wrap(
         width = 1/2,
         plots$plotting_cards(
@@ -162,16 +150,16 @@ server <- function(id) {
     output$power <- renderEcharts4r({
       # validate selected sample size
       if (is.na(input$sample) | input$sample < 4 | input$sample > 700 ) {
-        validate("Please select a per-group sample size between 4 and 700.")
+        validate("Please select between 4 and 700 sample observations.")
       }
-      plots$ttest_left(pwrTable, input$sample, input$alpha)
+      plots$anova_left(anovaTable, input$sample, input$alpha, input$groups)
     })
 
     output$leftCardHeader <- renderText({
       if (is.na(input$sample) | input$sample < 4 | input$sample > 700 ) {
         validate("Invalid entry!")
       }
-      glue("Sample size: {input$sample} (± 20) per group")
+      glue("Sample observations: {input$sample} (± 20)")
     })
 
     # right plot
@@ -179,7 +167,7 @@ server <- function(id) {
       if (is.na(input$effect) | input$effect < 0.1 | input$effect > 3 ) {
         validate("Invalid entry!")
       }
-      plots$right_plot(pwrTable, input$effect, input$alpha)
+      plots$right_plot(anovaTable, input$effect, input$alpha)
     })
 
     output$rightCardHeader <- renderText({
@@ -197,11 +185,12 @@ server <- function(id) {
     # the minimal calculated sample size is compared to the user-selected
     # sample size to finally render "sufficient" or "too low"
     comparisonTable <- reactive({
-      pwrTable |>
+      anovaTable |>
         filter(
           power >= 0.8,                    # for minimal acceptable power
           alpha == input$alpha,            # user input
           effectSize >= input$effect,      # user input
+          groups == input$groups
         ) |>
         arrange(power, effectSize)
     })
@@ -218,11 +207,12 @@ server <- function(id) {
 
     # front, right value_box
     studySampleNeeded <- reactive({
-      pwrTable |>
+      anovaTable |>
         filter(
           power >= 0.8,
           alpha == input$alpha,
-          effectSize >= input$effect
+          effectSize >= input$effect,
+          groups == input$groups
         ) |>
         arrange(power, effectSize) |>
         pull(sampleSize) |>
