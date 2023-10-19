@@ -5,12 +5,12 @@ box::use(
   echarts4r[e_charts, e_line, e_tooltip, e_grid, e_color, e_legend,
             e_datazoom, e_x_axis, e_y_axis, e_axis_labels,
             e_toolbox_feature, echarts4rOutput],
-  htmlwidgets[JS],
   shiny[textOutput]
 )
 
 box::use(
-  app/logic/data_tables[pwrTable]
+  app/logic/data_tables[pwrTable],
+  app/logic/chart_utils[left_label_formatter, right_label_formatter]
 )
 
 
@@ -28,16 +28,7 @@ left_plot <- function(inputSample, inputAlpha) {
     e_line(power) |>
     e_tooltip(
       trigger = "item",
-      formatter = JS(
-        "
-          function(params){
-            return(
-              'Power: ' + params.value[1] +
-              '<br />Effect size: ' + params.value[0]
-            )
-          }
-          "
-      )
+      formatter = left_label_formatter
     ) |>
     e_grid(right = '15%') |>
     e_color(c("#f47321", "#777777", "#005030")) |>
@@ -67,16 +58,7 @@ right_plot <- function(chosenEffect, chosenAlpha) {
     e_color("#777777") |>
     e_tooltip(
       trigger = "item",
-      formatter = htmlwidgets::JS(
-        "
-          function(params){
-            return(
-              'Sample size: ' + params.value[1] +
-              '<br />Power: ' + params.value[0]
-            )
-          }
-          "
-      )
+      formatter = right_label_formatter
     ) |>
     e_grid(right = '15%') |>
     e_legend(show = FALSE) |>
@@ -91,11 +73,11 @@ right_plot <- function(chosenEffect, chosenAlpha) {
 # this function will create a card container with a custom heading,
 # footer, and plot
 #' @export
-plotting_cards <- function(headerTextOutput, footerTextOutput, displayedPlot) {
+plotting_cards <- function(headerTextOutput, displayedPlot) {
   card(
+    class = "plotting_cards",
     full_screen = TRUE,
     card_header(headerTextOutput),
-    card_footer(footerTextOutput),
     displayedPlot
   )
 }

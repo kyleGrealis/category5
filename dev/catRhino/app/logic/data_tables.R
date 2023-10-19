@@ -1,7 +1,7 @@
 box::use(
   dplyr[between, filter, mutate],
   pwr,
-  shiny[p],
+  shiny[div, p],
   stats[na.omit]
 )
 
@@ -22,5 +22,3 @@ pwrTable <- expand.grid(
   ) |>
   filter(between(power, 0.4, 0.99)) |>
   na.omit()
-
-app_note <- p("To achieve at least 80% power, your study will need:")

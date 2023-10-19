@@ -1,6 +1,8 @@
 box::use(
-  shiny[div, span, em, a, icon]
+  shiny[a, div, em, icon, p, span]
 )
+
+app_note <- div(p("To achieve at least 80% power, your study will need:"))
 
 my_footer <- div(
   class = "footer",
