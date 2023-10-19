@@ -40,8 +40,6 @@ ui <- page_navbar(
       align = "right",
       nav_panel(
         "Means", 
-        # "t-test of Means here soon"
-        
         layout_sidebar(
           sidebar = my_sidebar, 
           display_here

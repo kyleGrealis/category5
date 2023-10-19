@@ -53,6 +53,7 @@ left_plot <- function(chosenSample, chosenAlpha) {
       )
     ) |> 
     e_grid(right = '15%') |>
+    e_color(c("#f47321", "#777777", "#005030")) |> 
     e_legend(
       left = '5', 
       title = list("Sample size")
@@ -74,6 +75,7 @@ right_plot <- function(chosenEffect, chosenAlpha) {
     group_by(effectSize, alpha) |>
     e_charts(power) |>
     e_line(sampleSize) |>
+    e_color("#777777") |> 
     e_tooltip(
       trigger = "item",
       formatter = htmlwidgets::JS(
@@ -96,50 +98,111 @@ right_plot <- function(chosenEffect, chosenAlpha) {
     e_toolbox_feature(feature = c("saveAsImage"))
 }
 
+input_alpha <- selectInput(
+  "alpha", "Choose your significance level",
+  choices = c(0.01, 0.025, 0.05),
+  selected = 0.05
+)
 
-my_sidebar <- sidebar(
-  title = "Plotting controls",
-  selectInput(
-    "alpha", "Choose your significance level",
-    choices = c(0.01, 0.025, 0.05),
-    selected = 0.05
-  ),
-  numericInput(
-    "effect", "Choose the desired effect size",
-    min = 0.1, max = 1.0, step = 0.05, value = 0.5
-  ),
-  numericInput(
-    "sample", "Choose the sample size per group",
-    min = 20, max = 300, step = 5, value = 100
+input_effect <- numericInput(
+  "effect", "Choose the desired effect size",
+  min = 0.1, max = 1.0, step = 0.05, value = 0.5
+)
+
+input_sampleSize <- numericInput(
+  "sample", "Choose the sample size per group",
+  min = 20, max = 300, step = 5, value = 100
+)
+
+extra_sidebar_buttons <- list(
+  shiny.blueprint::ButtonGroup(
+    class = "sidebar-buttons",
+    minimal = TRUE,
+    shiny.blueprint::Button(
+      onClick = shiny.blueprint::triggerEvent("reset"),
+      icon = "refresh",
+      "Reset"
+    ),
+    shiny.blueprint::Divider(),
+    shiny.blueprint::Button(
+      onClick = shiny.blueprint::triggerEvent("help_me"),
+      icon = "lightbulb",
+      "Help!"
+    )
   )
 )
 
 
 
 
+my_sidebar <- sidebar(
+  title = "Plotting controls",
+  input_alpha,
+  input_effect,
+  input_sampleSize,
+  extra_sidebar_buttons
+)
+
+
+
+
+
+
+
+plotting_cards <- function(headerTextOutput, footerTextOutput, displayedPlot) {
+  card(
+    full_screen = TRUE,
+    card_header(textOutput(headerTextOutput)),
+    card_footer(footerTextOutput),
+    echarts4rOutput(displayedPlot)
+  )
+}
+
+
+
+
+
 display_here <- list(
+  
+  shiny.blueprint::Callout(
+    title = "This is where the callout will live.",
+    "Inside this callout block, I am planning to provide an example of ",
+    "the selected statistical test. For example, describe what a test of ",
+    "means is with a quick use case."
+  ),
   
   layout_column_wrap(
     width = 1/2,
     
     # left plot
-    card(
-      full_screen = TRUE,
-      card_header(textOutput("leftCardHeader")),
-      card_footer(
-        "Displaying your desired sample size and ± 20 participants per group."
-      ),
-      echarts4rOutput("power"),
+    # card(
+    #   full_screen = TRUE,
+    #   card_header(textOutput("leftCardHeader")),
+    #   card_footer(
+    #     "Displaying your desired sample size and ± 20 participants per group."
+    #   ),
+    #   echarts4rOutput("power"),
+    # ),
+    plotting_cards(
+      "leftCardHeader", 
+      "Displaying your desired sample size and ± 20 participants per group.",
+      "power"
     ),
     
     # right plot
-    card(
-      card_header(textOutput("rightCardHeader")),
-      card_footer(
-        "The effect size line displays the necessary sample size and power."
-      ),
-      echarts4rOutput("power2"),
-    ),
+    # card(
+    #   full_screen = TRUE,
+    #   card_header(textOutput("rightCardHeader")),
+    #   card_footer(
+    #     "The effect size line displays the necessary sample size and power."
+    #   ),
+    #   echarts4rOutput("power2"),
+    # ),
+    plotting_cards(
+      "rightCardHeader",
+      "The effect size line displays the necessary sample size and power.",
+      "power2"
+    )
   ), # layout_columns
   
   
@@ -151,6 +214,9 @@ display_here <- list(
   
   # lower display section with flip cards
   layout_columns(
+  # layout_column_wrap(
+  #   fillable = FALSE,
+  #   width = 1/3,
     
     # left box
     div( # flip-box

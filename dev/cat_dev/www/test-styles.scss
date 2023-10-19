@@ -6,17 +6,18 @@ $my-shadow: 6px 6px 6px $shadow;
 $bg-gray: #d3d3d3;
 
 
-/* change entire app font */
+/* Full app features */
 * {
   font-family: Trebuchet MS;
 }
 
-/* render math expressions inline and not subscripted */
+/* This renders math expressions to be displayed inline with other text.
+   It has a weird quality to drop down like a subscript without this. */
 .MathJax_Display {
   margin: 0px !important;
 }
 
-/* ---------------- welcome modal -------------------------------------------*/
+/* ---------------- welcome modal -----------------------------------*/
 .modal {
   backdrop-filter: blur(5px);
   margin: auto;
@@ -53,7 +54,7 @@ $bg-gray: #d3d3d3;
   }
   
 }
-/*------------------ end of modal --------------------------------------------*/
+/*------------------ end of modal -----------------------------------*/
 
 
 
@@ -61,7 +62,7 @@ $bg-gray: #d3d3d3;
 
 
 
-/*---- this section controls the hover drop down for test selection ----------*/
+/*--- This section controls the hover drop down for test selection- --*/
 
 /* background property when statistic test is selected */
 .nav-underline .nav-link.active,
@@ -106,8 +107,7 @@ $bg-gray: #d3d3d3;
   font-weight: bold;
 }
 
-/* Change color of dropdown links on hover 
-*/
+/* Change color of dropdown links on hover */
 .dropdown-menu a:hover {
   background-color: #aaa;
   border-bottom: 0.3px solid gray;
@@ -117,7 +117,7 @@ $bg-gray: #d3d3d3;
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-menu {display: block;}
 
-/*---------------- end of the hover drop down -------------------------------*/
+/*------------- end of the hover drop down ---------------------------*/
 
 
 /* page title 
