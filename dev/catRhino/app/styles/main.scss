@@ -69,6 +69,16 @@
 .dropdown-menu, .card, .left-box, .center-box, .right-box {
   box-shadow: 6px 6px 6px gray;
 }
+.left-box > *,
+.center-box > *,
+.right-box > * {
+  font-size: 3.5vw;
+}
+
+div > .bi {
+  height: 0.7em;
+  width: 0.7em;
+}
 
 .main.bslib-gap-spacing.html-fill-container {
   box-shadow: inset 6px 6px 6px gray;
