@@ -1,7 +1,7 @@
 
 /* Full app features */
 * {
-  font-family: Trebuchet MS;
+  font-family: Poppins;
 }
 
 .navbar {
@@ -17,7 +17,7 @@
 }
 
 
-/*---  hover drop down for test selection -----------------------------*/
+/*--- drop down for test selection -----------------------------*/
 .nav.nav-underline {
   margin-top: 5px;
 }
@@ -37,13 +37,6 @@
   z-index: 1;
   border: 0.2px solid black;
 }
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-menu {display: block;}
-/* Close on click ----- NOT WORKING YET
-.dropdown-menu>li>a:active .dropdown-menu {
-  display: none;
-}
-*/
 
 /* Links inside the dropdown */
 .dropdown-menu a {
@@ -71,7 +64,7 @@
   outline: none;
 }
 
-/*------------- end of the hover drop down ---------------------------*/
+/*------------- end of the drop down ---------------------------*/
 
 .dropdown-menu, .card, .left-box, .center-box, .right-box {
   box-shadow: 6px 6px 6px gray;
@@ -91,6 +84,11 @@ div.tab-content:nth-child(2), .callout-block, .card {
   padding: 15px 15px 0px 15px;
 }
 
+.callout-block.app-note {
+  padding: 5px;
+  text-align: center;
+}
+
 .footer, .callout-block, .card-header {
   background-color: #f3f2f1;
 }
@@ -104,6 +102,29 @@ div.tab-content:nth-child(2), .callout-block, .card {
   margin-top: -1px;
 }
 
+/* "active" is the hover quality, "selected"" is the chosen item */
+.selectize-dropdown-content>div.option.active {
+  background-color: #f1f1f1;
+  border-bottom: 0.3px solid gray;
+  font-style: italic;
+  font-weight: bold;
+  color: #333;
+}
+/* turning off -- weird quirk where keeps underline and bold if prev selected
+.selectize-dropdown-content>div.option.selected {
+  background-color: #fff;
+  text-decoration: underline;
+}
+*/
+.selectize-input.focus, .form-control:focus {
+  border-color: black;
+  box-shadow: 0 0 0 0.25rem rgba(170, 170, 170, 0.4);
+}
+.selectize-dropdown-content>.option:active {
+  color: red;
+  font-weight: bold;
+}
+
 .footer {
   position: fixed;
   width: 100%;
@@ -113,3 +134,8 @@ div.tab-content:nth-child(2), .callout-block, .card {
   padding: 12px 20px;
   border-top: 0.4px solid black;
 }
+
+
+
+
+

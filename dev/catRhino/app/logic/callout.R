@@ -5,6 +5,11 @@ box::use(
 
 Callout <- function(...) div(class = "callout-block", ...)
 
+app_note <- Callout(
+  class = "app-note",
+  "To achieve at least 80% power, your study will need:"
+)
+
 ttest <- Callout(
   title = "This is a test for differences in means.",
   p("Two sample: Is there a difference in the mean income of men and women?"),

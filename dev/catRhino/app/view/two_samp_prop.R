@@ -18,7 +18,6 @@ box::use(
 box::use(
   app/logic/callout,
   app/logic/plots,
-  app/logic/text[app_note],
 
   app/view/sidebar_buttons[extra_buttons],
 )
@@ -76,7 +75,7 @@ ui <- function(id) {
           echarts4rOutput(ns("effect"))
         )
       ), # layout_column_wrap
-      app_note,
+      callout$app_note,
 
       layout_columns(
 

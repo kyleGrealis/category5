@@ -1,9 +1,7 @@
 box::use(
-  shiny[a, div, em, icon, p, span],
+  shiny[a, em, icon],
   shiny.fluent[Stack, Text]
 )
-
-app_note <- div(p("To achieve at least 80% power, your study will need:"))
 
 footer <- Stack(
   horizontal = TRUE,
@@ -18,6 +16,6 @@ footer <- Stack(
     ),
     block=TRUE
   ),
-  Text(variant = "medium", nowrap = FALSE, "The Azimuth Project ©2023"),
-  Text(variant = "medium", nowrap = FALSE, "All rights reserved.")
+  # Text(variant = "medium", nowrap = FALSE, "The Azimuth Project ©2023"),
+  Text(variant = "medium", nowrap = FALSE, "All rights reserved ©2023")
 )
