@@ -4,6 +4,12 @@
   font-family: Trebuchet MS;
 }
 
+.navbar {
+  font-weight: bold;
+  background: linear-gradient(to right, #f47532, white, #005030);
+  border-top: 0.4px solid black;
+}
+
 /* This renders math expressions to be displayed inline with other text.
    It has a weird quality to drop down like a subscript without this. */
 .MathJax_Display {
@@ -34,8 +40,8 @@
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  border: 0.2px solid black;
 }
 
 /* Links inside the dropdown */
@@ -68,3 +74,43 @@
 
 /*------------- end of the hover drop down ---------------------------*/
 
+.dropdown-menu, .card, .left-box, .center-box, .right-box {
+  box-shadow: 6px 6px 6px gray;
+}
+
+.main.bslib-gap-spacing.html-fill-container {
+  box-shadow: inset 6px 6px 6px gray;
+  margin-top: -1px;
+}
+
+div.tab-content:nth-child(2), .callout-block, .card {
+  border: 0.4px solid black;
+  border-radius: 5px;
+}
+
+.callout-block {
+  padding: 15px 15px 0px 15px;
+}
+
+.footer, .callout-block, .card-header {
+  background-color: #f3f2f1;
+}
+
+.navbar, .card-header {
+  border-bottom: 0.4px solid black;
+}
+
+.sidebar.my-sidebar {
+  border-right: 0.4px solid black;
+  margin-top: -1px;
+}
+
+.footer {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  color: black;
+  padding: 12px 20px;
+  border-top: 0.4px solid black;
+}

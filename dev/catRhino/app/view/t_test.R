@@ -3,21 +3,24 @@ box::use(
         layout_sidebar, sidebar, layout_column_wrap, card, card_header,
         card_footer, layout_columns, value_box],
   bsicons[bs_icon],
-  dplyr[arrange, filter, pull],
+  dplyr[arrange, between, filter, mutate, pull],
   echarts4r[echarts4rOutput, renderEcharts4r],
   glue[glue],
-  shiny[moduleServer, NS, reactive, withMathJax, validate, div, a,
-        selectInput, numericInput, textOutput, renderText],
+  pwr[pwr.t.test],
+  shiny[moduleServer, NS, reactive, withMathJax, validate, div, a, p,
+        selectInput, numericInput, textOutput, renderText,
+        observeEvent, updateNumericInput],
   shiny.blueprint[Callout],
+  stats[na.omit],
   utils[head]
 )
 
 box::use(
   app/logic/callout,
-  app/logic/data_tables[pwrTable],
   app/logic/plots,
-  app/logic/sidebar_buttons[extra_buttons],
-  app/logic/text[app_note]
+  app/logic/text[app_note],
+
+  app/view/sidebar_buttons[extra_buttons],
 )
 
 
@@ -28,6 +31,7 @@ ui <- function(id) {
     "Means",
     layout_sidebar(
       sidebar = sidebar(
+        class = "my-sidebar",
         selectInput(
           ns("alpha"), "Significance level",
           choices = c(0.01, 0.025, 0.05),
@@ -57,7 +61,12 @@ ui <- function(id) {
           ),
           selected = "two.sided"
         ),
-        extra_buttons
+        extra_buttons,
+        p("The plots will not redraw if you select 't-test type' or
+           'Alternative hypothesis type'. The calculated power table
+           is hardly affected by these options, so a change will not
+           be reflected in the displays. This is more for understanding
+           special considerations for this power test."),
       ),
       callout$ttest,
       layout_column_wrap(
@@ -73,33 +82,32 @@ ui <- function(id) {
       ), # layout_column_wrap
       app_note,
 
-      # TEST: adding the flip boxes (will look like shit until CSS)
       layout_columns(
 
         # left box
         value_box(
-          title = "Overall measurable effect size:",
+          title = "Measurable effect size:",
           value = textOutput(ns("effectSize")),
           showcase = bsicons::bs_icon("graph-up-arrow"),
-          theme = "white",
+          theme = "white", full_screen = FALSE, fill = TRUE, height = 100L,
           class = "left-box"
         ),
 
         # center box
         value_box(
-          title = "Minimal sample size per group:",
+          title = "Sample size per group:",
           value = textOutput(ns("minSampleSize")),
           showcase = bsicons::bs_icon("people-fill"),
-          theme = "white",
+          theme = "white", full_screen = FALSE, fill = TRUE, height = 100L,
           class = "center-box"
         ),
 
         # right box
         value_box(
-          title = "Your proposed study power will be:",
+          title = "Proposed study power is:",
           value = textOutput(ns("sampleResult")),
           showcase = bsicons::bs_icon("bullseye"),
-          theme = "white",
+          theme = "white", full_screen = FALSE, fill = TRUE, height = 100L,
           class = "right-box"
         )
       ) # layout_columns
@@ -111,88 +119,114 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
 
+    sample <- reactive(input$sample)
+    alpha  <- reactive(input$alpha)
+    effect <- reactive(input$effect)
+
+    pwrTable <- reactive({
+      expand.grid(
+        alpha = c(0.01, 0.025, 0.05),
+        effectSize = seq(0.0, 2, by = 0.05),
+        sampleSize = seq(2, sample()+100, by = 1)
+      ) |>
+        mutate(
+          power = pwr.t.test(
+            n = sampleSize,
+            d = effectSize,
+            sig.level = alpha,
+            power = NULL
+          )$power,
+          power = round(power, 2)
+        ) |>
+        filter(between(power, 0.6, 0.99)) |>
+        na.omit()
+    })
+
+    # ensure that the maximum selectable effect size does not exceed
+    # what values are available
+    observeEvent(effect(), {
+      updateNumericInput(inputId = "effect",
+                         max = max(pwrTable()$effectSize)-0.1)
+    })
+
     # left plot
     output$power <- renderEcharts4r({
       # validate selected sample size
-      if (is.na(input$sample) | input$sample < 4 | input$sample > 700 ) {
+      if (is.na(sample()) | sample() < 4 | sample() > 700 ) {
         validate("Please select a per-group sample size between 4 and 700.")
       }
-      plots$ttest_left(pwrTable, input$sample, input$alpha)
+      plots$ttest_left(pwrTable(), sample(), alpha())
     })
 
     output$leftCardHeader <- renderText({
-      if (is.na(input$sample) | input$sample < 4 | input$sample > 700 ) {
+      if (is.na(sample()) | sample() < 4 | sample() > 700 ) {
         validate("Invalid entry!")
       }
-      glue("Sample size: {input$sample} (± 20) per group")
+      glue("Sample size: {sample()} (± 20) per group")
     })
+
 
     # right plot
     output$effect <- renderEcharts4r({
-      if (is.na(input$effect) | input$effect < 0.1 | input$effect > 3 ) {
-        validate("Invalid entry!")
+      if (min(pwrTable()$effectSize) > effect() |
+          max(pwrTable()$effectSize) < effect()) {
+        validate("Please choose another effect size to render a plot.")
       }
-      plots$right_plot(pwrTable, input$effect, input$alpha)
+      plots$right_plot(pwrTable(), effect(), alpha())
     })
 
     output$rightCardHeader <- renderText({
-      if (is.na(input$effect) | input$effect < 0.1 | input$effect > 3 ) {
+      if (is.na(effect()) | effect() < 0.1 | effect() > 3 ) {
         validate("Invalid entry!")
       }
-      glue("Selected effect size: {input$effect}")
+      glue("Selected effect size: {effect()}")
     })
 
-    # flip boxes --------------------------------------------------------------
+
+    # left value box
+    output$effectSize <- renderText({effect()})
+
     # this section is for comparing the selected sample size against the
-    # required sample size to achieve >= 80% holding the other variables
-    # (alpha, effect size) at a constant. then, a minimal sample size is
+    # required sample size to achieve >= 80%. a minimal sample size is
     # calculated and displayed in the middle output box, front side. lastly,
     # the minimal calculated sample size is compared to the user-selected
-    # sample size to finally render "sufficient" or "too low"
+    # sample size to finally render "good" or "too low"
     comparisonTable <- reactive({
-      pwrTable |>
+      pwrTable() |>
         filter(
           power >= 0.8,                    # for minimal acceptable power
-          alpha == input$alpha,            # user input
-          effectSize >= input$effect,      # user input
+          alpha == alpha(),            # user input
+          effectSize >= effect(),      # user input
         ) |>
         arrange(power, effectSize)
     })
 
-    # front, left value box
-    output$effectSize <- renderText({input$effect})
-
-    # front, middle value_box
+    # middle value_box
     output$minSampleSize <- renderText({
       comparisonTable() |>
         pull(sampleSize) |>
         head(1)
     })
 
-    # front, right value_box
+    # right value_box
     studySampleNeeded <- reactive({
-      pwrTable |>
+      pwrTable() |>
         filter(
           power >= 0.8,
-          alpha == input$alpha,
-          effectSize >= input$effect
+          alpha == alpha(),
+          effectSize >= effect()
         ) |>
         arrange(power, effectSize) |>
         pull(sampleSize) |>
         head(1)
     })
 
-    # backside of middle box
-    output$sampleCardBack <- renderText({
-      "...information coming soon!"
-    })
-
     output$sampleResult <- renderText({
-      if (is.na(input$sample) | input$sample < 4 | input$sample > 700 ) {
+      if (is.na(sample()) | sample() < 4 | sample() > 700 ) {
         validate("Invalid entry!")
-      } else if (is.na(input$effect) | input$effect < 0.1 | input$effect > 3 ) {
+      } else if (is.na(effect()) | effect() < 0.1 | effect() > 3 ) {
         validate("Invalid entry!")
-      } else if (studySampleNeeded() <= input$sample) {
+      } else if (studySampleNeeded() <= sample()) {
         "GOOD"
       } else {
         "LOW!!"

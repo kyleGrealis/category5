@@ -28,7 +28,7 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   nav_panel(
-    "Unequal sample sizes",
+    "Correlation",
     layout_sidebar(
       sidebar = sidebar(
         class = "my-sidebar",
@@ -38,29 +38,32 @@ ui <- function(id) {
           selected = 0.05
         ),
         numericInput(
-          "effectSize_d", "Desired effect size",
-          min = 0.1, max = 3, step = 0.1, value = 0.5
+          ns("effect"), "Desired effect size",
+          min = 0.1, max = 3.0, step = 0.1, value = 0.5
         ),
         numericInput(
-          "sampleN1_t2n", "Sample size in group 1",
-          min = 20, max = 700, step = 5, value = 50
-        ),
-        numericInput(
-          "sampleN2_t2n", "Sample size in group 2",
-          min = 20, max = 700, step = 5, value = 75
+          ns("sample"), "Sample size per group",
+          min = 20, max = 700, step = 5, value = 100
         ),
         selectInput(
-          "alternative_t2n", "Alternative hypothesis type",
+          ns("testType"), "t-test type",
+          choices = c(
+            "Two sample" = "two.sample",
+            "One sample" = "one.sample",
+            "Paired" = "paired"
+          )
+        ),
+        selectInput(
+          ns("alternative"), "Alternative hypothesis type",
           choices = c(
             "Two-sided" = "two.sided",
-            "Less than the null" = "less",
             "Greater than the null" = "greater"
           ),
           selected = "two.sided"
         ),
         extra_buttons
       ),
-      callout$uneq_t_test,
+      callout$corr,
       layout_column_wrap(
         width = 1/2,
         plots$plotting_cards(

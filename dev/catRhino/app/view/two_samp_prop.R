@@ -28,7 +28,7 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   nav_panel(
-    "Unequal sample sizes",
+    "Two sample proportions",
     layout_sidebar(
       sidebar = sidebar(
         class = "my-sidebar",
@@ -38,19 +38,23 @@ ui <- function(id) {
           selected = 0.05
         ),
         numericInput(
-          "effectSize_d", "Desired effect size",
-          min = 0.1, max = 3, step = 0.1, value = 0.5
+          "sampleObs", "Number of tests",
+          min = 20, max = 700, step = 5, value = 100
         ),
         numericInput(
-          "sampleN1_t2n", "Sample size in group 1",
-          min = 20, max = 700, step = 5, value = 50
+          "p1_p", "Null hypothesis proportion",
+          min = 0, max = 1, step = 0.05, value = 0.55
         ),
         numericInput(
-          "sampleN2_t2n", "Sample size in group 2",
-          min = 20, max = 700, step = 5, value = 75
+          "p2_p", "Alternative hypothesis proportion",
+          min = 0, max = 1, step = 0.05, value = 0.5
+        ),
+        numericInput(
+          "hEffectSize_p", "Desired effect size",
+          min = 0, max = 3, step = 0.1, value = 0.5
         ),
         selectInput(
-          "alternative_t2n", "Alternative hypothesis type",
+          "alternative_p", "Alternative hypothesis type",
           choices = c(
             "Two-sided" = "two.sided",
             "Less than the null" = "less",
@@ -60,7 +64,7 @@ ui <- function(id) {
         ),
         extra_buttons
       ),
-      callout$uneq_t_test,
+      callout$two_samp_prop,
       layout_column_wrap(
         width = 1/2,
         plots$plotting_cards(

@@ -10,18 +10,7 @@ grid <- expand.grid(
   sampleSize = seq(4, 700 , by = 1)
 )
 
-pwrTable <- grid |>
-    mutate(
-      power = pwr.t.test(
-        n = sampleSize,
-        d = effectSize,
-        sig.level = alpha,
-        power = NULL
-      )$power,
-      power = round(power, 2)
-    ) |>
-    filter(between(power, 0.6, 0.99)) |>
-    na.omit()
+
 
 # uneq_tTable <- grid |>
 #   mutate(
