@@ -85,7 +85,8 @@ div > .bi {
   margin-top: -1px;
 }
 
-div.tab-content:nth-child(2), .callout-block, .card {
+div.tab-content:nth-child(2), .callout-block, .card,
+.markdown-panel {
   border: 0.4px solid black;
   border-radius: 5px;
 }
@@ -145,7 +146,10 @@ div.tab-content:nth-child(2), .callout-block, .card {
   border-top: 0.4px solid black;
 }
 
-
+.markdown-panel {
+  padding: 5%;
+  background-color: #f1f1f1;
+}
 
 
 

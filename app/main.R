@@ -43,7 +43,18 @@ ui <- function(id) {
       corr$ui(ns("corr")),
       chi_sq$ui(ns("chi_sq")),
       glm$ui(ns("glm")),
-      nav_panel(shiny::icon("circle-info"), shiny::markdown("{pwr} link"))
+      nav_panel(
+        class = "markdown-panel",
+        shiny::icon("circle-info"), shiny::markdown(
+          
+        "Stay tuned! The other statistical power tests are being optimized to 
+        achieve the best user experience. If you would like to contribute or
+        have any suggestions, please click my GitHub link below!
+        
+        \nThank you! ~Kyle"
+        
+        )
+      )
     ),
     div(class = "footer", text$footer)
   ) # page_navbar
@@ -53,8 +64,8 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     t_test$server("t_test")
-    uneq_t_test$server("uneq_t_test")
-    one_samp_prop$server("one_samp_prop")
-    anova$server("anova")
+    # uneq_t_test$server("uneq_t_test")
+    # one_samp_prop$server("one_samp_prop")
+    # anova$server("anova")
   })
 }

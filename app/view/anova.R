@@ -37,16 +37,21 @@ ui <- function(id) {
           selected = 0.05
         ),
         numericInput(
-          ns("effect"), "Desired effect size",
-          min = 0.1, max = 2, step = 0.1, value = 0.5
+          ns("nTests"), "Number of tests",
+          min = 2, max = 80, step = 2, value = 70
         ),
         numericInput(
-          ns("sample"), "Number of tests",
-          min = 20, max = 700, step = 5, value = 100
-        ),
-        numericInput(
-          ns("groups"), "Number of groups (classes)",
+          ns("k"), "Number of groups (classes)",
           min = 2, max = 6, step = 1, value = 2
+        ),
+        selectInput(
+          ns("effectSize"), "Desired effect size",
+          choices = c(
+            "Small" = 0.1,
+            "Medium" = 0.25,
+            "Large" = 0.4
+          ),
+          selected = 0.25
         ),
         extra_buttons
       ),
@@ -101,66 +106,57 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
 
-    sample <- reactive(input$sample)
     alpha  <- reactive(input$alpha)
+    nTests <- reactive(input$nTests)
+    k      <- reactive(input$k)
     effect <- reactive(input$effect)
 
     pwrTable <- reactive({
       expand.grid(
         alpha = c(0.01, 0.025, 0.05),
-        effectSize = seq(0.0, 2, by = 0.05),
-        sampleSize = seq(2, sample()+100, by = 1)
+        effectSize = seq(0.0, 0.6, by = 0.01),
+        k = seq(2, 6, by = 1),
+        nTests = seq(2, 80, by = 2)
       ) |>
         mutate(
-          power = pwr.t.test(
-            n = sampleSize,
-            d = effectSize,
+          power = pwr::pwr.anova.test(
             sig.level = alpha,
+            n = nTests,
+            k = k,
+            f = effectSize,
             power = NULL
           )$power,
-          power = round(power, 2)
+          power = round(power, 2) * 100,
         ) |>
-        filter(between(power, 0.6, 0.99)) |>
+        filter(between(power, 40, 99)) |>
         na.omit()
-    })
-
-    # ensure that the maximum selectable effect size does not exceed
-    # what values are available
-    observeEvent(effect(), {
-      updateNumericInput(inputId = "effect",
-                         max = max(pwrTable()$effectSize)-0.1)
     })
 
     # left plot
     output$power <- renderEcharts4r({
       # validate selected sample size
-      if (is.na(sample()) | sample() < 4 | sample() > 700 ) {
-        validate("Please select a per-group sample size between 4 and 700.")
+      if (is.na(k()) | k() < 2 | k() > 6) {
+        validate("Please select a between 2-6 groups.")
+      } else if (is.na(nTests()) | nTests() < 2 | nTests() > 80) {
+        validate("Please select btween 2-80 tests.")
       }
-      plots$ttest_left(pwrTable(), sample(), alpha())
+      plots$anovaLeft(pwrTable(), nTests(), k(), effect(), alpha())
     })
 
     output$leftCardHeader <- renderText({
-      if (is.na(sample()) | sample() < 4 | sample() > 700 ) {
+      if (is.na(nTests()) | nTests() < 2 | nTests() > 80) {
         validate("Invalid entry!")
       }
-      glue("Sample size: {sample()} (± 20) per group")
+      glue("Number of Tests: {nTests()} (± 10)")
     })
 
 
     # right plot
     output$effect <- renderEcharts4r({
-      if (min(pwrTable()$effectSize) > effect() |
-          max(pwrTable()$effectSize) < effect()) {
-        validate("Please choose another effect size to render a plot.")
-      }
-      plots$right_plot(pwrTable(), effect(), alpha())
+      plots$anovaRight(pwrTable(), nTests(), k(), effect(), alpha())
     })
 
     output$rightCardHeader <- renderText({
-      if (is.na(effect()) | effect() < 0.1 | effect() > 3 ) {
-        validate("Invalid entry!")
-      }
       glue("Selected effect size: {effect()}")
     })
 
@@ -178,7 +174,8 @@ server <- function(id) {
         filter(
           power >= 0.8,                    # for minimal acceptable power
           alpha == alpha(),            # user input
-          effectSize >= effect(),      # user input
+          # effectSize == effect(),      # user input
+          k == k()
         ) |>
         arrange(power, effectSize)
     })
@@ -186,29 +183,28 @@ server <- function(id) {
     # middle value_box
     output$minSampleSize <- renderText({
       comparisonTable() |>
-        pull(sampleSize) |>
+        pull(nTests) |>
         head(1)
     })
 
     # right value_box
-    studySampleNeeded <- reactive({
+    studyNTestsNeeded <- reactive({
       pwrTable() |>
         filter(
           power >= 0.8,
           alpha == alpha(),
-          effectSize >= effect()
+          # effectSize == effect(),
+          k == k()
         ) |>
         arrange(power, effectSize) |>
-        pull(sampleSize) |>
+        pull(nTests) |>
         head(1)
     })
 
     output$sampleResult <- renderText({
-      if (is.na(sample()) | sample() < 4 | sample() > 700 ) {
+      if (is.na(k()) | k() < 2 | k() > 6) {
         validate("Invalid entry!")
-      } else if (is.na(effect()) | effect() < 0.1 | effect() > 3 ) {
-        validate("Invalid entry!")
-      } else if (studySampleNeeded() <= sample()) {
+      } else if (studyNTestsNeeded() <= k()) {
         "GOOD"
       } else {
         "LOW!!"
