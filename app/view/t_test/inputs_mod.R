@@ -57,14 +57,14 @@ ui <- function(id) {
 
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
-    return(
+    reactive({
       list(
-        alpha=reactive({ input$alpha }),
-        effect=reactive({ input$effect }),
-        n=reactive({ input$n }),
-        type=reactive({ input$type }),
-        alt=reactive({ input$alt })
+        alpha  = as.numeric(input$alpha),
+        effect = input$effect,
+        n      = input$n,
+        type   = input$type,
+        alt    = input$alt
       )
-    )
+    })
   })
 }

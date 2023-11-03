@@ -1,12 +1,13 @@
 box::use(
-  dplyr[filter, group_by, mutate, tibble],
-  echarts4r[e_charts, e_line, e_tooltip, e_grid, e_color,
+  dplyr[case_when, filter, group_by, mutate],
+  echarts4r[e_add_nested, e_bar, e_charts, e_line, e_tooltip, e_grid, e_color,
             e_legend, e_datazoom, e_axis_labels, e_toolbox_feature],
   pwr[pwr.t.test]
 )
 
 box::use(
-  app/logic/effect[effect_table]
+  app/logic/chart_utils[left_label_formatter, right_label_formatter],
+  app/logic/effect[effect_table],
 )
 
 
@@ -33,7 +34,7 @@ t_table <- function(alpha, d, n, t_type, alt) {
 
 # this is the left plot: power vs sample size
 #' @export
-power_effect <- function(data, n, ...) {
+power_effect <- function(data, n) {
   # show selected sample size and 30 above and 30 below, min = 5
   if (n-30 < 5) {
     sample_groups <- c(5, n, n+30)
@@ -47,7 +48,7 @@ power_effect <- function(data, n, ...) {
     e_line(power) |>
     e_tooltip(
       trigger = "item",
-      # formatter = left_label_formatter
+      formatter = left_label_formatter
     ) |>
     e_grid(right = '15%') |>
     e_color(c("#f47321", "#777777", "#005030")) |>
@@ -62,13 +63,12 @@ power_effect <- function(data, n, ...) {
 
 # this is the bar chart: power at the 3 effect sizes for the user-selected sample size
 #' @export
-power_bar <- function(data, n, d_levels, ...) {
+power_bar <- function(data, n) {
   # plotting the selected power for sample size at 3 levels of effect size
-  # d_levels are the S/M/L effect sizes
   data |>
     filter(
       n == n,
-      d %in% d_levels
+      d %in% effect_table$t_test
     ) |>
     mutate(
       # custom x-axis labels
@@ -85,7 +85,7 @@ power_bar <- function(data, n, d_levels, ...) {
     e_add_nested("itemStyle", color) |>
     e_tooltip(
       trigger = "item",
-      # formatter = left_label_formatter
+      # formatter = right_label_formatter
     ) |>
     e_grid(right = '15%') |>
     e_color("#005030") |>

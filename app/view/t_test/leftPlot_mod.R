@@ -20,7 +20,7 @@ ui <- function(id) {
 server <- function(id, data, inputs){
   moduleServer(id, function(input, output, session) {
     output$leftPlot <- renderEcharts4r(
-      power_effect(data=data, n=inputs$n())
+      functions$power_effect(data=data(), n=inputs()$n)
     ) 
   })
 }

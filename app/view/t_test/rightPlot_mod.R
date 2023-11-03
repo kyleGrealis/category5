@@ -17,10 +17,10 @@ ui <- function(id) {
 }
 
 #' @export
-server <- function(id, data, n, d){
+server <- function(id, data, inputs){
   moduleServer(id, function(input, output, session) {
     output$rightPlot <- renderEcharts4r(
-      power_bar(data=data, n=n, d=d)
+      functions$power_bar(data=data(), n=inputs()$n)
     ) 
   })
 }
