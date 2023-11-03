@@ -3,21 +3,20 @@ box::use(
         layout_sidebar, sidebar, layout_column_wrap, card, card_header,
         card_footer, layout_columns, value_box],
   bsicons[bs_icon],
-  glue[glue],
-  shiny[h4, moduleServer, NS, reactive, validate, selectInput, textOutput, 
-        reactiveValues, renderText, observeEvent, req,  updateNumericInput],
+  shiny[moduleServer, NS, reactive, validate, selectInput, textOutput],
 )
 
 box::use(
   app/logic/callout,
   app/logic/effect[effect_table],
-  app/logic/t_test/functions,
   app/logic/plots,
+  
+  app/logic/t_test/data_mod,
+  app/logic/t_test/functions,
 
   app/view/t_test/inputs_mod,
   app/view/t_test/leftPlot_mod,
   app/view/t_test/rightPlot_mod,
-  app/view/sidebar_buttons[extra_buttons],
 )
 
 
@@ -29,8 +28,7 @@ ui <- function(id) {
     layout_sidebar(
       sidebar = sidebar(
         class = "my-sidebar",
-        inputs_mod$ui(ns("userInputs")),
-        extra_buttons,
+        inputs_mod$ui(ns("userInputs"))
       ),
       callout$ttest,
       layout_column_wrap(
@@ -78,20 +76,7 @@ server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
     inputs <- inputs_mod$server("userInputs")
-    
-    # pass inputs to function that creates the data
-    data <- reactive({
-      req(inputs()$alpha)
-      req(inputs()$effect)
-      req(inputs()$n)
-      req(inputs()$type)
-      req(inputs()$alt)
-
-      functions$t_table(
-        inputs()$alpha, inputs()$effect, inputs()$n,
-        inputs()$type, inputs()$alt
-      )
-    })
+    data <- data_mod$server("data", inputs)
     
     leftPlot_mod$server("plot", data, inputs)
     rightPlot_mod$server("plot", data, inputs)
