@@ -47,8 +47,7 @@ ui <- function(id) {
       ns("alt"), "Alternative hypothesis type",
       choices=c(
         "Two-sided"="two.sided",
-        "Greater than the null"="greater",
-        "Less than the null"="less"
+        "Greater than the null"="greater"
       ),
       selected="two.sided"
     )

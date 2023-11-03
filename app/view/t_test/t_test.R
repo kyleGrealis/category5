@@ -3,6 +3,7 @@ box::use(
         layout_sidebar, sidebar, layout_column_wrap, card, card_header,
         card_footer, layout_columns, value_box],
   bsicons[bs_icon],
+  glue[glue],
   shiny[h4, moduleServer, NS, reactive, validate, selectInput, textOutput, 
         reactiveValues, renderText, observeEvent, req,  updateNumericInput],
 )
@@ -28,24 +29,14 @@ ui <- function(id) {
     layout_sidebar(
       sidebar = sidebar(
         class = "my-sidebar",
-        inputs_mod$ui(ns("inputs")),
+        inputs_mod$ui(ns("userInputs")),
         extra_buttons,
       ),
       callout$ttest,
       layout_column_wrap(
         width = 1/2,
-        # h4("Left plot here"),
-        leftPlot_mod$ui(ns("leftPlot")),
-        # plots$plotting_cards(
-        #   textOutput(ns("leftCardHeader")),
-        #   leftPlot_mod$ui(ns("plot"))
-        # ),
-        # h4("Right plot here")
-        rightPlot_mod$ui(ns("rightPlot")),
-        # plots$plotting_cards(
-        #   textOutput(ns("rightCardHeader")),
-        #   rightPlot_mod$server(ns("plot"))
-        # )
+        leftPlot_mod$ui(ns("plot")),
+        rightPlot_mod$ui(ns("plot"))
       ), # layout_column_wrap
       callout$app_note,
 
@@ -86,7 +77,7 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
-    inputs <- inputs_mod$server("inputs")
+    inputs <- inputs_mod$server("userInputs")
     
     # pass inputs to function that creates the data
     data <- reactive({
@@ -102,8 +93,13 @@ server <- function(id) {
       )
     })
     
-    leftPlot_mod$server("leftPlot", data, inputs)
-    rightPlot_mod$server("rightPlot", data, inputs)
+    leftPlot_mod$server("plot", data, inputs)
+    rightPlot_mod$server("plot", data, inputs)
+    
+    # effectCard_mod$server("card", inputs)
+    # minSampleCard_mod$server("card", inputs)
+    # compareCard_mod$server("card", inputs)
+    
   })
   
   
