@@ -86,8 +86,13 @@ div > .bi {
   margin-top: -1px;
 }
 
+/* modal background */
+.ms-Modal {
+  backdrop-filter: blur(5px);
+}
+
 div.tab-content:nth-child(2), .callout-block, .card,
-.markdown-panel {
+.markdown-panel, #ModalFocusTrapZone3 {
   border: 0.4px solid black;
   border-radius: 5px;
 }
