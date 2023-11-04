@@ -124,8 +124,8 @@ t_compare <- function(t_type, alt, n, d, alpha) {
     power=NULL
   )
   if (compare$power < 0.8) {
-    return("too low!")
+    return("TOO LOW!")
   } else {
-    return("good!")
+    return("Good!")
   }
 }

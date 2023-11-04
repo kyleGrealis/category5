@@ -4,6 +4,7 @@ box::use(
         card_footer, layout_columns, value_box],
   bsicons[bs_icon],
   shiny[moduleServer, NS, reactive, validate, selectInput, textOutput],
+  shiny[observeEvent]
 )
 
 box::use(
@@ -56,6 +57,7 @@ server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
     inputs <- inputs_mod$server("userInputs")
+    # observeEvent(inputs(), browser())
     data <- data_mod$server("data", inputs)
     
     leftPlot_mod$server("plot", data, inputs)
