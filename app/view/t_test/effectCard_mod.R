@@ -29,7 +29,7 @@ server <- function(id, inputs){
         value = effect(),
         showcase = bs_icon("graph-up-arrow"),
         theme = "white", full_screen = FALSE, fill = TRUE, height = 100L,
-        class = "left-box"
+        class = "info-box"
       )
     })
     

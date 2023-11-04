@@ -38,7 +38,7 @@ server <- function(id, inputs){
         value=compare(),
         showcase=bsicons::bs_icon("bullseye"),
         theme="white", full_screen=FALSE, fill=TRUE, height=100L,
-        class="right-box"
+        class="info-box"
       )
     })
     

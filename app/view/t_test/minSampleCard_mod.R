@@ -36,7 +36,7 @@ server <- function(id, inputs){
         value=minSample(),
         showcase=bsicons::bs_icon("people-fill"),
         theme="white", full_screen=FALSE, fill=TRUE, height=100L,
-        class="center-box"
+        class="info-box"
       )
     })
     

@@ -11,7 +11,6 @@
 box::use(
   shiny[h6, moduleServer, NS, numericInput, radioButtons, reactive,
         selectInput, tagList],
-  shiny.blueprint[Radio, RadioGroup.shinyInput]
 )
 
 ui <- function(id) {
@@ -19,29 +18,36 @@ ui <- function(id) {
   tagList(
     selectInput(
       ns("alpha"), "Significance level",
-      choices=c(0.01, 0.25, 0.05),
+      choices=c(0.01, 0.025, 0.05),
       selected=0.05
     ),
-    h6("Effect size"),
-    RadioGroup.shinyInput(
+    radioButtons(
       inputId=ns("effect"),
-      value=0.3,
-      Radio(label="Small (0.1)", value=0.1),
-      Radio(label="Medium (0.3)", value=0.3),
-      Radio(label="Large (0.5)", value=0.5)
+      label="Effect size",
+      selected=0.3,
+      choiceNames=list(
+        "Small (0.1)", "Medium (0.3)", "Large (0.5)"
+      ),
+      choiceValues=list(0.1, 0.3, 0.5)
     ),
     numericInput(
       ns("n"), "Sample size per group",
-      min=1, max=150, value=70
+      min=10, max=300, value=100, step=5
     ),
-    # 
-    h6("t-test type"),
-    RadioGroup.shinyInput(
+    radioButtons(
       inputId=ns("type"),
-      value="one.sample",
-      Radio(label="One sample", value="one.sample"),
-      Radio(label="Two sample", value="two.sample"),
-      Radio(label="Paired", value="paired")
+      label="t-test type",
+      selected="one.sample",
+      choiceNames=list(
+        "One sample",
+        "Two sample",
+        "Paired"
+      ),
+      choiceValues=list(
+        "one.sample",
+        "two.sample",
+        "paired"
+      )
     ),
     selectInput(
       ns("alt"), "Alternative hypothesis type",
