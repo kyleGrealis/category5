@@ -58,7 +58,7 @@
 .dropdown-menu a:hover {
   background-color: #aaa;
   border-bottom: 0.3px solid gray;
-  font-style: italic;
+  /*font-style: italic;*/
 }
 :focus {
   outline: none;
@@ -66,15 +66,16 @@
 
 /*------------- end of the drop down ---------------------------*/
 
-.dropdown-menu, .card, .left-box, .center-box, .right-box {
+.dropdown-menu, .card, .info-box {
   box-shadow: 6px 6px 6px gray;
 }
-.left-box > *,
-.center-box > *,
-.right-box > * {
+.info-box > * {
   font-size: 3.5vw;
+  padding: 3%;
 }
-
+svg.bi {
+  opacity: 20% !important;
+}
 div > .bi {
   height: 0.7em;
   width: 0.7em;
@@ -112,6 +113,16 @@ div.tab-content:nth-child(2), .callout-block, .card,
   border-right: 0.4px solid black;
   margin-top: -1px;
 }
+/* checkbox & radio buttons have green background instead of blue generic yuck */
+.form-check-input:checked,
+.shiny-input-container .checkbox input:checked,
+.shiny-input-container .checkbox-inline input:checked,
+.shiny-input-container .radio input:checked,
+.shiny-input-container .radio-inline input:checked {
+  background-color:#005030;
+  border-color:gray;
+}
+
 
 /* "active" is the hover quality, "selected"" is the chosen item */
 .selectize-dropdown-content>div.option.active {
@@ -150,6 +161,3 @@ div.tab-content:nth-child(2), .callout-block, .card,
   padding: 5%;
   background-color: #f1f1f1;
 }
-
-
-

@@ -18,8 +18,6 @@ box::use(
 box::use(
   app/logic/callout,
   app/logic/plots,
-
-  app/view/sidebar_buttons[extra_buttons],
 )
 
 
@@ -57,7 +55,6 @@ ui <- function(id) {
           ),
           selected = "two.sided"
         ),
-        extra_buttons
       ),
       callout$uneq_t_test,
       layout_column_wrap(

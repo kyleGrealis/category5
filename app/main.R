@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/view/t_test,
+  app/view/t_test/t_test,
   app/view/uneq_t_test,
   app/view/one_samp_prop,
   app/view/two_samp_prop,

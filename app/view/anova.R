@@ -18,8 +18,6 @@ box::use(
 box::use(
   app/logic/callout,
   app/logic/plots,
-
-  app/view/sidebar_buttons[extra_buttons],
 )
 
 
@@ -53,7 +51,6 @@ ui <- function(id) {
           ),
           selected = 0.25
         ),
-        extra_buttons
       ),
       callout$anova,
       layout_column_wrap(
