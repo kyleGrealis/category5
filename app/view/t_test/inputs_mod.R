@@ -9,6 +9,10 @@
 #' @return list of input parameters as reactives
 
 box::use(
+  app/view/helpMe_mod
+)
+
+box::use(
   shiny[h6, moduleServer, NS, numericInput, radioButtons, reactive,
         selectInput, tagList],
 )
@@ -30,6 +34,7 @@ ui <- function(id) {
       ),
       choiceValues=list(0.1, 0.3, 0.5)
     ),
+    helpMe_mod$ui(ns("help")),
     numericInput(
       ns("n"), "Sample size per group",
       min=10, max=300, value=100, step=5
@@ -62,6 +67,9 @@ ui <- function(id) {
 
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
+    
+    helpMe_mod$server("help")
+    
     reactive({
       list(
         alpha  = as.numeric(input$alpha),

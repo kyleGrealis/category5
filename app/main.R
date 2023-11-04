@@ -64,8 +64,5 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     t_test$server("t_test")
-    # uneq_t_test$server("uneq_t_test")
-    # one_samp_prop$server("one_samp_prop")
-    # anova$server("anova")
   })
 }

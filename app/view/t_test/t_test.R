@@ -28,13 +28,17 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   nav_panel(
+    
     "Means",
+    
     layout_sidebar(
       sidebar=sidebar(
         class="my-sidebar",
         inputs_mod$ui(ns("userInputs"))
       ),
+      
       callout$ttest,
+      
       layout_column_wrap(
         width=1/2,
         leftPlot_mod$ui(ns("plot")),
