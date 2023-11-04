@@ -3,8 +3,8 @@ box::use(
 )
 
 box::use(
-  app/logic/plots[plotting_cards],
-  app/logic/t_test/functions
+  app/logic/t_test/functions,
+  app/logic/t_test/plotCard,
 )
 
 #' @export
@@ -23,7 +23,7 @@ server <- function(id, data, inputs){
     plot <- reactive({ functions$power_effect(data=data(), n=inputs()$n) })
 
     output$leftPlot <- renderUI({
-      plotting_cards(
+      plotCard$plotting_cards(
         "Lines represent group sample size (±30) plotted
         against power and effect size",
         plot()

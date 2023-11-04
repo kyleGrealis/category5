@@ -21,7 +21,7 @@ t_table <- function(t_type, alt, n, d, alpha, ...) {
 }
 
 # test results of user's selection to compare minimum reqs
-t_compare <- function(t_type, alt, n, d, alpha, ...) {
+t_compare <- function(t_type, alt, n, d, alpha) {
   pwr::pwr.t.test(
     type = t_type,
     alternative = alt,
