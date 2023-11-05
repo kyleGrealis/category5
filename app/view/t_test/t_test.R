@@ -52,7 +52,7 @@ ui <- function(id) {
         minSampleCard_mod$ui(ns("info")),
         compareCard_mod$ui(ns("info"))
       ) 
-    ),
+    )
   )
 }
 
