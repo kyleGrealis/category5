@@ -22,7 +22,7 @@ t2n_server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     compare <- reactive({
-      functions$t_compare(
+      functions$t2n_compare(
         t_type=inputs()$type, 
         alt=inputs()$alt,
         group1_n=inputs()$group1_n,
