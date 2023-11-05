@@ -72,8 +72,8 @@ server <- function(id) {
     
     reactive({
       list(
-        alpha  = as.numeric(input$alpha),
-        effect = as.numeric(input$effect),
+        alpha  = input$alpha,
+        effect = input$effect,
         n      = input$n,
         type   = input$type,
         alt    = input$alt
