@@ -4,7 +4,6 @@ box::use(
         card_footer, layout_columns, value_box],
   bsicons[bs_icon],
   shiny[moduleServer, NS, reactive, validate, selectInput, textOutput],
-  shiny[observeEvent]
 )
 
 box::use(
