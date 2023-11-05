@@ -34,7 +34,7 @@ server <- function(id, inputs){
     
     output$compare <- renderUI({
       value_box(
-        title="Proposed study power is:",
+        title="Proposed power is:",
         value=compare(),
         showcase=bsicons::bs_icon("bullseye"),
         theme="white", full_screen=FALSE, fill=TRUE, height=100L,
