@@ -20,13 +20,19 @@ ui <- function(id) {
 server <- function(id, data, inputs){
   moduleServer(id, function(input, output, session) {
     
-    # plot <- reactive({ functions$power_bar(data=data(), n=inputs()$n) })
+    plot <- reactive({
+      functions$power_bar(
+        data=data(), 
+        n1=inputs()$group1_n,
+        n2=inputs()$group2_n
+      )
+    })
     
     output$rightPlot <- renderUI({
       plotCard$plotting_cards(
-        "I will make a cool plot here",
-        # plot()
-        "something else coming"
+        "Bars represent power varying effect sizes given 
+        selected group sample sizes",
+        plot()
       )
     })
     
