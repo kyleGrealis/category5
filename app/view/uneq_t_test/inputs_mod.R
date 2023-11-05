@@ -44,21 +44,6 @@ t2n_ui <- function(id) {
       ns("group2_n"), "Sample size (group 2)",
       min=10, max=300, value=100, step=5
     ),
-    radioButtons(
-      inputId=ns("type"),
-      label="t-test type",
-      selected="one.sample",
-      choiceNames=list(
-        "One sample",
-        "Two sample",
-        "Paired"
-      ),
-      choiceValues=list(
-        "one.sample",
-        "two.sample",
-        "paired"
-      )
-    ),
     selectInput(
       ns("alt"), "Alternative hypothesis type",
       choices=c(
