@@ -5,14 +5,14 @@ box::use(
 )
 
 box::use(
-  app/logic/t_test/functions,
+  app/logic/uneq_t_test/functions,
 )
 
 #' @export
 ui <- function(id) {
   ns <- NS(id)
   tagList(
-    uiOutput(ns("minSample"))
+    uiOutput(ns("minEffect"))
   )
   
 }
@@ -21,20 +21,20 @@ ui <- function(id) {
 server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
-    minSample <- reactive({
-      functions$min_sample(
+    minEffect <- reactive({
+      functions$min_effect(
         n1=inputs()$group1_n, 
-        alt=inputs()$alt, 
-        d=inputs()$effect,
-        alpha=inputs()$alpha
+        n2=inputs()$group2_n,
+        alpha=inputs()$alpha,
+        alt=inputs()$alt
       )
     })
     
-    output$minSample <- renderUI({
+    output$minEffect <- renderUI({
       value_box(
-        title="Minimal size for Group 2:",
-        value=minSample(),
-        showcase=bsicons::bs_icon("people-fill"),
+        title="Minimal effect size given the group sample sizes:",
+        value=c(minEffect(), "teek"),
+        showcase=bsicons::bs_icon("graph-up-arrow"),
         theme="white", full_screen=FALSE, fill=TRUE, height=100L,
         class="info-box"
       )
