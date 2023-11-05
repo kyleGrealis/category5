@@ -8,7 +8,6 @@ box::use(
 
 box::use(
   app/logic/callout,
-  app/logic/effect[effect_table],
   app/logic/plotCard,
   
   app/logic/t_test/data_mod,

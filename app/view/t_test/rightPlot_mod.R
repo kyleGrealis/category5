@@ -3,8 +3,8 @@ box::use(
 )
 
 box::use(
+  app/logic/plotCard,
   app/logic/t_test/functions,
-  app/logic/t_test/plotCard,
 )
 
 #' @export
