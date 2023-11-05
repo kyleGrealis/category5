@@ -66,7 +66,6 @@ t2n_server <- function(id) {
         effect   = as.numeric(input$effect),
         group1_n = input$group1_n,
         group2_n = input$group2_n,
-        type     = input$type,
         alt      = input$alt
       )
     })
