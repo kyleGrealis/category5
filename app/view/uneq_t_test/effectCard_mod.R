@@ -9,7 +9,7 @@ box::use(
 )
 
 #' @export
-t2n_ui <- function(id) {
+ui <- function(id) {
   ns <- NS(id)
   tagList(
     uiOutput(ns("effectInfo"))
@@ -18,18 +18,25 @@ t2n_ui <- function(id) {
 }
 
 #' @export
-t2n_server <- function(id, inputs){
+server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
-    effect <- reactive({ inputs()$effect })
+    minEffect <- reactive({
+      functions$min_effect(
+        n1=inputs()$group1_n, 
+        n2=inputs()$group2_n,
+        alpha=inputs()$alpha,
+        alt=inputs()$alt
+      )
+    })
     
     output$effectInfo <- renderUI({
       value_box(
-        title = "Measurable effect size:",
-        value = effect(),
-        showcase = bs_icon("graph-up-arrow"),
-        theme = "white", full_screen = FALSE, fill = TRUE, height = 100L,
-        class = "info-box"
+        title="Minimal effect size given the group sample sizes:",
+        value=minEffect(),
+        showcase=bsicons::bs_icon("graph-up-arrow"),
+        theme="white", full_screen=FALSE, fill=TRUE, height=100L,
+        class="info-box"
       )
     })
     
