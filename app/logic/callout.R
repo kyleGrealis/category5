@@ -20,8 +20,8 @@ ttest <- Callout(
 
 uneq_t_test <- Callout(
   title = "This is a test of differences in means with unequal sample sizes.",
-  p("Example: Is the mean income in Group 1 (with 50 participants) different
-    than the mean income in Group 2 (with 75 participants)?")
+  p("Example: Is the mean income in Group 1 (with 15 participants) different
+    than the mean income in Group 2 (with 20 participants)?")
 )
 
 one_samp_prop <- Callout(
