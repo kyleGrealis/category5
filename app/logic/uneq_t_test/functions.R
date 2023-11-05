@@ -45,36 +45,69 @@ t2n_table <- function(alpha, d, n1, n2, alt) {
 
 # plot1
 
-# plot2
+#' @export
+power_bar <- function(data, n1, n2) {
+  # plotting the selected power for sample size at 3 levels of effect size
+  data |>
+    filter(
+      n1 == n1,
+      n2 == n2,
+      d %in% effect_table$t_test
+    ) |>
+    mutate(
+      # custom x-axis labels
+      d=factor(d, labels=c("Small", "Medium", "Large")),
+      # custom bar color
+      color=case_when(
+        d == "Small" ~ "#f47321",
+        d == "Medium" ~ "#f3f3f3",
+        d == "Large" ~ "#005030"
+      )
+    ) |>
+    e_charts(d) |>
+    e_bar(power) |>
+    e_add_nested("itemStyle", color) |>
+    e_tooltip(
+      trigger="item",
+      # formatter=right_label_formatter
+    ) |>
+    e_grid(right='15%') |>
+    e_color("#005030") |>
+    e_legend(show=FALSE) |>
+    e_datazoom(type='inside') |>
+    e_axis_labels(x="Effect \nSize", y="Power") |>
+    e_toolbox_feature(feature=c("saveAsImage"))
+}
 
 
 # this function will calculate the sample size at 80% power and user's inputs
 #' @export
-min_sample <- function(n1, alt, d, alpha) {
+min_effect <- function(n1, n2, alpha, alt) {
   # round down to maintain mininum group diff
-  floor(
+  round(
     pwr::pwr.t2n.test(
-      n1 = n1,
-      n2 = NULL,
-      d = 0.5,
-      sig.level = 0.5,
-      power = 0.8,
-      alternative = "two.sided"
-    )$n2
+      n1=n1,
+      n2=n2,
+      sig.level=alpha,
+      power=0.8,
+      alternative=alt,
+      d=NULL
+    )$d,
+    digits = 2
   )
 }
 
 
 # this function is used to compare the user's vs calculated min sample size
 #' @export
-t2n_compare <- function(alpha, d, group1_n, group2_n, alt) {
+t2n_compare <- function(alpha, d, n1, n2, alt) {
   compare <- pwr::pwr.t2n.test(
-    sig.level = alpha,
-    d = d,
-    n1 = group1_n,
-    n2 = group2_n,
-    alternative = alt,
-    power = NULL
+    sig.level=alpha,
+    d=d,
+    n1=n1,
+    n2=n2,
+    alternative=alt,
+    power=NULL
   )
   if (compare$power < 0.8) {
     return("TOO LOW!")
