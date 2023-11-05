@@ -23,12 +23,11 @@ t2n_server <- function(id, inputs){
     
     compare <- reactive({
       functions$t2n_compare(
-        t_type=inputs()$type, 
-        alt=inputs()$alt,
+        alpha=inputs()$alpha,
+        d=inputs()$effect,
         group1_n=inputs()$group1_n,
         group2_n=inputs()$group2_n,
-        d=inputs()$effect,
-        alpha=inputs()$alpha
+        alt=inputs()$alt,
       )
     })
     
