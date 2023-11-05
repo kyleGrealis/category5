@@ -10,10 +10,10 @@ box::use(
 box::use(
   app/logic/callout,
   app/logic/effect[effect_table],
+  app/logic/plotCard,
   
   app/logic/t_test/data_mod,
   app/logic/t_test/functions,
-  app/logic/t_test/plotCard,
 
   app/view/t_test/inputs_mod,
   app/view/t_test/leftPlot_mod,
