@@ -11,7 +11,7 @@ ui <- function(id) {
     reactOutput(ns("modal")),
     PrimaryButton.shinyInput(
       ns("showModal"), 
-      text = "Help me choose!",
+      text = "Help me choose",
       style="background-color: #f3f2f1; color: black; border: 1px solid gray;"
     ),
   )
@@ -30,7 +30,11 @@ server <- function(id) {
           tokens = list(padding = "15px", childrenGap = "10px"),
           div(
             style = list(display = "flex"),
-            Text("About effect sizes", variant = "large"),
+            Text(
+              "About effect sizes", 
+              variant = "large", 
+              style="font-weight: bold"
+            ),
             div(style = list(flexGrow = 1)),
             IconButton.shinyInput(
               ns("hideModal"),

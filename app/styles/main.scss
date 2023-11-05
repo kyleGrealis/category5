@@ -13,21 +13,23 @@
 /* This renders math expressions to be displayed inline with other text.
    It has a weird quality to drop down like a subscript without this. */
 .MathJax_Display {
-  margin: 0px !important;
+  margin: 0 !important;
 }
 
 
-/*--- drop down for test selection -----------------------------*/
+/* --- drop down for test selection ----------------------------- */
 .nav.nav-underline {
   margin-top: 5px;
 }
+
 /* background property when statistic test is selected */
 .nav-underline .nav-link.active,
-.nav-underline :where(ul.nav.navbar-nav > li)>a.active,
-.nav-underline .nav-tabs>li>a.active,
-.nav-underline .nav-pills>li>a.active {
-  font-weight: bold
+.nav-underline :where(ul.nav.navbar-nav > li) > a.active,
+.nav-underline .nav-tabs > li > a.active,
+.nav-underline .nav-pills > li > a.active {
+  font-weight: bold;
 }
+
 /* Dropdown Content (Hidden by Default) */
 .dropdown-menu {
   display: none;
@@ -45,37 +47,46 @@
   text-decoration: none;
   display: block;
 }
+
 .dropdown-item.active,
-.dropdown-menu>li>a.active,
+.dropdown-menu > li > a.active,
 .dropdown-item:active,
-.dropdown-menu>li>a:active {
+.dropdown-menu > li > a:active {
   background-color: #f1f1f1;
   text-decoration: underline;
   color: black;
   font-weight: bold;
 }
+
 /* Change color of dropdown links on hover */
 .dropdown-menu a:hover {
   background-color: #aaa;
   border-bottom: 0.3px solid gray;
-  /*font-style: italic;*/
+
+  /* font-style: italic; */
 }
+
 :focus {
   outline: none;
 }
 
-/*------------- end of the drop down ---------------------------*/
+/* ------------- end of the drop down --------------------------- */
 
-.dropdown-menu, .card, .info-box {
+.dropdown-menu,
+.card,
+.info-box {
   box-shadow: 6px 6px 6px gray;
 }
+
 .info-box > * {
   font-size: 3.5vw;
   padding: 3%;
 }
+
 svg.bi {
   opacity: 20% !important;
 }
+
 div > .bi {
   height: 0.7em;
   width: 0.7em;
@@ -86,14 +97,22 @@ div > .bi {
   margin-top: -1px;
 }
 
-div.tab-content:nth-child(2), .callout-block, .card,
-.markdown-panel {
+/* modal background */
+.ms-Modal {
+  backdrop-filter: blur(5px);
+}
+
+div.tab-content:nth-child(2),
+.callout-block,
+.card,
+.markdown-panel,
+#ModalFocusTrapZone3 {
   border: 0.4px solid black;
   border-radius: 5px;
 }
 
 .callout-block {
-  padding: 15px 15px 0px 15px;
+  padding: 15px 15px 0 15px;
 }
 
 .callout-block.app-note {
@@ -101,11 +120,14 @@ div.tab-content:nth-child(2), .callout-block, .card,
   text-align: center;
 }
 
-.footer, .callout-block, .card-header {
+.footer,
+.callout-block,
+.card-header {
   background-color: #f3f2f1;
 }
 
-.navbar, .card-header {
+.navbar,
+.card-header {
   border-bottom: 0.4px solid black;
 }
 
@@ -113,46 +135,51 @@ div.tab-content:nth-child(2), .callout-block, .card,
   border-right: 0.4px solid black;
   margin-top: -1px;
 }
+
 /* checkbox & radio buttons have green background instead of blue generic yuck */
 .form-check-input:checked,
 .shiny-input-container .checkbox input:checked,
 .shiny-input-container .checkbox-inline input:checked,
 .shiny-input-container .radio input:checked,
 .shiny-input-container .radio-inline input:checked {
-  background-color:#005030;
-  border-color:gray;
+  background-color: #005030;
+  border-color: gray;
 }
+
 .form-check-input:focus,
 .shiny-input-container .checkbox input:focus,
 .shiny-input-container .checkbox-inline input:focus,
 .shiny-input-container .radio input:focus,
 .shiny-input-container .radio-inline input:focus {
-  border-color:#80bde1;
-  outline:0;
-  box-shadow:0 0 0 .25rem gray;
+  border-color: #80bde1;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem gray;
 }
 
 
 
 /* "active" is the hover quality, "selected"" is the chosen item */
-.selectize-dropdown-content>div.option.active {
+.selectize-dropdown-content > div.option.active {
   background-color: #f1f1f1;
   border-bottom: 0.3px solid gray;
   font-style: italic;
   font-weight: bold;
   color: #333;
 }
+
 /* turning off -- weird quirk where keeps underline and bold if prev selected
 .selectize-dropdown-content>div.option.selected {
   background-color: #fff;
   text-decoration: underline;
 }
 */
-.selectize-input.focus, .form-control:focus {
+.selectize-input.focus,
+.form-control:focus {
   border-color: black;
   box-shadow: 0 0 0 0.25rem rgba(170, 170, 170, 0.4);
 }
-.selectize-dropdown-content>.option:active {
+
+.selectize-dropdown-content > .option:active {
   color: red;
   font-weight: bold;
 }

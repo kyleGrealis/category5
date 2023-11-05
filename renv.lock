@@ -181,13 +181,13 @@
       "Package": "bslib",
       "Version": "0.5.1.9000",
       "Source": "GitHub",
-      "Remotes": "rstudio/htmltools",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "bslib",
       "RemoteUsername": "rstudio",
+      "RemoteRepo": "bslib",
       "RemoteRef": "HEAD",
-      "RemoteSha": "212d1f74b917fd07dbbf3116b2f2a667a4448488",
+      "RemoteSha": "f574b9f06c81053daae162976734e9efa91607ea",
+      "RemoteHost": "api.github.com",
+      "Remotes": "rstudio/htmltools, rstudio/shiny",
       "Requirements": [
         "R",
         "base64enc",
@@ -202,7 +202,7 @@
         "rlang",
         "sass"
       ],
-      "Hash": "c823f020645ea2b57fe1574d1f7cd8c0"
+      "Hash": "c3c5345c0640f72cbd976516d38f79a1"
     },
     "cachem": {
       "Package": "cachem",
@@ -230,7 +230,7 @@
     },
     "checkmate": {
       "Package": "checkmate",
-      "Version": "2.2.0",
+      "Version": "2.3.0",
       "Source": "Repository",
       "Repository": "RSPM",
       "Requirements": [
@@ -238,7 +238,7 @@
         "backports",
         "utils"
       ],
-      "Hash": "ca9c113196136f4a9ca9ce6079c2c99e"
+      "Hash": "ed4275b13c6ab74b89a31def0b6bf835"
     },
     "cli": {
       "Package": "cli",
@@ -452,14 +452,14 @@
     },
     "evaluate": {
       "Package": "evaluate",
-      "Version": "0.22",
+      "Version": "0.23",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "66f39c7a21e03c4dcb2c2d21d738d603"
+      "Hash": "daf4a1246be12c1fa8c7705a0935c1a0"
     },
     "fansi": {
       "Package": "fansi",
@@ -558,14 +558,14 @@
     },
     "htmltools": {
       "Package": "htmltools",
-      "Version": "0.5.6.9001",
+      "Version": "0.5.7.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "htmltools",
       "RemoteUsername": "rstudio",
+      "RemoteRepo": "htmltools",
       "RemoteRef": "HEAD",
-      "RemoteSha": "94360318c5d5fa4cc95a40fe4a9c94caea8c83f1",
+      "RemoteSha": "7efa2d87adbfa8506347b84d78b2da0ba9705ad2",
+      "RemoteHost": "api.github.com",
       "Requirements": [
         "R",
         "base64enc",
@@ -576,7 +576,7 @@
         "rlang",
         "utils"
       ],
-      "Hash": "b0d41e3f85bd3bf0556eb6fe0d728e19"
+      "Hash": "b26db9527800b6572ae8c881993b04bf"
     },
     "htmlwidgets": {
       "Package": "htmlwidgets",
@@ -595,9 +595,9 @@
     },
     "httpuv": {
       "Package": "httpuv",
-      "Version": "1.6.11",
+      "Version": "1.6.12",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "R6",
@@ -606,7 +606,7 @@
         "promises",
         "utils"
       ],
-      "Hash": "838602f54e32c1a0f8cc80708cefcefa"
+      "Hash": "c992f75861325961c29a188b45e549f7"
     },
     "jquerylib": {
       "Package": "jquerylib",
@@ -630,9 +630,9 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.44",
+      "Version": "1.45",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "evaluate",
@@ -642,7 +642,7 @@
         "xfun",
         "yaml"
       ],
-      "Hash": "60885b9f746c9dfaef110d070b5f7dc0"
+      "Hash": "1ec462871063897135c1bcbe0fc8f07d"
     },
     "labeling": {
       "Package": "labeling",
@@ -989,9 +989,14 @@
     },
     "rhino": {
       "Package": "rhino",
-      "Version": "1.5.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "1.5.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "rhino",
+      "RemoteUsername": "Appsilon",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "b032a3c22e64a01e51afc761dba1668e61e120d6",
       "Requirements": [
         "R",
         "box",
@@ -1012,7 +1017,7 @@
         "withr",
         "yaml"
       ],
-      "Hash": "aec1b2db96151d32a244d38b136d8392"
+      "Hash": "e06fe13ec92b5f22174b1ed8abc68e6e"
     },
     "rlang": {
       "Package": "rlang",
@@ -1394,13 +1399,13 @@
     },
     "utf8": {
       "Package": "utf8",
-      "Version": "1.2.3",
+      "Version": "1.2.4",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R"
       ],
-      "Hash": "1fe17157424bb09c48a8b3b550c753bc"
+      "Hash": "62b65c52671e6665f803ff02954446e9"
     },
     "vctrs": {
       "Package": "vctrs",
@@ -1440,10 +1445,11 @@
     },
     "waldo": {
       "Package": "waldo",
-      "Version": "0.5.1",
+      "Version": "0.5.2",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
+        "R",
         "cli",
         "diffobj",
         "fansi",
@@ -1453,31 +1459,31 @@
         "rlang",
         "tibble"
       ],
-      "Hash": "2c993415154cdb94649d99ae138ff5e5"
+      "Hash": "c7d3fd6d29ab077cbac8f0e2751449e6"
     },
     "withr": {
       "Package": "withr",
-      "Version": "2.5.1",
+      "Version": "2.5.2",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "grDevices",
         "graphics",
         "stats"
       ],
-      "Hash": "d77c6f74be05c33164e33fbc85540cae"
+      "Hash": "4b25e70111b7d644322e9513f403a272"
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.40",
+      "Version": "0.41",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "stats",
         "tools"
       ],
-      "Hash": "be07d23211245fc7d4209f54c4e4ffc8"
+      "Hash": "460a5e0fe46a80ef87424ad216028014"
     },
     "xml2": {
       "Package": "xml2",
