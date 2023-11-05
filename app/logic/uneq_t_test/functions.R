@@ -13,12 +13,12 @@ box::use(
 
 # make the grid with calculated power
 #' @export
-t_table <- function(alpha, d, group1_n, group2_n, t_type, alt) {
+t2n_table <- function(alpha, d, group1_n, group2_n, t_type, alt) {
   expand.grid(
     # stop at the large effect size as per table
     d=seq(0.05, effect_table$t_test[3], by=0.05),
-    n1=seq(10, n+50, by=1),
-    n2=seq(10, n+50, by=1)
+    n1=seq(10, group1_n+30, by=1),
+    n2=seq(10, group2_n+30, by=1)
   )|>
     mutate(
       power=pwr::pwr.t2n.test(
