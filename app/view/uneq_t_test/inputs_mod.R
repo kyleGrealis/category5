@@ -18,7 +18,7 @@ box::use(
         selectInput, tagList],
 )
 
-t2n_ui <- function(id) {
+ui <- function(id) {
   ns <- NS(id)
   tagList(
     selectInput(
@@ -29,7 +29,7 @@ t2n_ui <- function(id) {
     radioButtons(
       inputId=ns("effect"),
       label="Effect size",
-      selected=0.3,
+      selected=0.5,
       choiceNames=list(
         "Small (0.2)", "Medium (0.5)", "Large (0.8)"
       ),
@@ -38,7 +38,7 @@ t2n_ui <- function(id) {
     helpMe_mod$ui(ns("help")),
     numericInput(
       ns("group1_n"), "Sample size (group 1)",
-      min=2, max=100, value=20, step=1
+      min=2, max=100, value=15, step=1
     ),
     numericInput(
       ns("group2_n"), "Sample size (group 2)",
@@ -55,7 +55,7 @@ t2n_ui <- function(id) {
   )
 }
 
-t2n_server <- function(id) {
+server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
     helpMe_mod$server("help")
