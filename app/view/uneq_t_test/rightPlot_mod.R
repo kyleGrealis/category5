@@ -4,7 +4,7 @@ box::use(
 
 box::use(
   app/logic/plotCard,
-  app/logic/t_test/functions,
+  app/logic/uneq_t_test/functions,
 )
 
 #' @export
@@ -20,12 +20,18 @@ ui <- function(id) {
 server <- function(id, data, inputs){
   moduleServer(id, function(input, output, session) {
     
-    plot <- reactive({ functions$power_bar(data=data(), n=inputs()$n) })
+    plot <- reactive({
+      functions$power_bar(
+        data=data(), 
+        n1=inputs()$group1_n,
+        n2=inputs()$group2_n
+      )
+    })
     
     output$rightPlot <- renderUI({
       plotCard$plotting_cards(
         "Bars represent power varying effect sizes given 
-        selected group sample size",
+        selected group sample sizes",
         plot()
       )
     })

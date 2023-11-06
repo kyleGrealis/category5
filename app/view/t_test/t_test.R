@@ -4,16 +4,14 @@ box::use(
         card_footer, layout_columns, value_box],
   bsicons[bs_icon],
   shiny[moduleServer, NS, reactive, validate, selectInput, textOutput],
-  shiny[observeEvent]
 )
 
 box::use(
   app/logic/callout,
-  app/logic/effect[effect_table],
+  app/logic/plotCard,
   
   app/logic/t_test/data_mod,
   app/logic/t_test/functions,
-  app/logic/t_test/plotCard,
 
   app/view/t_test/inputs_mod,
   app/view/t_test/leftPlot_mod,
@@ -52,7 +50,7 @@ ui <- function(id) {
         minSampleCard_mod$ui(ns("info")),
         compareCard_mod$ui(ns("info"))
       ) 
-    ),
+    )
   )
 }
 

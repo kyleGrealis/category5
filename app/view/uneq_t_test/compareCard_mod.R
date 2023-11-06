@@ -9,7 +9,7 @@ box::use(
 )
 
 #' @export
-t2n_ui <- function(id) {
+ui <- function(id) {
   ns <- NS(id)
   tagList(
     uiOutput(ns("compare"))
@@ -18,20 +18,18 @@ t2n_ui <- function(id) {
 }
 
 #' @export
-t2n_server <- function(id, inputs){
+server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     compare <- reactive({
       functions$t2n_compare(
-        t_type=inputs()$type, 
-        alt=inputs()$alt,
-        group1_n=inputs()$group1_n,
-        group2_n=inputs()$group2_n,
+        alpha=inputs()$alpha,
         d=inputs()$effect,
-        alpha=inputs()$alpha
+        n1=inputs()$group1_n,
+        n2=inputs()$group2_n,
+        alt=inputs()$alt
       )
     })
-    
     
     output$compare <- renderUI({
       value_box(

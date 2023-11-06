@@ -2,6 +2,7 @@ box::use(
   bsicons[bs_icon],
   bslib[value_box],
   shiny[moduleServer, NS, tagList, reactive, renderUI, uiOutput],
+  glue[glue]
 )
 
 box::use(
@@ -12,7 +13,7 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   tagList(
-    uiOutput(ns("effectInfo"))
+    uiOutput(ns("minEffect"))
   )
   
 }
@@ -21,20 +22,14 @@ ui <- function(id) {
 server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
-    minEffect <- reactive({
-      functions$min_effect(
-        n1=inputs()$group1_n, 
-        n2=inputs()$group2_n,
-        alpha=inputs()$alpha,
-        alt=inputs()$alt
-      )
-    })
+    group1 <- reactive({ inputs()$group1_n })
+    group2 <- reactive({ inputs()$group2_n })
     
-    output$effectInfo <- renderUI({
+    output$minEffect <- renderUI({
       value_box(
-        title="Minimal effect size given the group sample sizes:",
-        value=minEffect(),
-        showcase=bsicons::bs_icon("graph-up-arrow"),
+        title="Selected group sizes:",
+        value=glue("{group1()} & {group2()}"),
+        showcase=bsicons::bs_icon("people-fill"),
         theme="white", full_screen=FALSE, fill=TRUE, height=100L,
         class="info-box"
       )

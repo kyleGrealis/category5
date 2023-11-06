@@ -18,7 +18,7 @@ box::use(
         selectInput, tagList],
 )
 
-t2n_ui <- function(id) {
+ui <- function(id) {
   ns <- NS(id)
   tagList(
     selectInput(
@@ -29,7 +29,7 @@ t2n_ui <- function(id) {
     radioButtons(
       inputId=ns("effect"),
       label="Effect size",
-      selected=0.3,
+      selected=0.5,
       choiceNames=list(
         "Small (0.2)", "Medium (0.5)", "Large (0.8)"
       ),
@@ -38,26 +38,11 @@ t2n_ui <- function(id) {
     helpMe_mod$ui(ns("help")),
     numericInput(
       ns("group1_n"), "Sample size (group 1)",
-      min=10, max=300, value=100, step=5
+      min=2, max=150, value=65, step=1
     ),
     numericInput(
       ns("group2_n"), "Sample size (group 2)",
-      min=10, max=300, value=100, step=5
-    ),
-    radioButtons(
-      inputId=ns("type"),
-      label="t-test type",
-      selected="one.sample",
-      choiceNames=list(
-        "One sample",
-        "Two sample",
-        "Paired"
-      ),
-      choiceValues=list(
-        "one.sample",
-        "two.sample",
-        "paired"
-      )
+      min=2, max=150, value=70, step=1
     ),
     selectInput(
       ns("alt"), "Alternative hypothesis type",
@@ -70,7 +55,7 @@ t2n_ui <- function(id) {
   )
 }
 
-t2n_server <- function(id) {
+server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
     helpMe_mod$server("help")
@@ -81,7 +66,6 @@ t2n_server <- function(id) {
         effect   = as.numeric(input$effect),
         group1_n = input$group1_n,
         group2_n = input$group2_n,
-        type     = input$type,
         alt      = input$alt
       )
     })
