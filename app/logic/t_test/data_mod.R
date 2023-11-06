@@ -1,5 +1,5 @@
 box::use(
-  shiny[moduleServer, NS, tagList, reactive, renderUI, uiOutput, req],
+  shiny[moduleServer, NS, reactive, req],
 )
 
 box::use(
