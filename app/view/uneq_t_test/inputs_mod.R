@@ -38,11 +38,11 @@ ui <- function(id) {
     helpMe_mod$ui(ns("help")),
     numericInput(
       ns("group1_n"), "Sample size (group 1)",
-      min=2, max=100, value=15, step=1
+      min=2, max=150, value=65, step=1
     ),
     numericInput(
       ns("group2_n"), "Sample size (group 2)",
-      min=2, max=100, value=20, step=1
+      min=2, max=150, value=70, step=1
     ),
     selectInput(
       ns("alt"), "Alternative hypothesis type",
