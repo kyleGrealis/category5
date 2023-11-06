@@ -1,5 +1,5 @@
 box::use(
-  shiny[moduleServer, NS, tagList, reactive, renderUI, uiOutput, req],
+  shiny[moduleServer, NS, reactive, req],
 )
 
 box::use(
@@ -15,13 +15,6 @@ ui <- function(id) {
 #' @export
 server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
-    
-    # if (inputs()$group1_n < 2 | inputs()$group1_n > 100 ) {
-    #   validate("Please select a Group 1 sample size between 2 and 100.")
-    # }
-    # if (inputs()$group2_n < 2 | inputs()$group2_n > 100 ) {
-    #   validate("Please select a Group 2 sample size between 2 and 100.")
-    # }
     
     data <- reactive({
       req(inputs()$alpha)

@@ -1,5 +1,5 @@
 box::use(
-  shiny[moduleServer, NS, tagList, reactive, renderUI, uiOutput],
+  shiny[em, span, moduleServer, NS, tagList, reactive, renderUI, uiOutput],
 )
 
 box::use(
@@ -20,13 +20,19 @@ ui <- function(id) {
 server <- function(id, data, inputs){
   moduleServer(id, function(input, output, session) {
 
-    # plot <- reactive({ functions$power_effect(data=data(), n=inputs()$n) })
+    plot <- reactive({
+      functions$power_effect(data=data(), n=inputs()$group2_n)
+    })
 
     output$leftPlot <- renderUI({
       plotCard$plotting_cards(
-        "I don't know what to put here yet",
-        "something will go here"
-        # plot()
+        span(
+          "Lines represent ",
+          em("Group 2"),
+          "sample size (±20) plotted against power,
+          effect size, and Group 1 size"
+        ),
+        plot()
       )
     })
   })

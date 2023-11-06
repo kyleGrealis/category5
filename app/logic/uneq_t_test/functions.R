@@ -24,10 +24,9 @@ t2n_table <- function(alpha, d, n1, n2, alt) {
   
   expand.grid(
     # stop at the large effect size as per table
-    d=seq(0.05, 0.8, by=0.05),
-    # d=seq(0.05, effect_table$t_test[3], by=0.05),
-    n1=seq(n1-30, n1+30, by=2),
-    n2=seq(n2-30, n2+30, by=2)
+    d=seq(0.05, effect_table$t_test[3], by=0.05),
+    n1=n1,
+    n2=seq(n2-30, n2+100, by=2)
   )|>
     mutate(
       power=pwr::pwr.t2n.test(
@@ -43,7 +42,34 @@ t2n_table <- function(alpha, d, n1, n2, alt) {
 }
 
 
-# plot1
+#' @export
+power_effect <- function(data, n2) {
+  # show selected sample size and 30 above and 30 below, min=5
+  if (n2-30 < 2) {
+    sample_groups <- c(2, n2, n2+30)
+  } else {
+    sample_groups <- c(n2-30, n2, n2+30)
+  }
+  data |>
+    filter(n2 %in% sample_groups) |>
+    group_by(n2) |>
+    e_charts(d) |>
+    e_line(power) |>
+    e_tooltip(
+      trigger="item",
+      formatter=left_label_formatter
+    ) |>
+    e_grid(right='15%') |>
+    e_color(c("#f47321", "#777777", "#005030")) |>
+    e_legend(
+      left='5',
+      title=list("Sample size")
+    ) |>
+    e_datazoom(type='inside') |>
+    e_axis_labels(x="Effect \nSize", y="Power") |>
+    e_toolbox_feature(feature=c("saveAsImage"))
+}
+
 
 #' @export
 power_bar <- function(data, n1, n2) {
