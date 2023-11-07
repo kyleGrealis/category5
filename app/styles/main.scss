@@ -1,7 +1,12 @@
-
-/* Full app features */
+// font
 * {
   font-family: Poppins;
+}
+
+// display contents not including header and footer
+div.container-fluid:nth-child(7) {
+  max-width: 1250px;
+  margin: auto;
 }
 
 .navbar {
@@ -10,14 +15,14 @@
   border-top: 0.4px solid black;
 }
 
-/* This renders math expressions to be displayed inline with other text.
-   It has a weird quality to drop down like a subscript without this. */
+// This renders math expressions to be displayed inline with other text.
+// It has a weird quality to drop down like a subscript without this.
 .MathJax_Display {
   margin: 0 !important;
 }
 
 
-/* --- drop down for test selection ----------------------------- */
+// Dropdown menu
 .nav-link {
   color: black;
 }
@@ -25,7 +30,7 @@
   margin-top: 5px;
 }
 
-/* background property when statistic test is selected */
+// Background property when statistic test is selected
 .nav-underline .nav-link.active,
 .nav-underline :where(ul.nav.navbar-nav > li) > a.active,
 .nav-underline .nav-tabs > li > a.active,
@@ -33,7 +38,7 @@
   font-weight: bold;
 }
 
-/* Dropdown Content (Hidden by Default) */
+// Dropdown Content (Hidden by Default)
 .dropdown-menu {
   display: none;
   position: absolute;
@@ -43,7 +48,7 @@
   border: 0.2px solid black;
 }
 
-/* Links inside the dropdown */
+// Links inside the dropdown
 .dropdown-menu a {
   color: black;
   padding: 12px 16px;
@@ -61,24 +66,26 @@
   font-weight: bold;
 }
 
-/* Change color of dropdown links on hover */
+// Change color of dropdown links on hover
 .dropdown-menu a:hover {
   background-color: #aaa;
   border-bottom: 0.3px solid gray;
-
-  /* font-style: italic; */
 }
 
 :focus {
   outline: none;
 }
 
-/* ------------- end of the drop down --------------------------- */
-
 .dropdown-menu,
 .card,
 .info-box {
   box-shadow: 6px 6px 6px gray;
+}
+
+.bslib-card[data-full-screen="true"] {
+  max-width: 700px;
+  max-height: 400px !important;
+  margin: auto;
 }
 
 .info-box > * {
@@ -170,12 +177,6 @@ div.tab-content:nth-child(2),
   color: #333;
 }
 
-/* turning off -- weird quirk where keeps underline and bold if prev selected
-.selectize-dropdown-content>div.option.selected {
-  background-color: #fff;
-  text-decoration: underline;
-}
-*/
 .selectize-input.focus,
 .form-control:focus {
   border-color: black;
