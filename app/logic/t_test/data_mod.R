@@ -28,7 +28,7 @@ server <- function(id, inputs){
         inputs()$type, inputs()$alt
       )
     })
-    
+
     return(data)
     
   })

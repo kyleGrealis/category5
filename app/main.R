@@ -7,13 +7,13 @@ box::use(
 box::use(
   app/view/t_test/t_test,
   app/view/uneq_t_test/uneq_t_test,
-  app/view/one_samp_prop,
-  app/view/two_samp_prop,
-  app/view/uneq_samp_prop,
-  app/view/anova,
-  app/view/corr,
-  app/view/chi_sq,
-  app/view/glm,
+  app/view/one_samp_prop/one_samp_prop,
+  app/view/two_samp_prop/two_samp_prop,
+  app/view/uneq_samp_prop/uneq_samp_prop,
+  app/view/anova/anova,
+  app/view/corr/corr,
+  app/view/chisq/chisq,
+  app/view/glm/glm,
 
   app/logic/text
 )
@@ -41,7 +41,7 @@ ui <- function(id) {
       ),
       anova$ui(ns("anova")),
       corr$ui(ns("corr")),
-      chi_sq$ui(ns("chi_sq")),
+      chisq$ui(ns("chisq")),
       glm$ui(ns("glm")),
       nav_panel(
         class = "markdown-panel",
