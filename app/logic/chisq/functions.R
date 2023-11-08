@@ -28,3 +28,41 @@ chisq_table <- function(alpha, effect, n, df) {
       )$power,
       power=round(power, 2)
 }
+
+# plot 1
+
+
+# plot 2
+
+
+# this function will calculate the sample size at 80% power and user's inputs
+#' @export
+min_sample <- function(alpha, effect, n, df) {
+  # round up to the next whole person with `ceiling`
+  ceiling(
+    pwr::pwr.chisq.test(
+      sig.level=alpha,
+      df=df,
+      w=w,
+      power=0.8,
+      N=NULL  # solving for this
+    )$N
+  )
+}
+
+# this function is used to compare the user's vs calculated min sample size
+#' @export
+chisq_compare <- function(t_type, alt, n, d, alpha) {
+  compare <- pwr::pwr.chisq.test(
+    sig.level=alpha,
+      df=df,
+      w=w,
+      N=n,
+      power=NULL
+  )
+  if (compare$power < 0.8) {
+    return("TOO LOW!")
+  } else {
+    return("Good!")
+  }
+}
