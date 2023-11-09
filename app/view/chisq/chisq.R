@@ -3,21 +3,23 @@ box::use(
         layout_sidebar, sidebar, layout_column_wrap, card, card_header,
         card_footer, layout_columns, value_box],
   bsicons[bs_icon],
-  shiny[moduleServer, NS, reactive, validate, selectInput, textOutput],
+  shiny[moduleServer, NS, reactive, validate, selectInput, textOutput,
+        withMathJax],
 )
 
 box::use(
   app/logic/callout,
   app/logic/plotCard,
-  
-  app/logic/t_test/data_mod,
 
-  app/view/t_test/inputs_mod,
-  app/view/t_test/leftPlot_mod,
-  app/view/t_test/rightPlot_mod,
-  app/view/t_test/effectCard_mod,
-  app/view/t_test/minSampleCard_mod,
-  app/view/t_test/compareCard_mod,
+  app/logic/chisq/data_mod,
+  app/logic/chisq/functions,
+
+  app/view/chisq/inputs_mod,
+  app/view/chisq/leftPlot_mod,
+  app/view/chisq/rightPlot_mod,
+  app/view/chisq/effectCard_mod,
+  app/view/chisq/minSampleCard_mod,
+  app/view/chisq/compareCard_mod,
 )
 
 
@@ -26,7 +28,7 @@ ui <- function(id) {
   ns <- NS(id)
   nav_panel(
     
-    "Means",
+    withMathJax("$$X^2$$"),
     
     layout_sidebar(
       sidebar=sidebar(
@@ -34,7 +36,7 @@ ui <- function(id) {
         inputs_mod$ui(ns("userInputs"))
       ),
       
-      callout$ttest,
+      callout$chi_sq,
       
       layout_column_wrap(
         width=1/2,
@@ -43,12 +45,12 @@ ui <- function(id) {
       ),
       
       callout$app_note,
-
+      
       layout_columns(
         effectCard_mod$ui(ns("info")),
         minSampleCard_mod$ui(ns("info")),
         compareCard_mod$ui(ns("info"))
-      ) 
+      )
     )
   )
 }
@@ -56,7 +58,7 @@ ui <- function(id) {
 #' @export
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
-    
+
     inputs <- inputs_mod$server("userInputs")
     data <- data_mod$server("data", inputs)
     
@@ -66,7 +68,6 @@ server <- function(id) {
     effectCard_mod$server("info", inputs)
     minSampleCard_mod$server("info", inputs)
     compareCard_mod$server("info", inputs)
-    
+
   })
-  
 }
