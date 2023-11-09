@@ -30,7 +30,6 @@ server <- function(id, inputs){
       )
     })
     
-    
     output$compare <- renderUI({
       value_box(
         title="Proposed power is:",
