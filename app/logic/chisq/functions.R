@@ -66,7 +66,7 @@ power_bar <- function(data, n) {
   data |>
     filter(
       n == n,
-      d %in% effect_table$t_test
+      d %in% effect_table$chisq
     ) |>
     mutate(
       # custom x-axis labels
