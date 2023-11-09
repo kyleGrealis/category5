@@ -3,7 +3,8 @@ box::use(
         layout_sidebar, sidebar, layout_column_wrap, card, card_header,
         card_footer, layout_columns, value_box],
   bsicons[bs_icon],
-  shiny[moduleServer, NS, reactive, validate, selectInput, textOutput],
+  shiny[moduleServer, NS, reactive, validate, selectInput, textOutput,
+        withMathJax],
 )
 
 box::use(
@@ -26,42 +27,30 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   nav_panel(
+    
     withMathJax("$$X^2$$"),
+    
     layout_sidebar(
       sidebar=sidebar(
         class="my-sidebar",
-        selectInput(
-          ns("alpha"), "Significance level",
-          choices=c(0.01, 0.025, 0.05),
-          selected=0.05
-        ),
-        numericInput(
-          ns("effect"), "Desired effect size",
-          min=0.1, max=3.0, step=0.1, value=0.5
-        ),
-        numericInput(
-          ns("sample"), "Sample size per group",
-          min=20, max=700, step=5, value=100
-        ),
-        selectInput(
-          ns("testType"), "t-test type",
-          choices=c(
-            "Two sample"="two.sample",
-            "One sample"="one.sample",
-            "Paired"="paired"
-          )
-        ),
-        selectInput(
-          ns("alternative"), "Alternative hypothesis type",
-          choices=c(
-            "Two-sided"="two.sided",
-            "Greater than the null"="greater"
-          ),
-          selected="two.sided"
-        ),
+        inputs_mod$ui(ns("userInputs"))
       ),
+      
       callout$chi_sq,
+      
+      layout_column_wrap(
+        width=1/2,
+        leftPlot_mod$ui(ns("plot")),
+        rightPlot_mod$ui(ns("plot"))
+      ),
+      
       callout$app_note,
+      
+      layout_columns(
+        effectCard_mod$ui(ns("info")),
+        minSampleCard_mod$ui(ns("info")),
+        compareCard_mod$ui(ns("info"))
+      )
     )
   )
 }
@@ -70,7 +59,15 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
 
+    inputs <- inputs_mod$server("userInputs")
+    data <- data_mod$server("data", inputs)
     
+    leftPlot_mod$server("plot", data, inputs)
+    rightPlot_mod$server("plot", data, inputs)
+    
+    effectCard_mod$server("info", inputs)
+    minSampleCard_mod$server("info", inputs)
+    compareCard_mod$server("info", inputs)
 
   })
 }
