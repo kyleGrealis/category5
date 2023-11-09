@@ -65,5 +65,6 @@ server <- function(id) {
   moduleServer(id, function(input, output, session) {
     t_test$server("t_test")
     uneq_t_test$server("uneq_t_test")
+    chisq$server("chisq")
   })
 }
