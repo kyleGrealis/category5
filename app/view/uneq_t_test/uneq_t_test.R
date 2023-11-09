@@ -11,7 +11,6 @@ box::use(
   app/logic/plotCard,
   
   app/logic/uneq_t_test/data_mod,
-  app/logic/uneq_t_test/functions,
   
   app/view/uneq_t_test/inputs_mod,
   app/view/uneq_t_test/leftPlot_mod,
