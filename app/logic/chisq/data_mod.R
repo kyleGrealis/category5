@@ -20,12 +20,12 @@ server <- function(id, inputs) {
       req(inputs()$effect)
       req(inputs()$n)
       req(inputs()$df)
+      
+      functions$chisq_table(
+        inputs()$alpha, inputs()$effect,
+        inputs()$n, inputs()$df
+      )
     })
-    
-    functions$chisq_table(
-      inputs()$alpha, inputs()$effect,
-      inputs()$n, inputs()$df
-    )
     
     return(data)
     
