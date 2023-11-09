@@ -24,7 +24,7 @@ server <- function(id, inputs){
     minSample <- reactive({
       functions$min_sample(
         df=inputs()$df, 
-        w=inputs()$effect,
+        effect=inputs()$effect,
         alpha=inputs()$alpha
       )
     })

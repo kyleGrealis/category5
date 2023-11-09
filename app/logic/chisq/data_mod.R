@@ -1,5 +1,5 @@
 box::use(
-  shiny[moduleServer, NS, reactive, req],
+  shiny[moduleServer, NS, reactive, req, observeEvent],
 )
 
 box::use(
@@ -9,6 +9,7 @@ box::use(
 #' @export
 ui <- function(id) {
   ns <- NS(id)
+  
 }
 
 #' @export

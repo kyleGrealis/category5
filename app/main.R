@@ -63,8 +63,7 @@ ui <- function(id) {
 #' @export
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
-    t_test$server("t_test")
-    uneq_t_test$server("uneq_t_test")
+    # t_test$server("uneq_t_test")
     # one_samp_prop$server("one_samp_prop")
     # two_samp_prop$server("two_samp_prop")
     # uneq_samp_prop$server("uneq_samp_prop")

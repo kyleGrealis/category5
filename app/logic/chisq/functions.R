@@ -2,7 +2,7 @@ box::use(
   dplyr[case_when, filter, group_by, mutate],
   echarts4r[e_add_nested, e_bar, e_charts, e_line, e_tooltip, e_grid, e_color,
             e_legend, e_datazoom, e_axis_labels, e_toolbox_feature],
-  pwr[pwr.t.test]
+  pwr[pwr.t.test],
 )
 
 box::use(
@@ -10,12 +10,13 @@ box::use(
   app/logic/effect[effect_table],
 )
 
+
 # make the grid with calculated power
-#' @export 
-chisq_table <- function(alpha, effect, n, df) {
+#' @export
+chisq_table <- function(alpha, w, n, df) {
   expand.grid(
     # stop at the large effect size as per table
-    w=seq(0.05, effect_table$chisq_test[3], by=0.05),
+    w=seq(0.05, effect_table$chisq[3], by=0.05),
     n=seq(10, n+100, by=1)
   )|>
     mutate(
@@ -66,19 +67,19 @@ power_bar <- function(data, n) {
   data |>
     filter(
       n == n,
-      d %in% effect_table$chisq
+      w %in% effect_table$chisq
     ) |>
     mutate(
       # custom x-axis labels
-      d=factor(d, labels=c("Small", "Medium", "Large")),
+      w=factor(w, labels=c("Small", "Medium", "Large")),
       # custom bar color
       color=case_when(
-        d == "Small" ~ "#f47321",
-        d == "Medium" ~ "#f3f3f3",
-        d == "Large" ~ "#005030"
+        w == "Small" ~ "#f47321",
+        w == "Medium" ~ "#f3f3f3",
+        w == "Large" ~ "#005030"
       )
     ) |>
-    e_charts(d) |>
+    e_charts(w) |>
     e_bar(power) |>
     e_add_nested("itemStyle", color) |>
     e_tooltip(
@@ -95,13 +96,13 @@ power_bar <- function(data, n) {
 
 # this function will calculate the sample size at 80% power and user's inputs
 #' @export
-min_sample <- function(alpha, w, df) {
+min_sample <- function(alpha, effect, df) {
   # round up to the next whole person with `ceiling`
   ceiling(
     pwr::pwr.chisq.test(
       sig.level=alpha,
       df=df,
-      w=w,
+      w=effect,
       power=0.8,
       N=NULL  # solving for this
     )$N
@@ -110,11 +111,11 @@ min_sample <- function(alpha, w, df) {
 
 # this function is used to compare the user's vs calculated min sample size
 #' @export
-chisq_compare <- function(n, w, alpha) {
+chisq_compare <- function(n, effect, alpha, df) {
   compare <- pwr::pwr.chisq.test(
     sig.level=alpha,
     df=df,
-    w=w,
+    w=effect,
     N=n,
     power=NULL
   )

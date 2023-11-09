@@ -24,8 +24,9 @@ server <- function(id, inputs){
     compare <- reactive({
       functions$chisq_compare(
         n=inputs()$n,
-        w=inputs()$effect,
-        alpha=inputs()$alpha
+        effect=inputs()$effect,
+        alpha=inputs()$alpha,
+        df=inputs()$df
       )
     })
     
