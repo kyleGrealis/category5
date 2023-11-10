@@ -18,13 +18,13 @@ server <- function(id, inputs){
     
     data <- reactive({
       req(inputs()$alpha)
-      req(inputs()$f)
+      req(inputs()$effect)
       req(inputs()$n)
       req(inputs()$k)
       
       functions$anova_table(
         alpha=inputs()$alpha, 
-        f=inputs()$f, 
+        effect=inputs()$effect, 
         n=inputs()$n, 
         k=inputs()$k
       )
