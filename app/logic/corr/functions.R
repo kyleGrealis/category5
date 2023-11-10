@@ -105,8 +105,8 @@ min_sample <- function(alpha, effect, alt) {
       r=effect,
       alt=alt,
       power=0.8,
-      N=NULL  # solving for this
-    )$N
+      n=NULL  # solving for this
+    )$n
   )
 }
 

@@ -17,7 +17,7 @@ ui <- function(id) {
     ),
     radioButtons(
       inputId=ns("effect"),
-      label="Hypothesis correlation (r)",
+      label="Effect size",
       selected=0.3, # medium effect
       choiceNames=list(
         "Small (0.1)", "Medium (0.3)", "Large (0.5)"
@@ -27,7 +27,7 @@ ui <- function(id) {
     helpMe_mod$ui(ns("help")),
     numericInput(
       ns("n"), "Number of observations",
-      min=10, max=1300, value=150, step=10
+      min=0, max=1300, value=85, step=5
     ),
     selectInput(
       ns("alt"), "Alternative hypothesis type",
