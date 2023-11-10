@@ -13,7 +13,7 @@ box::use(
 
 # make the grid with calculated power
 #' @export
-anova_table <- function(alpha, effect, n, k) {
+anova_table <- function(alpha, n, k) {
   expand.grid(
     # stop at the large effect size as per table
     f=seq(0.05, effect_table$anova[3], by=0.05),
