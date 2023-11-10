@@ -107,7 +107,7 @@ div > .bi {
   margin-top: -1px;
 }
 
-/* modal background */
+// modal background
 .ms-Modal {
   backdrop-filter: blur(5px);
 }
@@ -146,7 +146,7 @@ div.tab-content:nth-child(2),
   margin-top: -1px;
 }
 
-/* checkbox & radio buttons have green background instead of blue generic yuck */
+// checkbox & radio buttons have green background instead of blue generic yuck
 .form-check-input:checked,
 .shiny-input-container .checkbox input:checked,
 .shiny-input-container .checkbox-inline input:checked,
@@ -168,7 +168,7 @@ div.tab-content:nth-child(2),
 
 
 
-/* "active" is the hover quality, "selected"" is the chosen item */
+// "active" is the hover quality, "selected"" is the chosen item
 .selectize-dropdown-content > div.option.active {
   background-color: #f1f1f1;
   border-bottom: 0.3px solid gray;
