@@ -112,7 +112,7 @@ min_sample <- function(alpha, effect, k) {
 
 # this function is used to compare the user's vs calculated min sample size
 #' @export
-t_compare <- function(alpha, effect, n, k) {
+anova_compare <- function(alpha, effect, n, k) {
   compare <- pwr::pwr.anova.test(
     k=k,
     n=n,
