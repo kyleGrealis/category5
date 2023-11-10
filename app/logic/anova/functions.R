@@ -101,7 +101,7 @@ min_sample <- function(alpha, effect, k) {
   ceiling(
     pwr::pwr.anova.test(
       k=k,
-      f=f,
+      f=effect,
       sig.level=alpha,
       power=0.8,
       n=NULL  # solving for this
@@ -116,7 +116,7 @@ anova_compare <- function(alpha, effect, n, k) {
   compare <- pwr::pwr.anova.test(
     k=k,
     n=n,
-    f=f,
+    f=effect,
     sig.level=alpha,
     power=NULL
   )

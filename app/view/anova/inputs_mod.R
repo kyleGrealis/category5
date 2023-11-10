@@ -26,9 +26,9 @@ ui <- function(id) {
       selected=0.05
     ),
     radioButtons(
-      inputId=ns("f"),
+      inputId=ns("effect"),
       label="Effect size",
-      selected=0.5,
+      selected=0.25,
       choiceNames=list(
         "Small (0.1)", "Medium (0.25)", "Large (0.4)"
       ),
@@ -36,13 +36,13 @@ ui <- function(id) {
     ),
     helpMe_mod$ui(ns("help")),
     numericInput(
-          ns("n"), "Number of tests (per group)",
-          min = 2, max = 80, step = 2, value = 70
-        ),
-        numericInput(
-          ns("k"), "Number of groups (classes)",
-          min = 2, max = 6, step = 1, value = 2
-        )
+      ns("n"), "Number of tests (per group)",
+      min = 5, max = 600, step = 5, value = 65
+    ),
+    numericInput(
+      ns("k"), "Number of groups (classes)",
+      min = 2, max = 6, step = 1, value = 2
+    )
   )
 }
 
