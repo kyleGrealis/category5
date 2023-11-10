@@ -23,10 +23,10 @@ server <- function(id, inputs){
     
     compare <- reactive({
       functions$t_compare(
-        t_type=inputs()$type, 
+        type=inputs()$type, 
         alt=inputs()$alt,
         n=inputs()$n,
-        d=inputs()$effect,
+        effect=inputs()$effect,
         alpha=inputs()$alpha
       )
     })

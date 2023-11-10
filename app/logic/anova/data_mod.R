@@ -24,7 +24,6 @@ server <- function(id, inputs){
       
       functions$anova_table(
         alpha=inputs()$alpha, 
-        effect=inputs()$effect, 
         n=inputs()$n, 
         k=inputs()$k
       )

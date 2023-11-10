@@ -1,9 +1,9 @@
 box::use(
-  shiny[moduleServer, NS, reactive, req],
+  shiny[moduleServer, NS, reactive, req, observeEvent],
 )
 
 box::use(
-  app/logic/t_test/functions
+  app/logic/corr/functions,
 )
 
 #' @export
@@ -13,24 +13,22 @@ ui <- function(id) {
 }
 
 #' @export
-server <- function(id, inputs){
+server <- function(id, inputs) {
   moduleServer(id, function(input, output, session) {
-    
+
     data <- reactive({
       req(inputs()$alpha)
       req(inputs()$effect)
       req(inputs()$n)
-      req(inputs()$type)
       req(inputs()$alt)
       
-      functions$t_table(
-        alpha=inputs()$alpha, 
-        n=inputs()$n,
-        type=inputs()$type, 
+      functions$corr_table(
+        alpha=inputs()$alpha,
+        n=inputs()$n, 
         alt=inputs()$alt
       )
     })
-
+    
     return(data)
     
   })

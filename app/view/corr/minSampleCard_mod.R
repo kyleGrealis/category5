@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/t_test/functions,
+  app/logic/corr/functions,
 )
 
 #' @export
@@ -23,16 +23,15 @@ server <- function(id, inputs){
     
     minSample <- reactive({
       functions$min_sample(
-        type=inputs()$type, 
-        alt=inputs()$alt, 
+        alpha=inputs()$alpha,
         effect=inputs()$effect,
-        alpha=inputs()$alpha
+        alt=inputs()$alt
       )
     })
     
     output$minSample <- renderUI({
       value_box(
-        title="Sample size per group:",
+        title="Observations needed:",
         value=minSample(),
         showcase=bsicons::bs_icon("people-fill"),
         theme="white", full_screen=FALSE, fill=TRUE, height=100L,

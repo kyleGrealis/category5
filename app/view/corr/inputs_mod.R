@@ -1,15 +1,4 @@
-#' User inputs specific to t-test
-#' 
-#' @param alpha Significance level
-#' @param effect Effect size
-#' @param n1 Group 1 sample size
-#' @param n2 Group 2 sample size
-#' @param type t-test type: one- or two-sample, or paired
-#' @param alt Alternative hypothesis. Default is two.sided
-#' 
-#' @return list of input parameters as reactives
-
-box::use(
+box::use( 
   app/view/helpMe_mod
 )
 
@@ -29,20 +18,16 @@ ui <- function(id) {
     radioButtons(
       inputId=ns("effect"),
       label="Effect size",
-      selected=0.5,
+      selected=0.3, # medium effect
       choiceNames=list(
-        "Small (0.2)", "Medium (0.5)", "Large (0.8)"
+        "Small (0.1)", "Medium (0.3)", "Large (0.5)"
       ),
-      choiceValues=list(0.2, 0.5, 0.8)
+      choiceValues=list(0.1, 0.3, 0.5)
     ),
     helpMe_mod$ui(ns("help")),
     numericInput(
-      ns("n1"), "Sample size (group 1)",
-      min=2, max=150, value=65, step=1
-    ),
-    numericInput(
-      ns("n2"), "Sample size (group 2)",
-      min=2, max=150, value=70, step=1
+      ns("n"), "Number of observations",
+      min=0, max=1300, value=85, step=5
     ),
     selectInput(
       ns("alt"), "Alternative hypothesis type",
@@ -62,11 +47,10 @@ server <- function(id) {
     
     reactive({
       list(
-        alpha    = as.numeric(input$alpha),
-        effect   = as.numeric(input$effect),
-        n1 = input$n1,
-        n2 = input$n2,
-        alt      = input$alt
+        alpha  = as.numeric(input$alpha),
+        effect = as.numeric(input$effect),
+        n      = input$n,
+        alt    = input$alt
       )
     })
   })
