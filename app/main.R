@@ -69,7 +69,7 @@ server <- function(id) {
     # two_samp_prop$server("two_samp_prop")
     # uneq_samp_prop$server("uneq_samp_prop")
     anova$server("anova")
-    # corr$server("corr")
+    corr$server("corr")
     chisq$server("chisq")
     # glm$server("glm")
   })
