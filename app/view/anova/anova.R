@@ -18,6 +18,16 @@ box::use(
 box::use(
   app/logic/callout,
   app/logic/plotCard,
+
+  app/logic/anova/data_mod,
+  app/logic/anova/functions,
+
+  app/view/anova/inputs_mod,
+  app/view/anova/leftPlot_mod,
+  app/view/anova/rightPlot_mod,
+  app/view/anova/effectCard_mod,
+  app/view/anova/minSampleCard_mod,
+  app/view/anova/compareCard_mod,
 )
 
 
@@ -25,35 +35,30 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   nav_panel(
+    
     "ANOVA",
+    
     layout_sidebar(
-      sidebar = sidebar(
-        class = "my-sidebar",
-        selectInput(
-          ns("alpha"), "Significance level",
-          choices = c(0.01, 0.025, 0.05),
-          selected = 0.05
-        ),
-        numericInput(
-          ns("nTests"), "Number of tests",
-          min = 2, max = 80, step = 2, value = 70
-        ),
-        numericInput(
-          ns("k"), "Number of groups (classes)",
-          min = 2, max = 6, step = 1, value = 2
-        ),
-        selectInput(
-          ns("effectSize"), "Desired effect size",
-          choices = c(
-            "Small" = 0.1,
-            "Medium" = 0.25,
-            "Large" = 0.4
-          ),
-          selected = 0.25
-        ),
+      sidebar=sidebar(
+        class="my-sidebar",
+        inputs_mod$ui(ns("userInputs"))
       ),
+      
       callout$anova,
+      
+      layout_column_wrap(
+        width=1/2,
+        leftPlot_mod$ui(ns("plot")),
+        rightPlot_mod$ui(ns("plot"))
+      ),
+      
       callout$app_note,
+      
+      layout_columns(
+        effectCard_mod$ui(ns("info")),
+        minSampleCard_mod$ui(ns("info")),
+        compareCard_mod$ui(ns("info"))
+      )
     )
   )
 }
@@ -62,7 +67,15 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
 
+    inputs <- inputs_mod$server("userInputs")
+    data <- data_mod$server("data", inputs)
     
+    leftPlot_mod$server("plot", data, inputs)
+    rightPlot_mod$server("plot", data, inputs)
+    
+    effectCard_mod$server("info", inputs)
+    minSampleCard_mod$server("info", inputs)
+    compareCard_mod$server("info", inputs)
 
   })
 }

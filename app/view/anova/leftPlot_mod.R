@@ -4,7 +4,7 @@ box::use(
 
 box::use(
   app/logic/plotCard,
-  app/logic/chisq/functions,
+  app/logic/anova/functions,
 )
 
 #' @export
@@ -24,7 +24,7 @@ server <- function(id, data, inputs){
 
     output$leftPlot <- renderUI({
       plotCard$plotting_cards(
-        "Lines represent sample size (±30) plotted
+        "Lines represent group tests (±30) plotted
         against power and effect size",
         plot()
       )

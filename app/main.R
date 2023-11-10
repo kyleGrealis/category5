@@ -68,7 +68,7 @@ server <- function(id) {
     # one_samp_prop$server("one_samp_prop")
     # two_samp_prop$server("two_samp_prop")
     # uneq_samp_prop$server("uneq_samp_prop")
-    # anova$server("anova")
+    anova$server("anova")
     # corr$server("corr")
     chisq$server("chisq")
     # glm$server("glm")
