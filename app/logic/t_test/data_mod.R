@@ -24,8 +24,10 @@ server <- function(id, inputs){
       req(inputs()$alt)
       
       functions$t_table(
-        inputs()$alpha, inputs()$effect, inputs()$n,
-        inputs()$type, inputs()$alt
+        alpha=inputs()$alpha, 
+        n=inputs()$n,
+        type=inputs()$type, 
+        alt=inputs()$alt
       )
     })
 

@@ -1,5 +1,5 @@
 box::use(
-  dplyr[case_when, filter, group_by, mutate],
+  dplyr[case_when, filter, group_by, mutate, rename],
   echarts4r[e_add_nested, e_bar, e_charts, e_line, e_tooltip, e_grid, e_color,
             e_legend, e_datazoom, e_axis_labels, e_toolbox_feature],
   pwr[pwr.t.test]
@@ -13,18 +13,18 @@ box::use(
 
 # make the grid with calculated power
 #' @export
-t_table <- function(alpha, d, n, t_type, alt) {
+t_table <- function(alpha, n, type, alt) {
   expand.grid(
     # stop at the large effect size as per table
-    d=seq(0.05, effect_table$t_test[3], by=0.05),
+    effect=seq(0.05, effect_table$t_test[3], by=0.05),
     n=seq(10, n+100, by=1)
   )|>
     mutate(
       power=pwr::pwr.t.test(
         sig.level=alpha,
-        d=d,
+        d=effect,
         n=n,
-        type=t_type,
+        type=type,
         alternative=alt,
         power=NULL
       )$power,
@@ -44,7 +44,7 @@ power_effect <- function(data, n) {
   data |>
     filter(n %in% sample_groups) |>
     group_by(n) |>
-    e_charts(d) |>
+    e_charts(effect) |>
     e_line(power) |>
     e_tooltip(
       trigger="item",
@@ -68,19 +68,19 @@ power_bar <- function(data, n) {
   data |>
     filter(
       n == n,
-      d %in% effect_table$t_test
+      effect %in% effect_table$t_test
     ) |>
     mutate(
       # custom x-axis labels
-      d=factor(d, labels=c("Small", "Medium", "Large")),
+      effect=factor(effect, labels=c("Small", "Medium", "Large")),
       # custom bar color
       color=case_when(
-        d == "Small" ~ "#f47321",
-        d == "Medium" ~ "#f3f3f3",
-        d == "Large" ~ "#005030"
+        effect == "Small" ~ "#f47321",
+        effect == "Medium" ~ "#f3f3f3",
+        effect == "Large" ~ "#005030"
       )
     ) |>
-    e_charts(d) |>
+    e_charts(effect) |>
     e_bar(power) |>
     e_add_nested("itemStyle", color) |>
     e_tooltip(
@@ -97,13 +97,13 @@ power_bar <- function(data, n) {
 
 # this function will calculate the sample size at 80% power and user's inputs
 #' @export
-min_sample <- function(t_type, alt, d, alpha) {
+min_sample <- function(type, alt, effect, alpha) {
   # round up to the next whole person with `ceiling`
   ceiling(
     pwr::pwr.t.test(
-      type=t_type,
+      type=type,
       alternative=alt,
-      d=d,
+      d=effect,
       sig.level=alpha,
       power=0.8,
       n=NULL  # solving for this
@@ -114,12 +114,12 @@ min_sample <- function(t_type, alt, d, alpha) {
 
 # this function is used to compare the user's vs calculated min sample size
 #' @export
-t_compare <- function(t_type, alt, n, d, alpha) {
+t_compare <- function(type, alt, n, effect, alpha) {
   compare <- pwr::pwr.t.test(
-    type=t_type,
+    type=type,
     alternative=alt,
     n=n,
-    d=d,
+    d=effect,
     sig.level=alpha,
     power=NULL
   )
