@@ -9,7 +9,7 @@ effect_table <- dplyr::tibble(
   t_test = c(0.2, 0.5, 0.8),
   proportions = c(0.2, 0.5, 0.8),
   anova = c(0.1, 0.25, 0.4),
-  corr = c(0.1, 0.5, 0.5),
+  corr = c(0.1, 0.3, 0.5),
   chisq = c(0.1, 0.3, 0.5),
   f2 = c(0.02, 0.15, 0.35)
 )
