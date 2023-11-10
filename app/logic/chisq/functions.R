@@ -13,7 +13,7 @@ box::use(
 
 # make the grid with calculated power
 #' @export
-chisq_table <- function(alpha, effect, n, df) {
+chisq_table <- function(alpha, n, df) {
   expand.grid(
     # stop at the large effect size as per table
     w=seq(0.05, effect_table$chisq[3], by=0.05),
