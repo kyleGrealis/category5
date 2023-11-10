@@ -1,5 +1,5 @@
 box::use(
-  dplyr[case_when, filter, group_by, mutate],
+  dplyr[case_when, filter, group_by, mutate, rename],
   echarts4r[e_add_nested, e_bar, e_charts, e_line, e_tooltip, e_grid, e_color,
             e_legend, e_datazoom, e_axis_labels, e_toolbox_feature],
   pwr[pwr.t.test]
@@ -28,7 +28,8 @@ anova_table <- function(alpha, effect, n, k) {
         power=NULL
       )$power,
       power=round(power, 2)
-    )
+    ) |> 
+    	rename(effect=f)
 }
 
 # this is the left plot: power vs sample size
@@ -43,7 +44,7 @@ power_effect <- function(data, n) {
   data |>
     filter(n %in% sample_groups) |>
     group_by(n) |>
-    e_charts(f) |>
+    e_charts(effect) |>
     e_line(power) |>
     e_tooltip(
       trigger="item",
@@ -67,19 +68,19 @@ power_bar <- function(data, n) {
   data |>
     filter(
       n == n,
-      f %in% effect_table$anova
+      effect %in% effect_table$anova
     ) |>
     mutate(
       # custom x-axis labels
-      f=factor(f, labels=c("Small", "Medium", "Large")),
+      effect=factor(effect, labels=c("Small", "Medium", "Large")),
       # custom bar color
       color=case_when(
-        f == "Small" ~ "#f47321",
-        f == "Medium" ~ "#f3f3f3",
-        f == "Large" ~ "#005030"
+        effect == "Small" ~ "#f47321",
+        effect == "Medium" ~ "#f3f3f3",
+        effect == "Large" ~ "#005030"
       )
     ) |>
-    e_charts(f) |>
+    e_charts(effect) |>
     e_bar(power) |>
     e_add_nested("itemStyle", color) |>
     e_tooltip(
