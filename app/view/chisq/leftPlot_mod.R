@@ -24,7 +24,7 @@ server <- function(id, data, inputs){
 
     output$leftPlot <- renderUI({
       plotCard$plotting_cards(
-        "Lines represent group sample size (±30) plotted
+        "Lines represent sample size (±30) plotted
         against power and effect size",
         plot()
       )
