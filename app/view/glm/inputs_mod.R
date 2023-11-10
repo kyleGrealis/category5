@@ -3,8 +3,9 @@ box::use(
 )
 
 box::use(
+  glue[glue],
   shiny[h6, moduleServer, NS, numericInput, radioButtons, reactive,
-        selectInput, tagList],
+        selectInput, tagList, renderText, textOutput],
 )
 
 ui <- function(id) {
@@ -16,10 +17,10 @@ ui <- function(id) {
       selected=0.05
     ),
     numericInput(
-      ns("rsq"), "Anticipated model R-squared",
-      min=0, max=1, step=0.5, value=0.5
+      ns("model"), "Anticipated model R-squared",
+      min=0, max=1, step=0.02, value=0.4
     ),
-    textOutput(ns("rsq")),
+    textOutput(ns("result")),
     radioButtons(
       inputId=ns("effect"),                 # f2 = (R^2)/(1-(R^2))
       label="Effect size",
@@ -44,13 +45,15 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
-    rsq <- reactive({
+    result <- reactive({
       round(
-        (input$rsq^2) / (1 - (input$rsq^2)),
+        (input$model / (1 - input$model)),
         digits = 2
       )
     })
-    output$rsq <- renderText({glue("Your estimated sample size is: {rsq()}")})
+    output$result <- renderText({glue(
+      "Your estimated effect size is: {result()}"
+    )})
     helpMe_mod$server("help")
     
     reactive({
@@ -58,7 +61,7 @@ server <- function(id) {
         alpha  = as.numeric(input$alpha),
         effect = as.numeric(input$effect),
         n      = input$n,
-        u    = input$u
+        u      = input$u
       )
     })
   })

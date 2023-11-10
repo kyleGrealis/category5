@@ -4,7 +4,7 @@ box::use(
 
 box::use(
   app/logic/plotCard,
-  app/logic/corr/functions,
+  app/logic/glm/functions,
 )
 
 #' @export

@@ -3,7 +3,7 @@ box::use(
 )
 
 box::use(
-  app/logic/corr/functions,
+  app/logic/glm/functions,
 )
 
 #' @export
@@ -20,12 +20,12 @@ server <- function(id, inputs) {
       req(inputs()$alpha)
       req(inputs()$effect)
       req(inputs()$n)
-      req(inputs()$alt)
+      req(inputs()$u)
       
-      functions$corr_table(
+      functions$glm_table(
         alpha=inputs()$alpha,
-        n=inputs()$n, 
-        alt=inputs()$alt
+        v=inputs()$n - inputs()$u -1, 
+        u=inputs()$u
       )
     })
     

@@ -71,6 +71,6 @@ server <- function(id) {
     anova$server("anova")
     corr$server("corr")
     chisq$server("chisq")
-    # glm$server("glm")
+    glm$server("glm")
   })
 }
