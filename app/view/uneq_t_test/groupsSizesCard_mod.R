@@ -22,13 +22,13 @@ ui <- function(id) {
 server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
-    group1 <- reactive({ inputs()$group1_n })
-    group2 <- reactive({ inputs()$group2_n })
+    n1 <- reactive({ inputs()$n1 })
+    n2 <- reactive({ inputs()$n2 })
     
     output$minEffect <- renderUI({
       value_box(
         title="Selected group sizes:",
-        value=glue("{group1()} & {group2()}"),
+        value=glue("{n1()} & {n2()}"),
         showcase=bsicons::bs_icon("people-fill"),
         theme="white", full_screen=FALSE, fill=TRUE, height=100L,
         class="info-box"

@@ -23,8 +23,8 @@ server <- function(id, data, inputs){
     plot <- reactive({
       functions$power_bar(
         data=data(), 
-        n1=inputs()$group1_n,
-        n2=inputs()$group2_n
+        n1=inputs()$n1,
+        n2=inputs()$n2
       )
     })
     

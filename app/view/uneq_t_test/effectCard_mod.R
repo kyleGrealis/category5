@@ -23,8 +23,8 @@ server <- function(id, inputs){
     
     minEffect <- reactive({
       functions$min_effect(
-        n1=inputs()$group1_n, 
-        n2=inputs()$group2_n,
+        n1=inputs()$n1, 
+        n2=inputs()$n2,
         alpha=inputs()$alpha,
         alt=inputs()$alt
       )

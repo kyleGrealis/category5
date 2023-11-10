@@ -19,14 +19,15 @@ server <- function(id, inputs){
     data <- reactive({
       req(inputs()$alpha)
       req(inputs()$effect)
-      req(inputs()$group1_n)
-      req(inputs()$group2_n)
+      req(inputs()$n1)
+      req(inputs()$n2)
       req(inputs()$alt)
       
       functions$t2n_table(
-        inputs()$alpha, inputs()$effect, 
-        inputs()$group1_n, inputs()$group2_n, 
-        inputs()$alt
+        alpha=inputs()$alpha, 
+        n1=inputs()$group1_n, 
+        n2=inputs()$group2_n, 
+        alt=inputs()$alt
       )
     })
     

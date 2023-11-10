@@ -1,5 +1,5 @@
 box::use(
-  dplyr[case_when, filter, group_by, mutate],
+  dplyr[case_when, filter, group_by, mutate, rename],
   echarts4r[e_add_nested, e_bar, e_charts, e_line, e_tooltip, e_grid, e_color,
             e_legend, e_datazoom, e_axis_labels, e_toolbox_feature],
   pwr[pwr.t2n.test]
@@ -24,14 +24,14 @@ t2n_table <- function(alpha, d, n1, n2, alt) {
   
   expand.grid(
     # stop at the large effect size as per table
-    d=seq(0.05, effect_table$t_test[3], by=0.05),
+    effect=seq(0.05, effect_table$t_test[3], by=0.05),
     n1=n1,
     n2=seq(n2-30, n2+100, by=2)
   )|>
     mutate(
       power=pwr::pwr.t2n.test(
         sig.level=alpha,
-        d=d,
+        d=effect,
         n1=n1,
         n2=n2,
         alternative=alt,
@@ -53,7 +53,7 @@ power_effect <- function(data, n2) {
   data |>
     filter(n2 %in% sample_groups) |>
     group_by(n2) |>
-    e_charts(d) |>
+    e_charts(effect) |>
     e_line(power) |>
     e_tooltip(
       trigger="item",
@@ -78,19 +78,19 @@ power_bar <- function(data, n1, n2) {
     filter(
       n1 == n1,
       n2 == n2,
-      d %in% effect_table$t_test
+      effect %in% effect_table$t_test
     ) |>
     mutate(
       # custom x-axis labels
-      d=factor(d, labels=c("Small", "Medium", "Large")),
+      effect=factor(effect, labels=c("Small", "Medium", "Large")),
       # custom bar color
       color=case_when(
-        d == "Small" ~ "#f47321",
-        d == "Medium" ~ "#f3f3f3",
-        d == "Large" ~ "#005030"
+        effect == "Small" ~ "#f47321",
+        effect == "Medium" ~ "#f3f3f3",
+        effect == "Large" ~ "#005030"
       )
     ) |>
-    e_charts(d) |>
+    e_charts(effect) |>
     e_bar(power) |>
     e_add_nested("itemStyle", color) |>
     e_tooltip(
@@ -126,10 +126,10 @@ min_effect <- function(n1, n2, alpha, alt) {
 
 # this function is used to compare the user's vs calculated min sample size
 #' @export
-t2n_compare <- function(alpha, d, n1, n2, alt) {
+t2n_compare <- function(alpha, effect, n1, n2, alt) {
   compare <- pwr::pwr.t2n.test(
     sig.level=alpha,
-    d=d,
+    d=effect,
     n1=n1,
     n2=n2,
     alternative=alt,

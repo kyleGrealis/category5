@@ -2,8 +2,8 @@
 #' 
 #' @param alpha Significance level
 #' @param effect Effect size
-#' @param group1_n Group 1 sample size
-#' @param group2_n Group 2 sample size
+#' @param n1 Group 1 sample size
+#' @param n2 Group 2 sample size
 #' @param type t-test type: one- or two-sample, or paired
 #' @param alt Alternative hypothesis. Default is two.sided
 #' 
@@ -37,11 +37,11 @@ ui <- function(id) {
     ),
     helpMe_mod$ui(ns("help")),
     numericInput(
-      ns("group1_n"), "Sample size (group 1)",
+      ns("n1"), "Sample size (group 1)",
       min=2, max=150, value=65, step=1
     ),
     numericInput(
-      ns("group2_n"), "Sample size (group 2)",
+      ns("n2"), "Sample size (group 2)",
       min=2, max=150, value=70, step=1
     ),
     selectInput(
@@ -64,8 +64,8 @@ server <- function(id) {
       list(
         alpha    = as.numeric(input$alpha),
         effect   = as.numeric(input$effect),
-        group1_n = input$group1_n,
-        group2_n = input$group2_n,
+        n1 = input$n1,
+        n2 = input$n2,
         alt      = input$alt
       )
     })

@@ -21,7 +21,7 @@ server <- function(id, data, inputs){
   moduleServer(id, function(input, output, session) {
 
     plot <- reactive({
-      functions$power_effect(data=data(), n=inputs()$group2_n)
+      functions$power_effect(data=data(), n=inputs()$n2)
     })
 
     output$leftPlot <- renderUI({
