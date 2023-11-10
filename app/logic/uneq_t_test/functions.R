@@ -13,7 +13,7 @@ box::use(
 
 # make the grid with calculated power
 #' @export
-t2n_table <- function(alpha, d, n1, n2, alt) {
+t2n_table <- function(alpha, n1, n2, alt) {
   # set lowest value as 32 because # obs in n1 must be at least 2
   if (n1<32) {
     n1=32
