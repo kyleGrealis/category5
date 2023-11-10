@@ -31,7 +31,7 @@ server <- function(id, inputs){
     
     output$minSample <- renderUI({
       value_box(
-        title="Sample size per group:",
+        title="Numboer of tests per group:",
         value=minSample(),
         showcase=bsicons::bs_icon("people-fill"),
         theme="white", full_screen=FALSE, fill=TRUE, height=100L,
