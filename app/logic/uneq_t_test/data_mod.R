@@ -25,8 +25,8 @@ server <- function(id, inputs){
       
       functions$t2n_table(
         alpha=inputs()$alpha, 
-        n1=inputs()$group1_n, 
-        n2=inputs()$group2_n, 
+        n1=inputs()$n1, 
+        n2=inputs()$n2, 
         alt=inputs()$alt
       )
     })
