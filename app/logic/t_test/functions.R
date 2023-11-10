@@ -29,7 +29,8 @@ t_table <- function(alpha, n, type, alt) {
         power=NULL
       )$power,
       power=round(power, 2)
-    )
+    ) |> 
+    	rename(effect=d)
 }
 
 # this is the left plot: power vs sample size
