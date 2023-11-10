@@ -16,18 +16,18 @@ ui <- function(id) {
       selected=0.05
     ),
     numericInput(
-      ns("rsq"), "What is your model's R-squared?",
+      ns("rsq"), "Anticipated model R-squared",
       min=0, max=1, step=0.5, value=0.5
     ),
     textOutput(ns("rsq")),
     radioButtons(
       inputId=ns("effect"),                 # f2 = (R^2)/(1-(R^2))
       label="Effect size",
-      selected=0.3, # medium effect
+      selected=0.3, # medium effect 
       choiceNames=list(
-        "Small (0.1)", "Medium (0.3)", "Large (0.5)"
+        "Small (0.02)", "Medium (0.15)", "Large (0.35)"
       ),
-      choiceValues=list(0.1, 0.3, 0.5)
+      choiceValues=list(0.02, 0.15, 0.35)
     ),
     helpMe_mod$ui(ns("help")),
     numericInput(
@@ -58,7 +58,7 @@ server <- function(id) {
         alpha  = as.numeric(input$alpha),
         effect = as.numeric(input$effect),
         n      = input$n,
-        alt    = input$alt
+        u    = input$u
       )
     })
   })
