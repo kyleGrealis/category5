@@ -24,7 +24,7 @@ ui <- function(id) {
     ),
     numericInput(
       ns("n"), "Number of tests",
-      min=0, max=1000, step=5, value=50
+      min=0, max=1000, step=5, value=60
     ),
     numericInput(
       ns("p1"), "Null hypothesis proportion",
