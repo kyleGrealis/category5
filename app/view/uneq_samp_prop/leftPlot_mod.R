@@ -20,7 +20,7 @@ ui <- function(id) {
 server <- function(id, data, inputs){
   moduleServer(id, function(input, output, session) {
 
-    plot <- reactive({ functions$power_effect(data=data(), n=inputs()$n) })
+    plot <- reactive({ functions$power_effect(data=data(), n2=inputs()$n2) })
 
     output$leftPlot <- renderUI({
       plotCard$plotting_cards(

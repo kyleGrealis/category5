@@ -15,7 +15,7 @@ ui <- function(id) {
 #' @export
 server <- function(id, inputs) {
   moduleServer(id, function(input, output, session) {
-
+    
     data <- reactive({
       req(inputs()$alpha)
       req(inputs()$effect)

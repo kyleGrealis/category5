@@ -46,11 +46,12 @@ prop_table <- function(alpha, n1, n2, alt) {
 #' @export
 power_effect <- function(data, n2) {
   # show selected sample size and 30 above and 30 below, min=5
-  if (n2-30 < 2) {
-    sample_groups <- c(2, n2, n2+30)
+  if (n2-30<2) {
+    sample_group = c(2, n2, n2+30)
   } else {
-    sample_groups <- c(n2-30, n2, n2+30)
+    sample_groups = c(n2-30, n2, n2+30)
   }
+  
   data |>
     filter(n2 %in% sample_groups) |>
     group_by(n2) |>
