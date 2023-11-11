@@ -68,6 +68,5 @@ server <- function(id) {
     chisq$server("chisq")
     glm$server("glm")
     
-    # helpMe_mod$server("help")
   })
 }
