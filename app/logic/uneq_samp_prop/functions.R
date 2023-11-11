@@ -108,17 +108,18 @@ power_bar <- function(data, n, n2) {
 
 # this function will calculate the sample size at 80% power and user's inputs
 #' @export
-min_sample <- function(alpha, p1, p2, alt, n1) {
-  # round up to the next whole person with `ceiling`
-  ceiling(
-    pwr::pwr.2p2n.test(
-      sig.level=alpha,
-      h=ES.h(p1=p1, p2=p2),
-      alt=alt,
-      power=0.8,
+min_effect <- function(n1, n2, alpha, alt) {
+  # round down to maintain mininum group diff
+  round(
+    pwr::pwr.t2n.test(
       n1=n1,
-      n2=NULL  # solving for this
-    )$n
+      n2=n2,
+      sig.level=alpha,
+      power=0.8,
+      alternative=alt,
+      h=NULL
+    )$h,
+    digits = 2
   )
 }
 

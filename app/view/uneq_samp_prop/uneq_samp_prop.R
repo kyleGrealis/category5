@@ -3,21 +3,22 @@ box::use(
         layout_sidebar, sidebar, layout_column_wrap, card, card_header,
         card_footer, layout_columns, value_box],
   bsicons[bs_icon],
-  dplyr[arrange, between, filter, mutate, pull],
-  echarts4r[echarts4rOutput, renderEcharts4r],
-  glue[glue],
-  pwr[pwr.t.test],
-  shiny[moduleServer, NS, reactive, withMathJax, validate, div, a,
-        selectInput, numericInput, textOutput, renderText,
-        observeEvent, updateNumericInput],
-  shiny.blueprint[Callout],
-  stats[na.omit],
-  utils[head]
+  shiny[moduleServer, NS, reactive, validate, selectInput, textOutput],
 )
 
 box::use(
   app/logic/callout,
   app/logic/plotCard,
+  
+  app/logic/uneq_samp_prop/data_mod,
+  app/logic/uneq_samp_prop/functions,
+
+  app/view/uneq_samp_prop/inputs_mod,
+  app/view/uneq_samp_prop/leftPlot_mod,
+  app/view/uneq_samp_prop/rightPlot_mod,
+  app/view/uneq_samp_prop/effectCard_mod,
+  app/view/uneq_samp_prop/minSampleCard_mod,
+  app/view/uneq_samp_prop/compareCard_mod,
 )
 
 
@@ -25,43 +26,30 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   nav_panel(
-    "Unequal sample sizes",
+    
+    "Unequal sample proportion",
+    
     layout_sidebar(
-      sidebar = sidebar(
-        class = "my-sidebar",
-        selectInput(
-          ns("alpha"), "Significance level",
-          choices = c(0.01, 0.025, 0.05),
-          selected = 0.05
-        ),
-        numericInput(
-          "sampleObs", "Number of tests",
-          min = 20, max = 700, step = 5, value = 100
-        ),
-        numericInput(
-          "p1_p", "Null hypothesis proportion",
-          min = 0, max = 1, step = 0.05, value = 0.55
-        ),
-        numericInput(
-          "p2_p", "Alternative hypothesis proportion",
-          min = 0, max = 1, step = 0.05, value = 0.5
-        ),
-        numericInput(
-          "hEffectSize_p", "Desired effect size",
-          min = 0, max = 3, step = 0.1, value = 0.5
-        ),
-        selectInput(
-          "alternative_p", "Alternative hypothesis type",
-          choices = c(
-            "Two-sided" = "two.sided",
-            "Less than the null" = "less",
-            "Greater than the null" = "greater"
-          ),
-          selected = "two.sided"
-        ),
+      sidebar=sidebar(
+        class="my-sidebar",
+        inputs_mod$ui(ns("userInputs"))
       ),
+      
       callout$uneq_samp_prop,
+      
+      layout_column_wrap(
+        width=1/2,
+        leftPlot_mod$ui(ns("plot")),
+        rightPlot_mod$ui(ns("plot"))
+      ),
+      
       callout$app_note,
+      
+      layout_columns(
+        effectCard_mod$ui(ns("info")),
+        groupSizesCard_mod$ui(ns("info")),
+        compareCard_mod$ui(ns("info"))
+      )
     )
   )
 }
@@ -70,7 +58,15 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
 
+    inputs <- inputs_mod$server("userInputs")
+    data <- data_mod$server("data", inputs)
     
+    leftPlot_mod$server("plot", data, inputs)
+    rightPlot_mod$server("plot", data, inputs)
+    
+    effectCard_mod$server("info", inputs)
+    groupSizesCard_mod$server("info", inputs)
+    compareCard_mod$server("info", inputs)
 
   })
 }
