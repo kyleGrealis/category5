@@ -47,15 +47,6 @@ ui <- function(id) {
       nav_panel(
         class = "markdown-panel",
         shiny::icon("circle-info"), 
-        # shiny::markdown(
-          
-        #   "Stay tuned! The other statistical power tests are being optimized to 
-        #   achieve the best user experience. If you would like to contribute or
-        #   have any suggestions, please click my GitHub link below!
-          
-        #   \nThank you! ~Kyle"
-        
-        # )
         helpMe$helpMe
       )
     ),
@@ -69,7 +60,7 @@ server <- function(id) {
     
     t_test$server("t_test")
     uneq_t_test$server("uneq_t_test")
-    # one_samp_prop$server("one_samp_prop")
+    one_samp_prop$server("one_samp_prop")
     # two_samp_prop$server("two_samp_prop")
     # uneq_samp_prop$server("uneq_samp_prop")
     anova$server("anova")
