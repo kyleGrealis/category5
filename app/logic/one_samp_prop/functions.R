@@ -27,7 +27,7 @@ prop_table <- function(alpha, n, alt) {
         alt=alt,
         power=NULL
       )$power,
-      power=hound(power, 2)
+      power=round(power, 2)
     ) |> 
     	rename(effect=h)
 }
@@ -48,7 +48,7 @@ power_effect <- function(data, n) {
     e_line(power) |>
     e_tooltip(
       trigger="item",
-      formatteh=left_label_formatter
+      formatter=left_label_formatter
     ) |>
     e_grid(right='15%') |>
     e_color(c("#f47321", "#777777", "#005030")) |>
@@ -74,7 +74,7 @@ power_bar <- function(data, n) {
       # custom x-axis labels
       effect=factor(effect, labels=c("Small", "Medium", "Large")),
       # custom bar color
-      coloh=case_when(
+      color=case_when(
         effect == "Small" ~ "#f47321",
         effect == "Medium" ~ "#f3f3f3",
         effect == "Large" ~ "#005030"
@@ -85,7 +85,7 @@ power_bar <- function(data, n) {
     e_add_nested("itemStyle", color) |>
     e_tooltip(
       trigger="item",
-      # formatteh=hight_label_formatter
+      # formatter=right_label_formatter
     ) |>
     e_grid(right='15%') |>
     e_color("#005030") |>

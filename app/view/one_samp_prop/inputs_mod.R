@@ -24,24 +24,24 @@ ui <- function(id) {
     ),
     numericInput(
       ns("n"), "Number of tests",
-      min = 0, max = 1000, step = 5, value = 100
+      min=0, max=1000, step=5, value=50
     ),
     numericInput(
-      "p1", "Null hypothesis proportion",
-      min = 0, max = 1, step = 0.05, value = 0.55
+      ns("p1"), "Null hypothesis proportion",
+      min=0, max=1, step=0.05, value=0.5
     ),
     numericInput(
-      "p2", "Alternative hypothesis proportion",
-      min = 0, max = 1, step = 0.05, value = 0.5
+      ns("p2"), "Alternative hypothesis proportion",
+      min=0, max=1, step=0.05, value=0.75
     ),
     selectInput(
-      "alt", "Alternative hypothesis type",
-      choices = c(
-        "Two-sided" = "two.sided",
-        "Greater than the null" = "greater",
-        "Less than the null" = "less"
+      ns("alt"), "Alternative hypothesis type",
+      choices=c(
+        "Two-sided"="two.sided",
+        "Greater than the null"="greater",
+        "Less than the null"="less"
       ),
-      selected = "two.sided"
+      selected="two.sided"
     )
   )
 }
@@ -50,12 +50,12 @@ server <- function(id) {
   moduleServer(id, function(input, output, session) {
     reactive({
       list(
-        alpha  = as.numeric(input$alpha),
-        effect = as.numeric(input$effect),
-        n      = input$n,
-        p1     = input$p1,
-        p2     = input$p2,
-        alt    = input$alt
+        alpha =as.numeric(input$alpha),
+        effect=as.numeric(input$effect),
+        n     =as.numeric(input$n),
+        p1    =as.numeric(input$p1),
+        p2    =as.numeric(input$p2),
+        alt   =input$alt
       )
     })
   })
