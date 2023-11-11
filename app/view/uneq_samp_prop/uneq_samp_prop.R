@@ -17,7 +17,7 @@ box::use(
   app/view/uneq_samp_prop/leftPlot_mod,
   app/view/uneq_samp_prop/rightPlot_mod,
   app/view/uneq_samp_prop/effectCard_mod,
-  app/view/uneq_samp_prop/minSampleCard_mod,
+  app/view/uneq_samp_prop/groupSizesCard_mod,
   app/view/uneq_samp_prop/compareCard_mod,
 )
 

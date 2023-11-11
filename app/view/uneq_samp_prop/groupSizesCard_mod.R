@@ -1,6 +1,7 @@
 box::use(
   bsicons[bs_icon],
   bslib[value_box],
+  glue[glue],
   shiny[moduleServer, NS, tagList, reactive, renderUI, uiOutput],
 )
 

@@ -44,16 +44,16 @@ prop_table <- function(alpha, n1, n2, alt) {
 
 # this is the left plot: power vs sample size
 #' @export
-power_effect <- function(data, n) {
+power_effect <- function(data, n2) {
   # show selected sample size and 30 above and 30 below, min=5
-  if (n-30 < 5) {
-    sample_groups <- c(5, n, n+30)
+  if (n2-30 < 2) {
+    sample_groups <- c(2, n2, n2+30)
   } else {
-    sample_groups <- c(n-30, n, n+30)
+    sample_groups <- c(n2-30, n2, n2+30)
   }
   data |>
-    filter(n %in% sample_groups) |>
-    group_by(n) |>
+    filter(n2 %in% sample_groups) |>
+    group_by(n2) |>
     e_charts(effect) |>
     e_line(power) |>
     e_tooltip(
