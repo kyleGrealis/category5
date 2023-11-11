@@ -24,7 +24,7 @@ server <- function(id, data, inputs){
     
     output$rightPlot <- renderUI({
       plotCard$plotting_cards(
-        "Power at Varying Effect Sizes for Selected Sample Size",
+        "Power at Varying Effect Sizes, for Selected Sample Size",
         plot()
       )
     })
