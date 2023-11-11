@@ -16,15 +16,15 @@ ui <- function(id) {
       choices=c(0.01, 0.025, 0.05),
       selected=0.05
     ),
-    numericInput(
-      ns("model"), "Anticipated model R-squared",
-      min=0, max=1, step=0.02, value=0.4
-    ),
-    textOutput(ns("result")),
+    # numericInput(
+    #   ns("model"), "Anticipated model R-squared",
+    #   min=0, max=1, step=0.02, value=0.4
+    # ),
+    # textOutput(ns("result")),
     radioButtons(
       inputId=ns("effect"),                 # f2 = (R^2)/(1-(R^2))
       label="Effect size",
-      selected=0.3, # medium effect 
+      selected=0.15, # medium effect 
       choiceNames=list(
         "Small (0.02)", "Medium (0.15)", "Large (0.35)"
       ),
@@ -32,12 +32,12 @@ ui <- function(id) {
     ),
     helpMe_mod$ui(ns("help")),
     numericInput(
-      "n", "Sample size",
-      min = 1, max = 700, step = 1, value = 50
+      ns("n"), "Sample size",
+      min = 0, max = 1000, step = 5, value = 100
     ),
     numericInput(
-      "u", "Number of variables in the model", 
-      min = 1, max = 100, step = 1, value = 1, 
+      ns("u"), "Number of variables in the model", 
+      min = 1, max = 100, step = 1, value = 2, 
     ),
   )
 }
@@ -45,15 +45,15 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
-    result <- reactive({
-      round(
-        (input$model / (1 - input$model)),
-        digits = 2
-      )
-    })
-    output$result <- renderText({glue(
-      "Your estimated effect size is: {result()}"
-    )})
+    # result <- reactive({
+    #   round(
+    #     (input$model / (1 - input$model)),
+    #     digits = 2
+    #   )
+    # })
+    # output$result <- renderText({glue(
+    #   "Your estimated effect size is: {result()}"
+    # )})
     helpMe_mod$server("help")
     
     reactive({

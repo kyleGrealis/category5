@@ -1,5 +1,5 @@
 box::use(
-  shiny[moduleServer, NS, reactive, req, observeEvent],
+  shiny[moduleServer, NS, reactive, req],
 )
 
 box::use(

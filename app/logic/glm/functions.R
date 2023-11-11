@@ -13,12 +13,14 @@ box::use(
 
 # make the grid with calculated power
 #' @export
-glm_table <- function(alpha, v, u) {
+glm_table <- function(alpha, u, n) {
   expand.grid(
     # stop at the large effect size as per table
-    f2=seq(0.05, effect_table$glm[3], by=0.05),
-    n=seq(10, n+100, by=1)
-  )|>
+    f2=seq(0.01, 0.35, by=0.01),
+    n=seq(10, n+200, by=5),
+    v=n-u-1,
+    u=u
+  ) |>
     mutate(
       power=pwr::pwr.f2.test(
         sig.level=alpha,
@@ -28,22 +30,17 @@ glm_table <- function(alpha, v, u) {
         power=NULL
       )$power,
       power=round(power, 2),
-      n=v+u+1                   # recalculate sample size
-    ) |> 
-    	rename(effect=f2)
+      f2=round(f2, 2)
+    ) |>
+    rename(effect=f2)
 }
 
 # this is the left plot: power vs sample size
 #' @export
 power_effect <- function(data, n) {
-  # show selected sample size and 30 above and 30 below, min=5
-  if (n-30 < 5) {
-    sample_groups <- c(5, n, n+30)
-  } else {
-    sample_groups <- c(n-30, n, n+30)
-  }
+  # this is different than the others... only plotting for 1 sample size
   data |>
-    filter(n %in% sample_groups) |>
+    filter(n == n) |>
     group_by(n) |>
     e_charts(effect) |>
     e_line(power) |>
@@ -52,10 +49,9 @@ power_effect <- function(data, n) {
       formatter=left_label_formatter
     ) |>
     e_grid(right='15%') |>
-    e_color(c("#f47321", "#777777", "#005030")) |>
+    e_color("#005030") |>
     e_legend(
-      left='5',
-      title=list("Sample size")
+      show=FALSE
     ) |>
     e_datazoom(type='inside') |>
     e_axis_labels(x="Effect \nSize", y="Power") |>
@@ -114,10 +110,13 @@ min_sample <- function(alpha, effect, u) {
 # this function is used to compare the user's vs calculated min sample size
 #' @export
 glm_compare <- function(n, effect, alpha, u) {
+  
+  v=n-u-1
+  
   compare <- pwr::pwr.f2.test(
     sig.level=alpha,
     f2=effect,
-    v=n-u-1,
+    v=v,
     u=u,
     power=NULL
   )

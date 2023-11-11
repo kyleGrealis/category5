@@ -1,5 +1,5 @@
 box::use(
-  shiny[moduleServer, NS, reactive, req, observeEvent],
+  shiny[moduleServer, NS, reactive, req,observeEvent],
 )
 
 box::use(
@@ -15,7 +15,8 @@ ui <- function(id) {
 #' @export
 server <- function(id, inputs) {
   moduleServer(id, function(input, output, session) {
-
+    
+    
     data <- reactive({
       req(inputs()$alpha)
       req(inputs()$effect)
@@ -24,8 +25,8 @@ server <- function(id, inputs) {
       
       functions$glm_table(
         alpha=inputs()$alpha,
-        v=inputs()$n - inputs()$u -1, 
-        u=inputs()$u
+        u=inputs()$u,
+        n=inputs()$n
       )
     })
     
