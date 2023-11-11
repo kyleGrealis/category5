@@ -1,6 +1,3 @@
-box::use( 
-  app/view/helpMe_mod
-)
 
 box::use(
   glue[glue],
@@ -16,11 +13,6 @@ ui <- function(id) {
       choices=c(0.01, 0.025, 0.05),
       selected=0.05
     ),
-    # numericInput(
-    #   ns("model"), "Anticipated model R-squared",
-    #   min=0, max=1, step=0.02, value=0.4
-    # ),
-    # textOutput(ns("result")),
     radioButtons(
       inputId=ns("effect"),                 # f2 = (R^2)/(1-(R^2))
       label="Effect size",
@@ -30,7 +22,6 @@ ui <- function(id) {
       ),
       choiceValues=list(0.02, 0.15, 0.35)
     ),
-    helpMe_mod$ui(ns("help")),
     numericInput(
       ns("n"), "Sample size",
       min = 0, max = 1000, step = 5, value = 100
@@ -44,18 +35,6 @@ ui <- function(id) {
 
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
-    
-    # result <- reactive({
-    #   round(
-    #     (input$model / (1 - input$model)),
-    #     digits = 2
-    #   )
-    # })
-    # output$result <- renderText({glue(
-    #   "Your estimated effect size is: {result()}"
-    # )})
-    helpMe_mod$server("help")
-    
     reactive({
       list(
         alpha  = as.numeric(input$alpha),
