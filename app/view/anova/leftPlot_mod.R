@@ -24,8 +24,7 @@ server <- function(id, data, inputs){
 
     output$leftPlot <- renderUI({
       plotCard$plotting_cards(
-        "Lines represent group tests (±30) plotted
-        against power and effect size",
+        "Power vs. Effect Size, for Different Number of Tests per Group",
         plot()
       )
     })

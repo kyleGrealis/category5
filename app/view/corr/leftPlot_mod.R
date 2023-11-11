@@ -4,7 +4,7 @@ box::use(
 
 box::use(
   app/logic/plotCard,
-  app/logic/chisq/functions,
+  app/logic/corr/functions,
 )
 
 #' @export
@@ -24,8 +24,7 @@ server <- function(id, data, inputs){
 
     output$leftPlot <- renderUI({
       plotCard$plotting_cards(
-        "Lines represent observations (±30) plotted
-        against power and effect size",
+        "Power vs. Effect Size, for Different Number of Observations",
         plot()
       )
     })

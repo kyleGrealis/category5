@@ -4,7 +4,7 @@ box::use(
 
 box::use(
   app/logic/plotCard,
-  app/logic/anova/functions,
+  app/logic/glm/functions,
 )
 
 #' @export
@@ -24,7 +24,7 @@ server <- function(id, data, inputs){
     
     output$rightPlot <- renderUI({
       plotCard$plotting_cards(
-        "Power at Varying Effect Sizes, for Selected Tests per Group",
+        "Power at Varying Effect Sizes, for Selected Sample Size",
         plot()
       )
     })

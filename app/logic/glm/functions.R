@@ -13,36 +13,34 @@ box::use(
 
 # make the grid with calculated power
 #' @export
-corr_table <- function(alpha, n, alt) {
+glm_table <- function(alpha, u, n) {
   expand.grid(
     # stop at the large effect size as per table
-    r=seq(0.05, effect_table$corr[3], by=0.05),
-    n=seq(10, n+100, by=1)
-  )|>
+    f2=seq(0.01, 0.35, by=0.01),
+    n=seq(10, n+200, by=5),
+    v=n-u-1,
+    u=u
+  ) |>
     mutate(
-      power=pwr::pwr.r.test(
+      power=pwr::pwr.f2.test(
         sig.level=alpha,
-        n=n,
-        r=r,
-        alt=alt,
+        u=u,
+        v=v,
+        f2=f2,
         power=NULL
       )$power,
-      power=round(power, 2)
-    ) |> 
-    	rename(effect=r)
+      power=round(power, 2),
+      f2=round(f2, 2)
+    ) |>
+    rename(effect=f2)
 }
 
 # this is the left plot: power vs sample size
 #' @export
 power_effect <- function(data, n) {
-  # show selected sample size and 30 above and 30 below, min=5
-  if (n-30 < 5) {
-    sample_groups <- c(5, n, n+30)
-  } else {
-    sample_groups <- c(n-30, n, n+30)
-  }
+  # this is different than the others... only plotting for 1 sample size
   data |>
-    filter(n %in% sample_groups) |>
+    filter(n == n) |>
     group_by(n) |>
     e_charts(effect) |>
     e_line(power) |>
@@ -51,10 +49,9 @@ power_effect <- function(data, n) {
       formatter=left_label_formatter
     ) |>
     e_grid(right='15%') |>
-    e_color(c("#f47321", "#777777", "#005030")) |>
+    e_color("#005030") |>
     e_legend(
-      left='5',
-      title=list("Sample size")
+      show=FALSE
     ) |>
     e_datazoom(type='inside') |>
     e_axis_labels(x="Effect \nSize", y="Power") |>
@@ -68,7 +65,7 @@ power_bar <- function(data, n) {
   data |>
     filter(
       n == n,
-      effect %in% effect_table$corr
+      effect %in% effect_table$glm
     ) |>
     mutate(
       # custom x-axis labels
@@ -97,27 +94,30 @@ power_bar <- function(data, n) {
 
 # this function will calculate the sample size at 80% power and user's inputs
 #' @export
-min_sample <- function(alpha, effect, alt) {
+min_sample <- function(alpha, effect, u) {
   # round up to the next whole person with `ceiling`
   ceiling(
-    pwr::pwr.r.test(
+    pwr::pwr.f2.test(
       sig.level=alpha,
-      r=effect,
-      alt=alt,
+      f2=effect,
+      u=u,
       power=0.8,
-      n=NULL  # solving for this
-    )$n
+      v=NULL  # solving for this
+    )$v
   )
 }
 
 # this function is used to compare the user's vs calculated min sample size
 #' @export
-corr_compare <- function(n, effect, alpha, alt) {
-  compare <- pwr::pwr.r.test(
+glm_compare <- function(n, effect, alpha, u) {
+  
+  v=n-u-1
+  
+  compare <- pwr::pwr.f2.test(
     sig.level=alpha,
-    r=effect,
-    n=n,
-    alt=alt,
+    f2=effect,
+    v=v,
+    u=u,
     power=NULL
   )
   if (compare$power < 0.8) {
