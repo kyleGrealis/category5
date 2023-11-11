@@ -30,8 +30,7 @@ server <- function(id, data, inputs){
     
     output$rightPlot <- renderUI({
       plotCard$plotting_cards(
-        "Bars represent power varying effect sizes given 
-        selected group sample sizes",
+        "Power at Varying Effect Sizes for Selected Group Sample Sizes",
         plot()
       )
     })
