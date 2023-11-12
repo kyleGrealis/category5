@@ -46,8 +46,8 @@ server <- function(id) {
       list(
         alpha    = as.numeric(input$alpha),
         effect   = as.numeric(input$effect),
-        n1 = input$n1,
-        n2 = input$n2,
+        n1       = input$n1,
+        n2       = input$n2,
         alt      = input$alt
       )
     })

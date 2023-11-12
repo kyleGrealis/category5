@@ -1,7 +1,9 @@
 
 box::use(
   bslib[card, card_header, card_body],
-  dplyr[filter, group_by, mutate, near],
+  dplyr[case_when, filter, group_by, mutate, near],
+  echarts4r[e_add_nested, e_bar, e_charts, e_line, e_tooltip, e_grid, e_color,
+            e_legend, e_datazoom, e_axis_labels, e_toolbox_feature],
 )
 
 
@@ -19,7 +21,7 @@ plotting_cards <- function(headerTextOutput, displayedPlot) {
 
 
 # this is the left plot for power vs effect size, for given sample size
-#' @export 
+#' @export
 power_effect <- function(data, n) {
   # show selected sample size and 30 above and 30 below, min=5
   if (n-30 < 5) {
@@ -50,14 +52,25 @@ power_effect <- function(data, n) {
 
 # this is the bar chart: power at the 3 effect sizes for the user-selected sample size
 #' @export
-power_bar <- function(data, n, type) {
+power_bar <- function(data, n, effect_values, equal=TRUE, ...) {
   # plotting the selected power for sample size at 3 levels of effect size
-  data |>
-    filter(
+  
+  if (equal == TRUE) {
+    plot_ds <- data |> 
+    	filter(
       n == n,
-      # effect %in% effect_table$chisq
-      # this will grab the values from the effect table
-      effect %in% type
+      effect %in% effect_values
+    )
+  } else {
+    plot_ds <- data |>
+      filter(
+        n == n,
+        n2 == n2,
+        effect %in% effect_values
+      )
+  }
+  
+  plot_ds |> 
     mutate(
       # custom x-axis labels
       effect=factor(effect, labels=c("Small", "Medium", "Large")),
@@ -79,3 +92,4 @@ power_bar <- function(data, n, type) {
     e_axis_labels(x="Effect \nSize", y="Power") |>
     e_toolbox_feature(feature=c("saveAsImage"))
 }
+

@@ -17,7 +17,6 @@ box::use(
 
 box::use(
   app/logic/callout,
-  app/logic/plotCard,
 
   app/logic/anova/data_mod,
   app/logic/anova/functions,

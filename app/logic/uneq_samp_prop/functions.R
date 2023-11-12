@@ -74,7 +74,7 @@ power_effect <- function(data, n2) {
 
  # this is the bar chart: power at the 3 effect sizes for the user-selected sample size
 #' @export
-power_bar <- function(data, n, n2) {
+power_bar <- function(data, n1, n2) {
   # plotting the selected power for sample size at 3 levels of effect size
   data |>
     filter(
