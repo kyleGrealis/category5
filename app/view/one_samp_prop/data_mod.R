@@ -3,7 +3,7 @@ box::use(
 )
 
 box::use(
-  app/logic/one_samp_prop/functions,
+  app/logic/one_samp_prop,
 )
 
 #' @export
@@ -24,7 +24,7 @@ server <- function(id, inputs) {
       req(inputs()$p2)
       req(inputs()$alt)
       
-      functions$prop_table(
+      one_samp_prop$prop_table(
         alpha=inputs()$alpha,
         n=inputs()$n, 
         alt=inputs()$alt
