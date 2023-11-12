@@ -9,11 +9,9 @@ box::use(
 box::use(
   app/logic/callout,
   app/logic/plotCard,
-  
-  app/logic/two_samp_prop/data_mod,
-  app/logic/two_samp_prop/functions,
 
   app/view/two_samp_prop/inputs_mod,
+  app/view/two_samp_prop/data_mod,
   app/view/two_samp_prop/leftPlot_mod,
   app/view/two_samp_prop/rightPlot_mod,
   app/view/two_samp_prop/effectCard_mod,

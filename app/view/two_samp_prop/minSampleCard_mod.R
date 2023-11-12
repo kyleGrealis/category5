@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/two_samp_prop/functions,
+  app/logic/two_samp_prop,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     minSample <- reactive({
-      functions$min_sample(
+      two_samp_prop$min_sample(
         alpha=inputs()$alpha,
         p1=inputs()$p1,
         p2=inputs()$p2,
