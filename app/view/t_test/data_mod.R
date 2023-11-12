@@ -3,7 +3,7 @@ box::use(
 )
 
 box::use(
-  app/logic/t_test/functions
+  app/logic/t_test
 )
 
 #' @export
@@ -23,7 +23,7 @@ server <- function(id, inputs){
       req(inputs()$type)
       req(inputs()$alt)
       
-      functions$t_table(
+      t_test$t_table(
         alpha=inputs()$alpha, 
         n=inputs()$n,
         type=inputs()$type, 

@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/t_test/functions,
+  app/logic/t_test,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     compare <- reactive({
-      functions$t_compare(
+      t_test$t_compare(
         type=inputs()$type, 
         alt=inputs()$alt,
         n=inputs()$n,
