@@ -3,7 +3,7 @@ box::use(
 )
 
 box::use(
-  app/logic/glm/functions,
+  app/logic/glm,
 )
 
 #' @export
@@ -23,7 +23,7 @@ server <- function(id, inputs) {
       req(inputs()$n)
       req(inputs()$u)
       
-      functions$glm_table(
+      glm$glm_table(
         alpha=inputs()$alpha,
         u=inputs()$u,
         n=inputs()$n
