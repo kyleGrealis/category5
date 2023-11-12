@@ -41,6 +41,8 @@ t2n_table <- function(alpha, n1, n2, alt) {
 }
 
 
+
+
 # this function will calculate the sample size at 80% power and user's inputs
 #' @export
 min_effect <- function(n1, n2, alpha, alt) {
