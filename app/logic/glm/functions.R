@@ -6,7 +6,7 @@ box::use(
 )
 
 box::use(
-  app/logic/chart_utils[left_label_formatter, right_label_formatter],
+  app/logic/chart_utils[left_label_formatter],
   app/logic/effect[effect_table],
 )
 

@@ -6,6 +6,10 @@ box::use(
             e_legend, e_datazoom, e_axis_labels, e_toolbox_feature],
 )
 
+box::use(
+  app/logic/chart_utils[left_label_formatter]
+)
+
 
 # this function will create a card container with a custom heading,
 # footer, and plot
@@ -22,23 +26,29 @@ plotting_cards <- function(headerTextOutput, displayedPlot) {
 
 # this is the left plot for power vs effect size, for given sample size
 #' @export
-power_effect <- function(data, n, glm=FALSE) {
+power_effect <- function(data, n, glm=FALSE, unequal=FALSE) {
   # set up for glm data:
-  if (glm==TRUE) {
-    plot_ds <- data |> 
-    	filter(n == n)
-      
+  if (glm == TRUE) {
+    sample_groups <- c(n)
   # set up for all other tests... filter sample size to be n+/-30
   } else if (n-30 < 5) {
-    plot_ds <- data |> 
-    	filter(n %in% c(5, n, n+30))
+    sample_groups <- c(5, n, n+30)
   } else {
-    plot_ds <- data |> 
-    	filter(n %in% c(n-30, n, n+30))
+    sample_groups <- c(n-30, n, n+30)
   }
   
-  plot_ds |>
-    group_by(n) |>
+  # filter the data based sample groups and if equal or unequal groups
+  if (unequal == TRUE) {
+    data <- data |> 
+    	filter(n2 %in% sample_groups) |> 
+      group_by(n2)
+  } else {
+    data <- data |> 
+    	filter(n %in% sample_groups) |> 
+      group_by(n)
+  }
+  
+  data |>
     e_charts(effect) |>
     e_line(power) |>
     e_tooltip(
@@ -64,10 +74,10 @@ power_bar <- function(data, n, effect_values, equal=TRUE, ...) {
   
   if (equal == TRUE) {
     plot_ds <- data |> 
-    	filter(
-      n == n,
-      effect %in% effect_values
-    )
+      filter(
+        n == n,
+        effect %in% effect_values
+      )
   } else {
     plot_ds <- data |>
       filter(
