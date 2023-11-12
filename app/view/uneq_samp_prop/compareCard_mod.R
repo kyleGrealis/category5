@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/uneq_samp_prop/functions,
+  app/logic/uneq_samp_prop,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     compare <- reactive({
-      functions$prop_compare(
+      uneq_samp_prop$prop_compare(
         n1=inputs()$n1,
         n2=inputs()$n2,
         p1=inputs()$p1,
