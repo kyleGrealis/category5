@@ -3,7 +3,7 @@ box::use(
 )
 
 box::use(
-  app/logic/t_test/functions
+  app/logic/uneq_t_test
 )
 
 #' @export
@@ -19,18 +19,18 @@ server <- function(id, inputs){
     data <- reactive({
       req(inputs()$alpha)
       req(inputs()$effect)
-      req(inputs()$n)
-      req(inputs()$type)
+      req(inputs()$n1)
+      req(inputs()$n2)
       req(inputs()$alt)
       
-      functions$t_table(
+      uneq_t_test$t2n_table(
         alpha=inputs()$alpha, 
-        n=inputs()$n,
-        type=inputs()$type, 
+        n1=inputs()$n1, 
+        n2=inputs()$n2, 
         alt=inputs()$alt
       )
     })
-
+    
     return(data)
     
   })

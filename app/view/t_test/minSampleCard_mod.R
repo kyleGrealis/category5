@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/t_test/functions,
+  app/logic/t_test,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     minSample <- reactive({
-      functions$min_sample(
+      t_test$min_sample(
         type=inputs()$type, 
         alt=inputs()$alt, 
         effect=inputs()$effect,

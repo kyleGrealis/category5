@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/glm/functions,
+  app/logic/glm,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     minSample <- reactive({
-      functions$min_sample(
+      glm$min_sample(
         alpha=inputs()$alpha,
         effect=inputs()$effect,
         u=inputs()$u

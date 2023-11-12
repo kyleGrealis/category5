@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/anova/functions,
+  app/logic/anova,
 )
 
 #' @export

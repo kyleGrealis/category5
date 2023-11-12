@@ -4,9 +4,6 @@ box::use(
   shiny[moduleServer, NS, tagList, reactive, renderUI, uiOutput],
 )
 
-box::use(
-  app/logic/uneq_samp_prop/functions,
-)
 
 #' @export
 ui <- function(id) {

@@ -7,13 +7,12 @@ box::use(
 )
 
 box::use(
+  app/logic/glm,
   app/logic/callout,
   app/logic/plotCard,
   
-  app/logic/glm/data_mod,
-  app/logic/glm/functions,
-
   app/view/glm/inputs_mod,
+  app/view/glm/data_mod,
   app/view/glm/leftPlot_mod,
   app/view/glm/rightPlot_mod,
   app/view/glm/effectCard_mod,

@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/anova/functions,
+  app/logic/anova,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     minSample <- reactive({
-      functions$min_sample(
+      anova$min_sample(
         alpha=inputs()$alpha,
         effect=inputs()$effect,
         k=inputs()$k

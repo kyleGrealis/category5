@@ -3,7 +3,7 @@ box::use(
 )
 
 box::use(
-  app/logic/anova/functions
+  app/logic/t_test
 )
 
 #' @export
@@ -20,12 +20,14 @@ server <- function(id, inputs){
       req(inputs()$alpha)
       req(inputs()$effect)
       req(inputs()$n)
-      req(inputs()$k)
+      req(inputs()$type)
+      req(inputs()$alt)
       
-      functions$anova_table(
+      t_test$t_table(
         alpha=inputs()$alpha, 
-        n=inputs()$n, 
-        k=inputs()$k
+        n=inputs()$n,
+        type=inputs()$type, 
+        alt=inputs()$alt
       )
     })
 

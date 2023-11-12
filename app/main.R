@@ -1,7 +1,7 @@
 box::use(
   bslib[page_navbar, navset_underline, nav_spacer, nav_menu,
         nav_panel, layout_sidebar],
-  shiny[div, icon, markdown, moduleServer, NS, withMathJax],
+  shiny[div, icon, markdown, moduleServer, NS],
 )
 
 box::use(

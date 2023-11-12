@@ -3,7 +3,7 @@ box::use(
 )
 
 box::use(
-  app/logic/corr/functions,
+  app/logic/anova
 )
 
 #' @export
@@ -13,22 +13,22 @@ ui <- function(id) {
 }
 
 #' @export
-server <- function(id, inputs) {
+server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
-
+    
     data <- reactive({
       req(inputs()$alpha)
       req(inputs()$effect)
       req(inputs()$n)
-      req(inputs()$alt)
+      req(inputs()$k)
       
-      functions$corr_table(
-        alpha=inputs()$alpha,
+      anova$anova_table(
+        alpha=inputs()$alpha, 
         n=inputs()$n, 
-        alt=inputs()$alt
+        k=inputs()$k
       )
     })
-    
+
     return(data)
     
   })

@@ -1,9 +1,9 @@
 box::use(
-  shiny[moduleServer, NS, reactive, req,observeEvent],
+  shiny[moduleServer, NS, reactive, req],
 )
 
 box::use(
-  app/logic/glm/functions,
+  app/logic/corr,
 )
 
 #' @export
@@ -15,18 +15,17 @@ ui <- function(id) {
 #' @export
 server <- function(id, inputs) {
   moduleServer(id, function(input, output, session) {
-    
-    
+
     data <- reactive({
       req(inputs()$alpha)
       req(inputs()$effect)
       req(inputs()$n)
-      req(inputs()$u)
+      req(inputs()$alt)
       
-      functions$glm_table(
+      corr$corr_table(
         alpha=inputs()$alpha,
-        u=inputs()$u,
-        n=inputs()$n
+        n=inputs()$n, 
+        alt=inputs()$alt
       )
     })
     

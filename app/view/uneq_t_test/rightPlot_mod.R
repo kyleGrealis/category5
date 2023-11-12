@@ -4,7 +4,6 @@ box::use(
 
 box::use(
   app/logic/plotCard,
-  app/logic/uneq_t_test/functions,
 )
 
 #' @export
@@ -13,7 +12,6 @@ ui <- function(id) {
   tagList(
     uiOutput(ns("rightPlot"))
   )
-  
 }
 
 #' @export
@@ -21,9 +19,11 @@ server <- function(id, data, inputs){
   moduleServer(id, function(input, output, session) {
     
     plot <- reactive({
-      functions$power_bar(
+      plotCard$power_bar(
         data=data(), 
-        n1=inputs()$n1,
+        n=inputs()$n1,
+        effect_values=c(0.2, 0.5, 0.8),
+        equal=FALSE,
         n2=inputs()$n2
       )
     })

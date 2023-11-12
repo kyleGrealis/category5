@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/t_test/functions,
+  app/logic/t_test,
 )
 
 #' @export

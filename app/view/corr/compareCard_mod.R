@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/corr/functions,
+  app/logic/corr,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     compare <- reactive({
-      functions$corr_compare(
+      corr$corr_compare(
         n=inputs()$n,
         effect=inputs()$effect,
         alpha=inputs()$alpha,

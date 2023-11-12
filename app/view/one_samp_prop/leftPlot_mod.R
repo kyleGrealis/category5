@@ -4,7 +4,6 @@ box::use(
 
 box::use(
   app/logic/plotCard,
-  app/logic/one_samp_prop/functions,
 )
 
 #' @export
@@ -13,14 +12,13 @@ ui <- function(id) {
   tagList(
     uiOutput(ns("leftPlot"))
   )
-  
 }
 
 #' @export
 server <- function(id, data, inputs){
   moduleServer(id, function(input, output, session) {
 
-    plot <- reactive({ functions$power_effect(data=data(), n=inputs()$n) })
+    plot <- reactive({ plotCard$power_effect(data=data(), n=inputs()$n) })
 
     output$leftPlot <- renderUI({
       plotCard$plotting_cards(

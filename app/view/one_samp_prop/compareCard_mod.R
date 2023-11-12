@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/one_samp_prop/functions,
+  app/logic/one_samp_prop,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     compare <- reactive({
-      functions$prop_compare(
+      one_samp_prop$prop_compare(
         n=inputs()$n,
         p1=inputs()$p1,
         p2=inputs()$p2,

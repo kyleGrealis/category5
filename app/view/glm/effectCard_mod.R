@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/glm/functions,
+  app/logic/glm,
 )
 
 #' @export

@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/glm/functions,
+  app/logic/glm,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     compare <- reactive({
-      functions$glm_compare(
+      glm$glm_compare(
         n=inputs()$n,
         effect=inputs()$effect,
         alpha=inputs()$alpha,

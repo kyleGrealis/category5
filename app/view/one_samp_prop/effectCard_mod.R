@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/one_samp_prop/functions,
+  app/logic/one_samp_prop,
 )
 
 #' @export

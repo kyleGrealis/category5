@@ -3,7 +3,7 @@ box::use(
 )
 
 box::use(
-  app/logic/one_samp_prop/functions,
+  app/logic/uneq_samp_prop,
 )
 
 #' @export
@@ -15,18 +15,20 @@ ui <- function(id) {
 #' @export
 server <- function(id, inputs) {
   moduleServer(id, function(input, output, session) {
-
+    
     data <- reactive({
       req(inputs()$alpha)
       req(inputs()$effect)
-      req(inputs()$n)
+      req(inputs()$n1)
+      req(inputs()$n2)
       req(inputs()$p1)
       req(inputs()$p2)
       req(inputs()$alt)
       
-      functions$prop_table(
+      uneq_samp_prop$prop_table(
         alpha=inputs()$alpha,
-        n=inputs()$n, 
+        n1=inputs()$n1,
+        n2=inputs()$n2,
         alt=inputs()$alt
       )
     })

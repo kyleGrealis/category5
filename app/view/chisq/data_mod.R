@@ -1,9 +1,9 @@
 box::use(
-  shiny[moduleServer, NS, reactive, req],
+  shiny[moduleServer, NS, reactive, req, observeEvent],
 )
 
 box::use(
-  app/logic/uneq_samp_prop/functions,
+  app/logic/chisq,
 )
 
 #' @export
@@ -15,21 +15,17 @@ ui <- function(id) {
 #' @export
 server <- function(id, inputs) {
   moduleServer(id, function(input, output, session) {
-    
+
     data <- reactive({
       req(inputs()$alpha)
       req(inputs()$effect)
-      req(inputs()$n1)
-      req(inputs()$n2)
-      req(inputs()$p1)
-      req(inputs()$p2)
-      req(inputs()$alt)
+      req(inputs()$n)
+      req(inputs()$df)
       
-      functions$prop_table(
+      chisq$chisq_table(
         alpha=inputs()$alpha,
-        n1=inputs()$n1,
-        n2=inputs()$n2,
-        alt=inputs()$alt
+        n=inputs()$n, 
+        df=inputs()$df
       )
     })
     

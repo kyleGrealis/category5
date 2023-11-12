@@ -9,12 +9,11 @@ box::use(
 
 box::use(
   app/logic/callout,
+  app/logic/chisq,
   app/logic/plotCard,
 
-  app/logic/chisq/data_mod,
-  app/logic/chisq/functions,
-
   app/view/chisq/inputs_mod,
+  app/view/chisq/data_mod,
   app/view/chisq/leftPlot_mod,
   app/view/chisq/rightPlot_mod,
   app/view/chisq/effectCard_mod,
