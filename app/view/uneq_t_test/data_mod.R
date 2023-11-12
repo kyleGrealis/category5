@@ -3,7 +3,7 @@ box::use(
 )
 
 box::use(
-  app/logic/uneq_t_test/functions
+  app/logic/uneq_t_test
 )
 
 #' @export
@@ -23,7 +23,7 @@ server <- function(id, inputs){
       req(inputs()$n2)
       req(inputs()$alt)
       
-      functions$t2n_table(
+      uneq_t_test$t2n_table(
         alpha=inputs()$alpha, 
         n1=inputs()$n1, 
         n2=inputs()$n2, 

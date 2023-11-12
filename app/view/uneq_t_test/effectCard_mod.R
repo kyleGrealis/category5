@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/uneq_t_test/functions,
+  app/logic/uneq_t_test,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     minEffect <- reactive({
-      functions$min_effect(
+      uneq_t_test$min_effect(
         n1=inputs()$n1, 
         n2=inputs()$n2,
         alpha=inputs()$alpha,

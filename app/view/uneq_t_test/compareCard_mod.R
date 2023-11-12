@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/uneq_t_test/functions,
+  app/logic/uneq_t_test,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     compare <- reactive({
-      functions$t2n_compare(
+      uneq_t_test$t2n_compare(
         alpha=inputs()$alpha,
         effect=inputs()$effect,
         n1=inputs()$n1,

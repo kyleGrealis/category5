@@ -10,9 +10,8 @@ box::use(
   app/logic/callout,
   app/logic/plotCard,
   
-  app/logic/uneq_t_test/data_mod,
-  
   app/view/uneq_t_test/inputs_mod,
+  app/view/uneq_t_test/data_mod,
   app/view/uneq_t_test/leftPlot_mod,
   app/view/uneq_t_test/rightPlot_mod,
   app/view/uneq_t_test/effectCard_mod,

@@ -5,9 +5,6 @@ box::use(
   glue[glue]
 )
 
-box::use(
-  app/logic/uneq_t_test/functions,
-)
 
 #' @export
 ui <- function(id) {
