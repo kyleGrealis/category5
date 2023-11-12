@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/chisq/functions,
+  app/logic/chisq,
 )
 
 #' @export

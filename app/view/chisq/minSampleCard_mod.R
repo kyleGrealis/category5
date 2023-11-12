@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/chisq/functions,
+  app/logic/chisq,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     minSample <- reactive({
-      functions$min_sample(
+      chisq$min_sample(
         df=inputs()$df, 
         effect=inputs()$effect,
         alpha=inputs()$alpha

@@ -3,7 +3,7 @@ box::use(
 )
 
 box::use(
-  app/logic/chisq/functions,
+  app/logic/chisq,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs) {
       req(inputs()$n)
       req(inputs()$df)
       
-      functions$chisq_table(
+      chisq$chisq_table(
         alpha=inputs()$alpha,
         n=inputs()$n, 
         df=inputs()$df
