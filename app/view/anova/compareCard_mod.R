@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/anova/functions,
+  app/logic/anova,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
   moduleServer(id, function(input, output, session) {
     
     compare <- reactive({
-      functions$anova_compare(
+      anova$anova_compare(
         alpha=inputs()$alpha,
         effect=inputs()$effect,
         n=inputs()$n,

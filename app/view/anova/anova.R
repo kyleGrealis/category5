@@ -16,12 +16,11 @@ box::use(
 )
 
 box::use(
+  app/logic/anova,
   app/logic/callout,
 
-  app/logic/anova/data_mod,
-  app/logic/anova/functions,
-
   app/view/anova/inputs_mod,
+  app/view/anova/data_mod,
   app/view/anova/leftPlot_mod,
   app/view/anova/rightPlot_mod,
   app/view/anova/effectCard_mod,

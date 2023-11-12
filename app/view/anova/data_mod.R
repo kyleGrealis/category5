@@ -3,7 +3,7 @@ box::use(
 )
 
 box::use(
-  app/logic/anova/functions
+  app/logic/anova
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs){
       req(inputs()$n)
       req(inputs()$k)
       
-      functions$anova_table(
+      anova$anova_table(
         alpha=inputs()$alpha, 
         n=inputs()$n, 
         k=inputs()$k
