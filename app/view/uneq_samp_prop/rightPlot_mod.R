@@ -4,7 +4,6 @@ box::use(
 
 box::use(
   app/logic/plotCard,
-  app/logic/uneq_samp_prop/functions,
 )
 
 #' @export
