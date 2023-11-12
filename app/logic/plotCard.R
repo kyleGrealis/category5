@@ -22,15 +22,22 @@ plotting_cards <- function(headerTextOutput, displayedPlot) {
 
 # this is the left plot for power vs effect size, for given sample size
 #' @export
-power_effect <- function(data, n) {
-  # show selected sample size and 30 above and 30 below, min=5
-  if (n-30 < 5) {
-    sample_groups <- c(5, n, n+30)
+power_effect <- function(data, n, glm=FALSE) {
+  # set up for glm data:
+  if (glm=TRUE) {
+    plot_ds <- data |> 
+    	filter(n == n)
+      
+  # set up for all other tests... filter sample size to be n+/-30
+  } else if (n-30 < 5) {
+    plot_ds <- data |> 
+    	filter(n %in% c(5, n, n+30))
   } else {
-    sample_groups <- c(n-30, n, n+30)
+    plot_ds <- data |> 
+    	filter(n %in% c(n-30, n, n+30))
   }
-  data |>
-    filter(n %in% sample_groups) |>
+  
+  plot_ds |>
     group_by(n) |>
     e_charts(effect) |>
     e_line(power) |>

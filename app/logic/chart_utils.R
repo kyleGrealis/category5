@@ -12,12 +12,3 @@ left_label_formatter <- JS(
     }"
 )
 
-#' @export
-right_label_formatter <- JS(
-  "function(params){
-    return(
-      'Sample size: ' + params.value[1] +
-      '<br />Power: ' + params.value[0]
-    )
-  }"
-)
