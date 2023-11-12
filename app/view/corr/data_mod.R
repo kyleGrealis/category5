@@ -3,7 +3,7 @@ box::use(
 )
 
 box::use(
-  app/logic/corr/functions,
+  app/logic/corr,
 )
 
 #' @export
@@ -22,7 +22,7 @@ server <- function(id, inputs) {
       req(inputs()$n)
       req(inputs()$alt)
       
-      functions$corr_table(
+      corr$corr_table(
         alpha=inputs()$alpha,
         n=inputs()$n, 
         alt=inputs()$alt

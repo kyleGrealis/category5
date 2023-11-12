@@ -5,7 +5,7 @@ box::use(
 )
 
 box::use(
-  app/logic/corr/functions,
+  app/logic/corr,
 )
 
 #' @export

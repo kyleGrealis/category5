@@ -7,13 +7,12 @@ box::use(
 )
 
 box::use(
+  app/logic/corr,
   app/logic/callout,
   app/logic/plotCard,
-  
-  app/logic/corr/data_mod,
-  app/logic/corr/functions,
 
   app/view/corr/inputs_mod,
+  app/view/corr/data_mod,
   app/view/corr/leftPlot_mod,
   app/view/corr/rightPlot_mod,
   app/view/corr/effectCard_mod,
