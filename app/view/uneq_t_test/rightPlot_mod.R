@@ -12,7 +12,6 @@ ui <- function(id) {
   tagList(
     uiOutput(ns("rightPlot"))
   )
-  
 }
 
 #' @export
