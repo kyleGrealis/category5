@@ -24,7 +24,7 @@ plotting_cards <- function(headerTextOutput, displayedPlot) {
 #' @export
 power_effect <- function(data, n, glm=FALSE) {
   # set up for glm data:
-  if (glm=TRUE) {
+  if (glm==TRUE) {
     plot_ds <- data |> 
     	filter(n == n)
       
