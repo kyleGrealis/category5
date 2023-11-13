@@ -7,7 +7,7 @@ box::use(
 )
 
 box::use(
-  app/logic/chart_utils[left_label_formatter]
+  app/logic/chart_utils[left_label_formatter, right_label_formatter]
 )
 
 
@@ -101,7 +101,7 @@ power_bar <- function(data, n, effect_values, equal=TRUE, ...) {
     e_charts(effect) |>
     e_bar(power) |>
     e_add_nested("itemStyle", color) |>
-    e_tooltip(trigger="item") |>
+    e_tooltip(trigger="item", formatter=right_label_formatter) |>
     e_grid(right='15%') |>
     e_color("#005030") |>
     e_legend(show=FALSE) |>
