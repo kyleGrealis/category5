@@ -23,21 +23,24 @@ t2n_table <- function(alpha, n1, n2, alt) {
   
   expand.grid(
     # stop at the large effect size as per table
-    effect=seq(0.05, effect_table$t_test[3], by=0.05),
+    d=seq(0.05, effect_table$t_test[3], by=0.05),
     n1=n1,
     n2=seq(n2-30, n2+100, by=2)
   )|>
     mutate(
       power=pwr::pwr.t2n.test(
         sig.level=alpha,
-        d=effect,
+        d=d,
         n1=n1,
         n2=n2,
         alternative=alt,
         power=NULL
       )$power,
-      power=round(power, 2)
-    )
+      power=round(power, 2),
+      d=round(d, 2)
+    ) |>
+    rename(effect=d)
+    
 }
 
 

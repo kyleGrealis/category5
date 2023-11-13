@@ -15,20 +15,22 @@ box::use(
 t_table <- function(alpha, n, type, alt) {
   expand.grid(
     # stop at the large effect size as per table
-    effect=seq(0.05, effect_table$t_test[3], by=0.05),
+    d=seq(0.05, effect_table$t_test[3], by=0.05),
     n=seq(10, n+100, by=1)
   )|>
     mutate(
       power=pwr::pwr.t.test(
         sig.level=alpha,
-        d=effect,
+        d=d,
         n=n,
         type=type,
         alternative=alt,
         power=NULL
       )$power,
-      power=round(power, 2)
-    )
+      power=round(power, 2),
+      d=round(d, 2)
+    ) |>
+    rename(effect=d)
 }
 
 

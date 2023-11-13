@@ -26,7 +26,8 @@ chisq_table <- function(alpha, n, df) {
         N=n,
         power=NULL
       )$power,
-      power=round(power, 2)
+      power=round(power, 2),
+      w=round(w, 2)
     ) |> 
     	rename(effect=w)
 }

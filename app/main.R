@@ -25,29 +25,32 @@ ui <- function(id) {
   page_navbar(
     title = "CAT 5: A Power Calculator & Plotting Tool",
     underline = TRUE,
-    navset_underline(
-      nav_spacer(),
-      nav_menu(
-        title = "t-test",
-        align = "right",
-        t_test$ui(ns("t_test")),
-        uneq_t_test$ui(ns("uneq_t_test"))
-      ),
-      nav_menu(
-        title = "Proportions",
-        align = "right",
-        one_samp_prop$ui(ns("one_samp_prop")),
-        two_samp_prop$ui(ns("two_samp_prop")),
-        uneq_samp_prop$ui(ns("uneq_samp_prop")),
-      ),
-      anova$ui(ns("anova")),
-      corr$ui(ns("corr")),
-      chisq$ui(ns("chisq")),
-      glm$ui(ns("glm")),
-      nav_panel(
-        class = "markdown-panel",
-        shiny::icon("circle-info"), 
-        helpMe$helpMe
+    div(
+      class = "main_display",
+      navset_underline(
+        nav_spacer(),
+        nav_menu(
+          title = "t-test",
+          align = "right",
+          t_test$ui(ns("t_test")),
+          uneq_t_test$ui(ns("uneq_t_test"))
+        ),
+        nav_menu(
+          title = "Proportions",
+          align = "right",
+          one_samp_prop$ui(ns("one_samp_prop")),
+          two_samp_prop$ui(ns("two_samp_prop")),
+          uneq_samp_prop$ui(ns("uneq_samp_prop")),
+        ),
+        anova$ui(ns("anova")),
+        corr$ui(ns("corr")),
+        chisq$ui(ns("chisq")),
+        glm$ui(ns("glm")),
+        nav_panel(
+          class = "markdown-panel",
+          shiny::icon("circle-info"), 
+          helpMe$helpMe
+        )
       )
     ),
     div(class = "footer", text$footer)

@@ -26,7 +26,8 @@ corr_table <- function(alpha, n, alt) {
         alt=alt,
         power=NULL
       )$power,
-      power=round(power, 2)
+      power=round(power, 2),
+      r=round(r, 2)
     ) |> 
     	rename(effect=r)
 }

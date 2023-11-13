@@ -26,7 +26,8 @@ anova_table <- function(alpha, n, k) {
         k=k,
         power=NULL
       )$power,
-      power=round(power, 2)
+      power=round(power, 2),
+      f=round(f, 2)
     ) |> 
     	rename(effect=f)
 }

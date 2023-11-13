@@ -26,7 +26,8 @@ prop_table <- function(alpha, n, alt) {
         alt=alt,
         power=NULL
       )$power,
-      power=round(power, 2)
+      power=round(power, 2),
+      h=round(h, 2)
     ) |> 
     	rename(effect=h)
 }
