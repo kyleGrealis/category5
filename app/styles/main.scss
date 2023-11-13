@@ -3,15 +3,24 @@
   font-family: Poppins;
 }
 
-// display contents not including header and footer
-div.container-fluid:nth-child(7) {
-  max-width: 1250px;
-  margin: auto;
+.main_display {
+  max-width: 1300px;
+  margin: 0px auto;
 }
 
 .navbar {
   font-weight: bold;
   background: linear-gradient(to right, #f47532, white, #005030);
+  border-top: 0.4px solid black;
+}
+
+.footer {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  color: black;
+  padding: 2px 20px;
   border-top: 0.4px solid black;
 }
 
@@ -82,8 +91,13 @@ div.container-fluid:nth-child(7) {
   box-shadow: 6px 6px 6px gray;
 }
 
+.plotting_cards {
+  max-height: 425px;
+  max-width: 500px;
+}
+
 .bslib-card[data-full-screen="true"] {
-  max-width: 700px;
+  max-width: 500px;
   max-height: 400px !important;
   margin: auto;
 }
@@ -136,6 +150,10 @@ div.tab-content:nth-child(2),
   background-color: #f3f2f1;
 }
 
+.card-header {
+  min-height: 65px;
+}
+
 .navbar,
 .card-header {
   border-bottom: 0.4px solid black;
@@ -186,16 +204,6 @@ div.tab-content:nth-child(2),
 .selectize-dropdown-content > .option:active {
   color: red;
   font-weight: bold;
-}
-
-.footer {
-  position: fixed;
-  width: 100%;
-  left: 0;
-  bottom: 0;
-  color: black;
-  padding: 12px 20px;
-  border-top: 0.4px solid black;
 }
 
 .markdown-panel {
