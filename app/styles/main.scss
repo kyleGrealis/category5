@@ -1,8 +1,9 @@
 $border: 0.4px solid black;
 $radius: 5px;
 $bg-color: #f3f2f1;
-$hover-color: #f1f1f1;
-$active-color: #005030;
+$bg-color-2: #f1f1f1;
+$um-orange: #f45732;
+$um-green: #005030;
 
 @mixin border-radius($radius) {
   border-radius: $radius;
@@ -34,7 +35,7 @@ $active-color: #005030;
 
 .navbar {
   @include border($radius);
-  background: linear-gradient(to right, #f47532, white, #005030);
+  background: linear-gradient(to right, $um-orange, white, $um-green);
 }
 
 .footer {
@@ -56,7 +57,7 @@ $active-color: #005030;
 .shiny-input-container .checkbox-inline input:checked,
 .shiny-input-container .radio input:checked,
 .shiny-input-container .radio-inline input:checked {
-  background-color: $active-color;
+  background-color: $um-green;
   border-color: gray;
 }
 
@@ -69,7 +70,7 @@ $active-color: #005030;
 }
 
 .selectize-dropdown-content > div.option.active {
-  background-color: $hover-color;
+  background-color: $bg-color-2;
   border-bottom: 0.3px solid gray;
   font-style: italic;
   font-weight: bold;
@@ -84,7 +85,7 @@ $active-color: #005030;
 
 .markdown-panel {
   padding: 5%;
-  background-color: $hover-color;
+  background-color: $bg-color-2;
 }
 
 // MathJax
@@ -105,7 +106,7 @@ $active-color: #005030;
 .dropdown-menu {
   display: none;
   position: absolute;
-  background-color: $hover-color;
+  background-color: $bg-color-2;
   min-width: 160px;
   z-index: 1;
   border: $border;
@@ -124,7 +125,7 @@ $active-color: #005030;
 .dropdown-menu > li > a.active,
 .dropdown-item:active,
 .dropdown-menu > li > a:active {
-  background-color: $hover-color;
+  background-color: $bg-color-2;
   text-decoration: underline;
   color: black;
   font-weight: bold;
@@ -206,6 +207,9 @@ div.tab-content:nth-child(2),
 
 .card-header {
   min-height: 65px;
+  font-weight: 500;
+  line-height: 1.375rem;
+  background: $bg-color-2;
 }
 
 .navbar,

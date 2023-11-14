@@ -187,7 +187,7 @@
       "RemoteRepo": "bslib",
       "RemoteUsername": "rstudio",
       "RemoteRef": "HEAD",
-      "RemoteSha": "b5bc3ab8c8954b8591426ef407793171c4e7c8d7",
+      "RemoteSha": "6e7b5cce88249d2ffc742e0f0835e55c89081fd0",
       "Requirements": [
         "R",
         "base64enc",
@@ -202,7 +202,7 @@
         "rlang",
         "sass"
       ],
-      "Hash": "fa9f34f2903a693c07c9ce85fd65bcfc"
+      "Hash": "ff4dc1a7026ecb632dea149233543221"
     },
     "cachem": {
       "Package": "cachem",
@@ -989,14 +989,14 @@
     },
     "rhino": {
       "Package": "rhino",
-      "Version": "1.5.0.9000",
+      "Version": "1.5.0.9001",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "rhino",
       "RemoteUsername": "Appsilon",
       "RemoteRef": "HEAD",
-      "RemoteSha": "b032a3c22e64a01e51afc761dba1668e61e120d6",
+      "RemoteSha": "091f9679577f6d4e829fadc0d886f3bece87161f",
       "Requirements": [
         "R",
         "box",
@@ -1017,7 +1017,7 @@
         "withr",
         "yaml"
       ],
-      "Hash": "e06fe13ec92b5f22174b1ed8abc68e6e"
+      "Hash": "e9e0dd6bc2d3d98cbf66f1ddfa4cc924"
     },
     "rlang": {
       "Package": "rlang",
