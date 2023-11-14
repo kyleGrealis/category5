@@ -1,60 +1,115 @@
-// font
+$border: 0.4px solid black;
+$radius: 5px;
+$bg-color: #f3f2f1;
+$hover-color: #f1f1f1;
+$active-color: #005030;
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
+@mixin border($radius: $radius) {
+  border: $border;
+  @include border-radius($radius);
+}
+
+@mixin box-shadow() {
+  box-shadow: 6px 6px 6px gray;
+}
+
+@mixin focus-border() {
+  border-color: #80bde1;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem gray;
+}
+
 * {
   font-family: Poppins;
 }
 
 .main_display {
   max-width: 1300px;
-  margin: 0px auto;
+  margin: 0 auto;
 }
 
 .navbar {
-  font-weight: bold;
+  @include border($radius);
   background: linear-gradient(to right, #f47532, white, #005030);
-  border-top: 0.4px solid black;
 }
 
 .footer {
+  @include border($radius);
   position: fixed;
   width: 100%;
   left: 0;
   bottom: 0;
   color: black;
   padding: 2px 20px;
-  border-top: 0.4px solid black;
 }
 
-// This renders math expressions to be displayed inline with other text.
-// It has a weird quality to drop down like a subscript without this.
+.card {
+  @include box-shadow();
+}
+
+.form-check-input:checked,
+.shiny-input-container .checkbox input:checked,
+.shiny-input-container .checkbox-inline input:checked,
+.shiny-input-container .radio input:checked,
+.shiny-input-container .radio-inline input:checked {
+  background-color: $active-color;
+  border-color: gray;
+}
+
+.form-check-input:focus,
+.shiny-input-container .checkbox input:focus,
+.shiny-input-container .checkbox-inline input:focus,
+.shiny-input-container .radio input:focus,
+.shiny-input-container .radio-inline input:focus {
+  @include focus-border();
+}
+
+.selectize-dropdown-content > div.option.active {
+  background-color: $hover-color;
+  border-bottom: 0.3px solid gray;
+  font-style: italic;
+  font-weight: bold;
+  color: #333;
+}
+
+.selectize-input.focus,
+.form-control:focus {
+  border-color: black;
+  box-shadow: 0 0 0 0.25rem rgba(170, 170, 170, 0.4);
+}
+
+.markdown-panel {
+  padding: 5%;
+  background-color: $hover-color;
+}
+
+// MathJax
 .MathJax_Display {
   margin: 0 !important;
 }
-
 
 // Dropdown menu
 .nav-link {
   color: black;
 }
+
 .nav.nav-underline {
   margin-top: 5px;
-}
-
-// Background property when statistic test is selected
-.nav-underline .nav-link.active,
-.nav-underline :where(ul.nav.navbar-nav > li) > a.active,
-.nav-underline .nav-tabs > li > a.active,
-.nav-underline .nav-pills > li > a.active {
-  font-weight: bold;
 }
 
 // Dropdown Content (Hidden by Default)
 .dropdown-menu {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: $hover-color;
   min-width: 160px;
   z-index: 1;
-  border: 0.2px solid black;
+  border: $border;
+  @include border-radius($radius);
 }
 
 // Links inside the dropdown
@@ -69,7 +124,7 @@
 .dropdown-menu > li > a.active,
 .dropdown-item:active,
 .dropdown-menu > li > a:active {
-  background-color: #f1f1f1;
+  background-color: $hover-color;
   text-decoration: underline;
   color: black;
   font-weight: bold;
@@ -78,7 +133,6 @@
 // Change color of dropdown links on hover
 .dropdown-menu a:hover {
   background-color: #aaa;
-  border-bottom: 0.3px solid gray;
 }
 
 :focus {
@@ -88,7 +142,7 @@
 .dropdown-menu,
 .card,
 .info-box {
-  box-shadow: 6px 6px 6px gray;
+  @include box-shadow();
 }
 
 .plotting_cards {
@@ -131,8 +185,8 @@ div.tab-content:nth-child(2),
 .card,
 .markdown-panel,
 #ModalFocusTrapZone3 {
-  border: 0.4px solid black;
-  border-radius: 5px;
+  border: $border;
+  @include border-radius($radius);
 }
 
 .callout-block {
@@ -147,7 +201,7 @@ div.tab-content:nth-child(2),
 .footer,
 .callout-block,
 .card-header {
-  background-color: #f3f2f1;
+  background-color: $bg-color;
 }
 
 .card-header {
@@ -156,57 +210,10 @@ div.tab-content:nth-child(2),
 
 .navbar,
 .card-header {
-  border-bottom: 0.4px solid black;
+  border-bottom: $border;
 }
 
 .sidebar.my-sidebar {
-  border-right: 0.4px solid black;
+  border-right: $border;
   margin-top: -1px;
-}
-
-// checkbox & radio buttons have green background instead of blue generic yuck
-.form-check-input:checked,
-.shiny-input-container .checkbox input:checked,
-.shiny-input-container .checkbox-inline input:checked,
-.shiny-input-container .radio input:checked,
-.shiny-input-container .radio-inline input:checked {
-  background-color: #005030;
-  border-color: gray;
-}
-
-.form-check-input:focus,
-.shiny-input-container .checkbox input:focus,
-.shiny-input-container .checkbox-inline input:focus,
-.shiny-input-container .radio input:focus,
-.shiny-input-container .radio-inline input:focus {
-  border-color: #80bde1;
-  outline: 0;
-  box-shadow: 0 0 0 0.25rem gray;
-}
-
-
-
-// "active" is the hover quality, "selected"" is the chosen item
-.selectize-dropdown-content > div.option.active {
-  background-color: #f1f1f1;
-  border-bottom: 0.3px solid gray;
-  font-style: italic;
-  font-weight: bold;
-  color: #333;
-}
-
-.selectize-input.focus,
-.form-control:focus {
-  border-color: black;
-  box-shadow: 0 0 0 0.25rem rgba(170, 170, 170, 0.4);
-}
-
-.selectize-dropdown-content > .option:active {
-  color: red;
-  font-weight: bold;
-}
-
-.markdown-panel {
-  padding: 5%;
-  background-color: #f1f1f1;
 }
