@@ -1,17 +1,29 @@
-// font
+// I want to make a mixin for the border bottom
+
+// Variables
+$font-family: Poppins;
+$um-green: #005030;
+$um-orange: #f47532;
+$white: white;
+$my-border: 0.4px solid black;
+$shadow-color: gray;
+$background-color: #f1f1f1;
+
+// Global styles
 * {
-  font-family: Poppins;
+  font-family: $font-family;
 }
 
 .main_display {
   max-width: 1300px;
-  margin: 0px auto;
+  margin: 0 auto;
 }
 
 .navbar {
   font-weight: bold;
-  background: linear-gradient(to right, #f47532, white, #005030);
-  border-top: 0.4px solid black;
+  background: linear-gradient(to right, $um-orange, $white, $um-green);
+  border-top: $my-border;
+  border-bottom: $my-border;
 }
 
 .footer {
@@ -21,25 +33,22 @@
   bottom: 0;
   color: black;
   padding: 2px 20px;
-  border-top: 0.4px solid black;
+  border-top: $my-border;
 }
 
-// This renders math expressions to be displayed inline with other text.
-// It has a weird quality to drop down like a subscript without this.
 .MathJax_Display {
   margin: 0 !important;
 }
-
 
 // Dropdown menu
 .nav-link {
   color: black;
 }
+
 .nav.nav-underline {
   margin-top: 5px;
 }
 
-// Background property when statistic test is selected
 .nav-underline .nav-link.active,
 .nav-underline :where(ul.nav.navbar-nav > li) > a.active,
 .nav-underline .nav-tabs > li > a.active,
@@ -47,38 +56,35 @@
   font-weight: bold;
 }
 
-// Dropdown Content (Hidden by Default)
 .dropdown-menu {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: $background-color;
   min-width: 160px;
   z-index: 1;
   border: 0.2px solid black;
-}
 
-// Links inside the dropdown
-.dropdown-menu a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
+  a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 
-.dropdown-item.active,
-.dropdown-menu > li > a.active,
-.dropdown-item:active,
-.dropdown-menu > li > a:active {
-  background-color: #f1f1f1;
-  text-decoration: underline;
-  color: black;
-  font-weight: bold;
-}
+    &:hover {
+      background-color: #aaa;
+      border-bottom: 0.3px solid gray;
+    }
+  }
 
-// Change color of dropdown links on hover
-.dropdown-menu a:hover {
-  background-color: #aaa;
-  border-bottom: 0.3px solid gray;
+  .active,
+  > li > a.active,
+  :active,
+  > li > a:active {
+    background-color: $background-color;
+    text-decoration: underline;
+    color: black;
+    font-weight: bold;
+  }
 }
 
 :focus {
@@ -88,7 +94,7 @@
 .dropdown-menu,
 .card,
 .info-box {
-  box-shadow: 6px 6px 6px gray;
+  box-shadow: 6px 6px 6px $shadow-color;
 }
 
 .plotting_cards {
@@ -117,11 +123,10 @@ div > .bi {
 }
 
 .main.bslib-gap-spacing.html-fill-container {
-  box-shadow: inset 6px 6px 6px gray;
+  box-shadow: inset 6px 6px 6px $shadow-color;
   margin-top: -1px;
 }
 
-// modal background
 .ms-Modal {
   backdrop-filter: blur(5px);
 }
@@ -131,47 +136,43 @@ div.tab-content:nth-child(2),
 .card,
 .markdown-panel,
 #ModalFocusTrapZone3 {
-  border: 0.4px solid black;
+  border: $my-border;
   border-radius: 5px;
 }
 
 .callout-block {
   padding: 15px 15px 0 15px;
-}
 
-.callout-block.app-note {
-  padding: 5px;
-  text-align: center;
+  &.app-note {
+    padding: 5px;
+    text-align: center;
+  }
 }
 
 .footer,
 .callout-block,
 .card-header {
-  background-color: #f3f2f1;
+  background-color: $background-color !important;
 }
 
 .card-header {
   min-height: 65px;
-}
-
-.navbar,
-.card-header {
-  border-bottom: 0.4px solid black;
+  border-bottom: $my-border;
+  font-weight: normal !important;
 }
 
 .sidebar.my-sidebar {
-  border-right: 0.4px solid black;
+  border-right: $my-border;
   margin-top: -1px;
 }
 
-// checkbox & radio buttons have green background instead of blue generic yuck
 .form-check-input:checked,
 .shiny-input-container .checkbox input:checked,
 .shiny-input-container .checkbox-inline input:checked,
 .shiny-input-container .radio input:checked,
 .shiny-input-container .radio-inline input:checked {
-  background-color: #005030;
-  border-color: gray;
+  background-color: $um-green;
+  border-color: black;
 }
 
 .form-check-input:focus,
@@ -181,14 +182,11 @@ div.tab-content:nth-child(2),
 .shiny-input-container .radio-inline input:focus {
   border-color: #80bde1;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem gray;
+  box-shadow: 0 0 0 0.25rem $shadow-color;
 }
 
-
-
-// "active" is the hover quality, "selected"" is the chosen item
 .selectize-dropdown-content > div.option.active {
-  background-color: #f1f1f1;
+  background-color: $background-color;
   border-bottom: 0.3px solid gray;
   font-style: italic;
   font-weight: bold;
@@ -201,13 +199,7 @@ div.tab-content:nth-child(2),
   box-shadow: 0 0 0 0.25rem rgba(170, 170, 170, 0.4);
 }
 
-.selectize-dropdown-content > .option:active {
-  color: red;
-  font-weight: bold;
-}
-
 .markdown-panel {
   padding: 5%;
-  background-color: #f1f1f1;
+  background-color: $background-color;
 }
-
