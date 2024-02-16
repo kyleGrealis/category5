@@ -1,7 +1,5 @@
-// I want to make a mixin for the border bottom
 
 // Variables
-$font-family: Poppins;
 $um-green: #005030;
 $um-orange: #f47532;
 $white: white;
@@ -11,7 +9,7 @@ $background-color: #f1f1f1;
 
 // Global styles
 * {
-  font-family: $font-family;
+  font-family: Poppins;
 }
 
 .main_display {
