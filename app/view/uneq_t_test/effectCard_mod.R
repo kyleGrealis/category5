@@ -32,7 +32,7 @@ server <- function(id, inputs){
     
     output$effectInfo <- renderUI({
       value_box(
-        title="Minimal effect size given the group sample sizes:",
+        title="Effect size:",
         value=minEffect(),
         showcase=bsicons::bs_icon("graph-up-arrow"),
         theme="white", full_screen=FALSE, fill=TRUE, height=100L,

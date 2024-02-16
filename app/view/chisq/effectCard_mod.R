@@ -25,7 +25,7 @@ server <- function(id, inputs){
     
     output$effectInfo <- renderUI({
       value_box(
-        title = "Measurable effect size:",
+        title = "Effect size:",
         value = effect(),
         showcase = bs_icon("graph-up-arrow"),
         theme = "white", full_screen = FALSE, fill = TRUE, height = 100L,
