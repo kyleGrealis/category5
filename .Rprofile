@@ -1,4 +1,12 @@
-source("renv/activate.R")
+if (file.exists("renv")) {
+  source("renv/activate.R")
+} else {
+  # The `renv` directory is automatically skipped when deploying with rsconnect.
+  message("No 'renv' directory found; renv won't be activated.")
+}
+
+# Allow absolute module imports (relative to the app root).
+options(box.path = getwd())
+
+# modify port
 options(shiny.port = 7209)
-options(shiny.fullstacktrace = FALSE)
-options(rsconnect.max.bundle.size = 40000)
