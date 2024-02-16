@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.0",
+    "Version": "4.3.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -163,26 +163,12 @@
       ],
       "Hash": "fd25391c3c4f6ecf0fa95f1e6d15378c"
     },
-    "bsicons": {
-      "Package": "bsicons",
-      "Version": "0.1.2",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "cli",
-        "htmltools",
-        "rlang",
-        "utils"
-      ],
-      "Hash": "d8f892fbd94d0b9b1f6d688b05b8633c"
-    },
     "bslib": {
       "Package": "bslib",
       "Version": "0.5.1.9000",
       "Source": "GitHub",
-      "Remotes": "rstudio/htmltools, rstudio/shiny",
       "RemoteType": "github",
+      "Remotes": "rstudio/htmltools, rstudio/shiny",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "bslib",
       "RemoteUsername": "rstudio",
