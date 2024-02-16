@@ -1,15 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 // Variables
 $um-green: #005030;
-$um-orange: #f47532;
-$white: white;
 $my-border: 0.4px solid black;
 $shadow-color: gray;
 $background-color: #f1f1f1;
 
-// Global styles
-* {
-  font-family: Poppins;
+
+body {
+  font-family: "Poppins" !important;
 }
 
 .main_display {
@@ -19,20 +18,9 @@ $background-color: #f1f1f1;
 
 .navbar {
   font-weight: bold;
-  background: linear-gradient(to right, $um-orange, $white, $um-green);
-  border-top: $my-border;
   border-bottom: $my-border;
 }
 
-.footer {
-  position: fixed;
-  width: 100%;
-  left: 0;
-  bottom: 0;
-  color: black;
-  padding: 2px 20px;
-  border-top: $my-border;
-}
 
 .MathJax_Display {
   margin: 0 !important;
@@ -85,43 +73,20 @@ $background-color: #f1f1f1;
   }
 }
 
-:focus {
-  outline: none;
-}
 
 .dropdown-menu,
 .card,
 .info-box {
-  box-shadow: 6px 6px 6px $shadow-color;
+  box-shadow: var(--bs-box-shadow-sm);
 }
 
-.plotting_cards {
-  height: 425px;
-  max-width: 500px;
-}
 
-.bslib-card[data-full-screen="true"] {
-  max-width: 500px;
-  max-height: 400px !important;
-  margin: auto;
-}
-
-.info-box > * {
-  font-size: 3.5vw;
-  padding: 3%;
-}
-
+// icons on info cards at bottom of page
 svg.bi {
   opacity: 20% !important;
 }
 
-div > .bi {
-  height: 0.7em;
-  width: 0.7em;
-}
-
 .main.bslib-gap-spacing.html-fill-container {
-  box-shadow: inset 6px 6px 6px $shadow-color;
   margin-top: -1px;
 }
 
@@ -140,6 +105,7 @@ div.tab-content:nth-child(2),
 
 .callout-block {
   padding: 15px 15px 0 15px;
+  font-size: 0.75em;
 
   &.app-note {
     padding: 5px;
@@ -147,54 +113,41 @@ div.tab-content:nth-child(2),
   }
 }
 
-.footer,
-.callout-block,
-.card-header {
-  background-color: $background-color !important;
+// dropdown selection window color
+.form-control:focus, .selectize-input.focus {
+	color: var(--bs-body-color);
+	background-color: var(--bs-body-bg);
+	border-color: gray;
+	outline: 0;
+	box-shadow: 0 0 0 .25rem $um-green;
 }
 
-.card-header {
-  min-height: 65px;
-  border-bottom: $my-border;
-  font-weight: normal !important;
+// color around radio buttons when selected
+.form-check-input:focus,
+.shiny-input-container .checkbox input:focus,
+.shiny-input-container .checkbox-inline input:focus,
+.shiny-input-container .radio input:focus,
+.shiny-input-container .radio-inline input:focus {
+  border-color: gray;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem var(--bs-body-bg);
 }
 
-.sidebar.my-sidebar {
-  border-right: $my-border;
-  margin-top: -1px;
-}
-
+// color inside radio buttons when selected
 .form-check-input:checked,
 .shiny-input-container .checkbox input:checked,
 .shiny-input-container .checkbox-inline input:checked,
 .shiny-input-container .radio input:checked,
 .shiny-input-container .radio-inline input:checked {
   background-color: $um-green;
-  border-color: black;
+  border-color: gray;
 }
 
-.form-check-input:focus,
-.shiny-input-container .checkbox input:focus,
-.shiny-input-container .checkbox-inline input:focus,
-.shiny-input-container .radio input:focus,
-.shiny-input-container .radio-inline input:focus {
-  border-color: #80bde1;
-  outline: 0;
-  box-shadow: 0 0 0 0.25rem $shadow-color;
-}
-
+// sidebar dropdown menu
 .selectize-dropdown-content > div.option.active {
   background-color: $background-color;
   border-bottom: 0.3px solid gray;
-  font-style: italic;
-  font-weight: bold;
   color: #333;
-}
-
-.selectize-input.focus,
-.form-control:focus {
-  border-color: black;
-  box-shadow: 0 0 0 0.25rem rgba(170, 170, 170, 0.4);
 }
 
 .markdown-panel {
