@@ -15,15 +15,16 @@ box::use(
   app/view/chisq/chisq,
   app/view/glm/glm,
   
-  app/logic/helpMe,
-  app/logic/text
+  app/view/footer,
+  
+  app/logic/helpMe
 )
 
 #' @export
 ui <- function(id) {
   ns <- NS(id)
   page_navbar(
-    title = "CAT 5: A Power Calculator & Plotting Tool",
+    title = "PowerViz: Power Calculation and Visualization Tool",
     underline = TRUE,
     div(
       class = "main_display",
@@ -53,7 +54,7 @@ ui <- function(id) {
         )
       )
     ),
-    div(class = "footer", text$footer)
+    div(footer$footer)
   )
 }
 
