@@ -9,11 +9,6 @@ body {
   font-family: "Poppins" !important;
 }
 
-.main_display {
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
 .navbar {
   font-weight: bold;
   border-bottom: $my-border;
@@ -108,10 +103,15 @@ div.tab-content:nth-child(2),
 .callout-block {
   padding: 15px 15px 0 15px;
   font-size: 0.75em;
+  height: 85px;
+  display: flex;
+  align-items: center;
 
   &.app-note {
     padding: 5px;
     text-align: center;
+    height: 29px;
+    justify-content: center;
   }
 }
 

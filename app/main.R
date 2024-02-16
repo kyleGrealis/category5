@@ -27,7 +27,7 @@ ui <- function(id) {
     title = "PowerViz: Power Calculation and Visualization Tool",
     underline = TRUE,
     div(
-      class = "main_display",
+      style = "margin: 0 auto; max-width: 1300px;",
       navset_underline(
         nav_spacer(),
         nav_menu(
