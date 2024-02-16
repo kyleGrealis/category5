@@ -56,7 +56,7 @@ power_effect <- function(data, n, glm=FALSE, unequal=FALSE) {
       formatter=left_label_formatter
     ) |>
     e_grid(right='15%') |>
-    e_color(c("#f47321", "#777777", "#005030")) |>
+    e_color(c("#dfe6e9", "#b2bec3", "#636e72")) |>
     e_legend(
       left='5',
       title=list("Sample size")
@@ -93,9 +93,9 @@ power_bar <- function(data, n, effect_values, equal=TRUE, ...) {
       effect=factor(effect, labels=c("Small", "Medium", "Large")),
       # custom bar color
       color=case_when(
-        effect == "Small" ~ "#f47321",
-        effect == "Medium" ~ "#f3f3f3",
-        effect == "Large" ~ "#005030"
+        effect == "Small" ~ "#dfe6e9",
+        effect == "Medium" ~ "#b2bec3",
+        effect == "Large" ~ "#636e72"
       )
     ) |>
     e_charts(effect) |>
@@ -103,7 +103,7 @@ power_bar <- function(data, n, effect_values, equal=TRUE, ...) {
     e_add_nested("itemStyle", color) |>
     e_tooltip(trigger="item", formatter=right_label_formatter) |>
     e_grid(right='15%') |>
-    e_color("#005030") |>
+    e_color("#636e72") |>
     e_legend(show=FALSE) |>
     e_datazoom(type='inside') |>
     e_axis_labels(x="Effect \nSize", y="Power") |>

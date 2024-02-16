@@ -1,9 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 // Variables
-$um-green: #005030;
 $my-border: 0.4px solid black;
-$shadow-color: gray;
 $background-color: #f1f1f1;
 
 
@@ -58,7 +56,7 @@ body {
 
     &:hover {
       background-color: #aaa;
-      border-bottom: 0.3px solid gray;
+      border-bottom: 0.3px solid 636e72;
     }
   }
 
@@ -78,6 +76,10 @@ body {
 .card,
 .info-box {
   box-shadow: var(--bs-box-shadow-sm);
+}
+
+.bslib-sidebar-layout > .sidebar {
+  border-right: 1px solid #aaa;
 }
 
 
@@ -113,14 +115,6 @@ div.tab-content:nth-child(2),
   }
 }
 
-// dropdown selection window color
-.form-control:focus, .selectize-input.focus {
-	color: var(--bs-body-color);
-	background-color: var(--bs-body-bg);
-	border-color: gray;
-	outline: 0;
-	box-shadow: 0 0 0 .25rem $um-green;
-}
 
 // color around radio buttons when selected
 .form-check-input:focus,
@@ -128,7 +122,7 @@ div.tab-content:nth-child(2),
 .shiny-input-container .checkbox-inline input:focus,
 .shiny-input-container .radio input:focus,
 .shiny-input-container .radio-inline input:focus {
-  border-color: gray;
+  border-color: #636e72;
   outline: 0;
   box-shadow: 0 0 0 0.25rem var(--bs-body-bg);
 }
@@ -139,14 +133,14 @@ div.tab-content:nth-child(2),
 .shiny-input-container .checkbox-inline input:checked,
 .shiny-input-container .radio input:checked,
 .shiny-input-container .radio-inline input:checked {
-  background-color: $um-green;
-  border-color: gray;
+  background-color: #b2bec3;
+  border-color: #636e72;
 }
 
 // sidebar dropdown menu
 .selectize-dropdown-content > div.option.active {
   background-color: $background-color;
-  border-bottom: 0.3px solid gray;
+  border-bottom: 0.3px solid #636e72;
   color: #333;
 }
 
