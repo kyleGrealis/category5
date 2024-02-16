@@ -7,7 +7,8 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   tagList(
-    selectInput(
+    "Unequal samples",
+    radioButtons(
       ns("alpha"), "Significance level",
       choices=c(0.01, 0.025, 0.05),
       selected=0.05
@@ -33,7 +34,7 @@ ui <- function(id) {
       ns("alt"), "Alternative hypothesis type",
       choices=c(
         "Two-sided"="two.sided",
-        "Greater than the null"="greater"
+        "> than the null"="greater"
       ),
       selected="two.sided"
     )

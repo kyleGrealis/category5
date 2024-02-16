@@ -1,14 +1,15 @@
 
 box::use(
   glue[glue],
-  shiny[h6, moduleServer, NS, numericInput, radioButtons, reactive,
-        selectInput, tagList, renderText, textOutput],
+  shiny[h6, moduleServer, NS, numericInput, radioButtons, reactive, tagList,
+        renderText, textOutput],
 )
 
 ui <- function(id) {
   ns <- NS(id)
   tagList(
-    selectInput(
+    "Generalized Linear Models",
+    radioButtons(
       ns("alpha"), "Significance level",
       choices=c(0.01, 0.025, 0.05),
       selected=0.05

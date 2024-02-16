@@ -1,13 +1,13 @@
 
 box::use(
-  shiny[h6, moduleServer, NS, numericInput, radioButtons, reactive,
-        selectInput, tagList],
+  shiny[h6, moduleServer, NS, numericInput, radioButtons, reactive, tagList],
 )
 
 ui <- function(id) {
   ns <- NS(id)
   tagList(
-    selectInput(
+    "AVONA",
+    radioButtons(
       ns("alpha"), "Significance level",
       choices=c(0.01, 0.025, 0.05),
       selected=0.05
