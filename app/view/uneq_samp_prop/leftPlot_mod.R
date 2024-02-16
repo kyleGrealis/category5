@@ -25,8 +25,8 @@ server <- function(id, data, inputs){
     output$leftPlot <- renderUI({
       plotCard$plotting_cards(
         span(
-          "Power vs. Effect Size, for Different", 
-          em("Group 2"), "Sample Sizes"
+          "Power vs. Effect Size, at", 
+          em("Group 2"), "sample sizes"
         ),
         plot()
       )

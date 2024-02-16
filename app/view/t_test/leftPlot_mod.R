@@ -22,7 +22,7 @@ server <- function(id, data, inputs){
 
     output$leftPlot <- renderUI({
       plotCard$plotting_cards(
-        "Power vs. Effect Size, for Different Sample Sizes",
+        "Power vs. Effect Size, for different sample sizes",
         plot()
       )
     })
