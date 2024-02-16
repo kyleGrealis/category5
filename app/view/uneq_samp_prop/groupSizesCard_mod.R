@@ -24,7 +24,7 @@ server <- function(id, inputs){
     
     output$minEffect <- renderUI({
       value_box(
-        title="Selected group sizes:",
+        title="Group sizes:",
         value=glue("{n1()} & {n2()}"),
         showcase=bsicons::bs_icon("people-fill"),
         theme="white", full_screen=FALSE, fill=TRUE, height=100L,
