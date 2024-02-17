@@ -1,8 +1,5 @@
 box::use(
-  bslib[page_navbar, navset_underline, nav_spacer, nav_menu,
-        nav_panel, layout_sidebar],
-  shiny[div, icon, markdown, moduleServer, NS, tags, fluidPage, checkboxInput, observeEvent],
-  shinyjs[runjs, useShinyjs],
+  shiny[moduleServer, NS, tags, fluidPage, checkboxInput, observeEvent],
 )
 
 
